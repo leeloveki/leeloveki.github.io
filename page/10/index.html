@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/redis%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/" target="_self">
-          redis缓存击穿
+        <a href="/2022/11/03/Redis/" target="_self">
+          Redis
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/redis%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Redis/" target="_self">
         <div>
-          Redis 缓存击穿 缓存穿透 redis缓存击穿redis缓存击穿是指客户端请求的数据在redis和数据库中都不存在, 会导致每次请求都对数据库发送请求, 导致数据库压力大 redis缓存雪崩redis缓存会定期失效, 当大量数据在同一时刻失效时, 会导致数据库收到大量流量压力 解决方法:  对更新机制加锁 缓存过期时间加上随机值, 避免在同时间失效 对redis集群(分布式系统)使用分布锁 对
+          RedisRedis是一种NoSql数据库 NoSql是非关系型数据库, 仅仅保存数据本身,不会保存数据间的关系 非关系型数据库是为了适应现代互联网服务的高并发 大数据场景而设计, 一般都将数据存储在内存中提高数据读写速度(需要一直通电, 易丢失), 后续再通过持久化将需要长久保存的数据  一般NoSql保存的都是需要频繁使用(访问)的热点数据 持久化保存的是冷却的数据  常见的NoSql数据库：
         </div>
       </a>
 
@@ -241,7 +241,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -258,15 +258,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/sql%E4%BC%98%E5%8C%96/" target="_self">
-          sql优化
+        <a href="/2022/11/03/RPC%E5%8D%8F%E8%AE%AE/" target="_self">
+          RPC协议
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/sql%E4%BC%98%E5%8C%96/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/RPC%E5%8D%8F%E8%AE%AE/" target="_self">
         <div>
-          sql优化sql优化主要是建立索引以及防止索引失效 索引: 优势:   加快查询速度 加快表连接速度 加快分组和查询的时间 唯一索引可以保证数据的唯一性  缺点:  索引的建立需要耗费时间, 每次对索引字段进行修改后, 索引需要重新生成 索引占用物理空间, 聚簇索引需要更大的物理空间  innodb引擎使用B+树作为索引的数据结构 B+树特点:  针对物理磁盘的存储特性设计优化 真实数据存储在叶子
+          RPC协议虾皮二面：既然有 HTTP 协议，为什么还要有 RPC?分享一道群友面试虾皮遇到的 RPC 基础面试题。 下面是正文。 我想起了我刚工作的时候，第一次接触 RPC 协议，当时就很懵，我 HTTP 协议用的好好的，为什么还要用 RPC 协议？ 于是就到网上去搜。 不少解释显得非常官方，我相信大家在各种平台上也都看到过，解释了又好像没解释，都在用一个我们不认识的概念去解释另外一个我们不认识的
         </div>
       </a>
 
@@ -274,7 +274,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -291,15 +291,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/project%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5/" target="_self">
-          project数据库字段
+        <a href="/2022/11/03/Redis%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" target="_self">
+          Redis应用场景
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/project%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Redis%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" target="_self">
         <div>
-          数据库字段 挂号表   挂号表  挂号id (自增 主键) 挂号科室 挂号类型 就诊卡号 (逻辑外键) 挂号费 挂号状态 就诊日期 候诊时间 预约时间 医生id (逻辑外键)  患者表  患者id (自增 主键) 患者姓名 就诊卡号 (唯一) 身份证号 手机号码  医生表  医生id (自增主键) 院区id (逻辑外键) 科室id (逻辑外键) 医生姓名 头像 职称 简介 标签  医生排班表 1.
+          Redis应用场景**如何保证 redis 中的数据都是热点数据？ **  redis设置数据过期时间 设置数据容量阈值，根据置换策略，淘汰溢出的数据。  Redis设置过期时间   命令 功能    expire 键 ttl秒 设置生存时间   pexipre 键 ttl毫秒 设置生存时间   expireat 键 ttl秒 设置过期时间   pexpireat 键 ttl毫秒 设置过期时间
         </div>
       </a>
 
@@ -307,7 +307,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -324,15 +324,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/project/" target="_self">
-          project
+        <a href="/2022/11/03/SQL%E6%B8%B8%E6%A0%87/" target="_self">
+          SQL游标
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/project/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/SQL%E6%B8%B8%E6%A0%87/" target="_self">
         <div>
-          功能用户端(小程序) 登陆 挂号(就医) 个人中心 医院信息    后台 登陆 首页 医院管理 系统设置 预约管理 费用管理    数据库 思维导图    石墨文档 https://shimo.im/mindmaps/loqeWM94YasmRnAn/  开发规范 变量和方法名用小驼峰(首字母小写)  例如 getName   类名接口名用大驼峰(首字母大小写)  例如 UserControlle
+          SQL游标cursor(游标)是一个缓存区, 用于存放sql执行结果 通过游标名可以提取出记录并进行变量赋值操作
         </div>
       </a>
 
@@ -340,7 +340,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -357,15 +357,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/project%20%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83%E5%BC%80%E5%8F%91/" target="_self">
-          project 个人中心开发
+        <a href="/2022/11/03/Redis%E9%9D%A2%E8%AF%95/" target="_self">
+          Redis面试
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/project%20%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83%E5%BC%80%E5%8F%91/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Redis%E9%9D%A2%E8%AF%95/" target="_self">
         <div>
-          project 个人中心开发需求描述 用户可以点击按钮进入个人中心，用户不仅在个人中心可以进行就诊人和住院人的管理，还可以查看门诊缴费额记录、核酸&#x2F;体检的预约记录等 需要开发的功能:    就诊人管理     添加  一个用户最多绑定五个就诊人       修改     修改详情  先查询详情  校验就诊卡是否存在  校验用户id是否绑定       启用默认  校验用户id是否绑定
+          Redis面试Redis优点(为什么这么快):  数据存储在内存中, 读写速度非常快 数据结构简单, 操作速度快 单线程运行, 避免了多线程的锁竞争导致性能消耗 采用多路复用IO模型,效率高
         </div>
       </a>
 
@@ -373,7 +373,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -390,15 +390,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/jenkins%E7%AC%94%E8%AE%B0/" target="_self">
-          jenkins笔记
+        <a href="/2022/11/03/Review/" target="_self">
+          Review
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/jenkins%E7%AC%94%E8%AE%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Review/" target="_self">
         <div>
-          1. 持续集成及Jenkins介绍1.1 软件开发生命周期软件开发生命周期又叫做SDLC（Software Development Life Cycle），它是集合了计划、开发、测试 和部署过程的集合。如下图所示 ：   需求分析  这是生命周期的第一阶段，根据项目需求，团队执行一个可行性计划的分析。项目需求可能是公司内部 或者客户提出的。这阶段主要是对信息的收集，也有可能是对现有项目的改善和重新
+          ReviewCode &#x2F;2022&#x2F;11&#x2F;03&#x2F;Review&#x2F; 代码审查: 是对项目中其他人提交的代码进行审查, 确保代码的可读性 可维护性 规范性 进行代码审查可以使个人:  了解团队中其他人的工作 学习其他人的代码规范 纠正自己不好的代码规范
         </div>
       </a>
 
@@ -406,7 +406,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -423,15 +423,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/offer%E6%9D%A5%E4%BA%86-%20java%E5%9F%BA%E7%A1%80/" target="_self">
-          offer来了- java基础
+        <a href="/2022/11/03/Servlet/" target="_self">
+          Servlet
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/offer%E6%9D%A5%E4%BA%86-%20java%E5%9F%BA%E7%A1%80/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Servlet/" target="_self">
         <div>
-          offer来了- java基础 集合Java的集合类主要有4种: List Queue Set Map   List:   ArrayList  LinkedList  Vector    Queue(不重要):  DelayQueue …   Set  HashSet LinkedHashSet TreeSet   Map  HashMap HashTable TreeMap LinkedHas
+          Servlet url匹配servlet的url匹配是有优先级的, 并且每个url只能被优先级最高的那个servlet匹配, 不会被多个servlet匹配 优先级顺序: 全路径匹配(精确匹配) &gt; 目录匹配 &gt; 扩展名匹配(后缀匹配) &gt; 缺省匹配(不属于前三种的所有匹配)    匹配类型 规则 示例    精确匹配 &#x2F;开头, 不能包含* &#x2F;login   路
         </div>
       </a>
 
@@ -439,7 +439,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -456,15 +456,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/Web/" target="_self">
-          Web
+        <a href="/2022/11/03/Spring%20Boot/" target="_self">
+          Spring Boot
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Web/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Spring%20Boot/" target="_self">
         <div>
-          Web互联网被称为www(world wide web) 大部分网站系统都是C&#x2F;S架构(Client Service) 其中Client分为浏览器(瘦客户端) 手机APP 电脑程序 Client是前端 Serivce是后端 前端前端三件套 HTML	CSS	JavaScript HTML和CSS负责页面布局的展示 JavaScript负责业务逻辑的编程  注意常见的前端框架如Vue Re
+          Spring BootSpringBoot框架基于Spring4.0设计, 在Spring的基础上将配置进行简化, 实现了约定大于配置(Convention over configuration)的思想 约定大于配置: 由SpringBoot自动配置框架, 开发者仅需要提b供必要信息的思想, 该特性降低了开发的灵活性, 但是可以降低开发者的配置工作量, 并实现代码编译测试打包的自动化 Spring
         </div>
       </a>
 
@@ -472,7 +472,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -489,15 +489,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/TreeSet/" target="_self">
-          TreeSet
+        <a href="/2022/11/03/Shiro%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/" target="_self">
+          Shiro身份验证
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/TreeSet/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Shiro%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81/" target="_self">
         <div>
-          树树是一种分层结构, 不是线性结构 树中的每个节点(node)会包含三部分:   当前节点的数据 指向左子节点的指针(null表示不存在左子节点) 指向右子节点的指针(null表示不存在右子节点)   (?正确性存疑)	注意这里并没有指向父节点的指针, 也就是说无法从叶子节点向根节点进行遍历   常见线性数据结构: 数组(Arrays) 链表(Linked List) 栈(Stack) 队列(Qu
+          Shiro身份验证用户设置密码 abc，如果数据库保存明文 abc，一旦泄露就等于泄露密码，黑客就可以登录。 所以服务器不存密码明文，存摘要的哈希值，比如存 md5(“abc”) 的结果 900150983cd24fb0d6963f7d28e17f72，但登录只接受明文输入，不接受哈希值。 黑客将服务器的数据库资料拖库下来时, 只能哈希值 900150983cd24fb0d6963f7d28e17
         </div>
       </a>
 
@@ -505,7 +505,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
@@ -522,15 +522,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/Tomcat/" target="_self">
-          Tomcat
+        <a href="/2022/11/03/Spring%20MVC/" target="_self">
+          Spring MVC
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Tomcat/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/Spring%20MVC/" target="_self">
         <div>
-          Tomcattomcat是开源的java web服务器, 实现了Servlet JSP Java WebScoket等web技术 Tomcat目录解析:    目录 作用    lib 存放java的jar包   bin 二进制可执行文件   conf 存放配置   logs 存放日志   webapps 存放所有部署的web项目   当前常用的Tomcat版本为8.0对应Servlet3.1 t
+          SpringMVCSpringMVC是Spring内置的web开发框架 工作流程:  客户端发送请求, DispatcherServlet(主控制器)接收请求  DispatcherServlet调用HandlerMapping处理请求  根据HandlerMapping存储的请求和Controller关系, 将请求转发给对应的Controller  Controller根据业务逻辑对请求进行处理
         </div>
       </a>
 
@@ -538,7 +538,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-03 19:59" pubdate>
+            <time datetime="2022-11-03 20:24" pubdate>
               2022-11-03
             </time>
           </div>
