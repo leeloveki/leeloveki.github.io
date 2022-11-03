@@ -1,0 +1,1001 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="面经_四方NO.1:springboot启动流程 常规 NO.2:redis五种数据类型，以及缓存雪崩及解决方案 string，list，set，zset，hash 。redis缓存大量失效，跳过redis直接查询数据库，造成数据库瘫痪。解决方案就是设置热点数据永不过期，键值对随机设置过期时间，开启redis集群，设置多级缓存 NO.3:MySQL 如何实现分页 通过pagehelper插件 NO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面经_四方精创">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/%E9%9D%A2%E7%BB%8F_%E5%9B%9B%E6%96%B9%E7%B2%BE%E5%88%9B/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="面经_四方NO.1:springboot启动流程 常规 NO.2:redis五种数据类型，以及缓存雪崩及解决方案 string，list，set，zset，hash 。redis缓存大量失效，跳过redis直接查询数据库，造成数据库瘫痪。解决方案就是设置热点数据永不过期，键值对随机设置过期时间，开启redis集群，设置多级缓存 NO.3:MySQL 如何实现分页 通过pagehelper插件 NO">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-03T11:59:44.583Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:44.583Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>面经_四方精创 - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="面经_四方精创"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          89 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">面经_四方精创</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="面经-四方"><a href="#面经-四方" class="headerlink" title="面经_四方"></a>面经_四方</h1><p>NO.1:springboot启动流程</p>
+<p>常规</p>
+<p>NO.2:redis五种数据类型，以及缓存雪崩及解决方案</p>
+<p>string，list，set，zset，hash 。redis缓存大量失效，跳过redis直接查询数据库，造成数据库瘫痪。解决方案就是设置热点数据永不过期，键值对随机设置过期时间，开启redis集群，设置多级缓存</p>
+<p>NO.3:MySQL 如何实现分页</p>
+<p>通过pagehelper插件</p>
+<p>NO.4:分布式事务一致性</p>
+<p>通过分布式锁</p>
+<p>NO.5:springboot和springcloud的区别</p>
+<p>Spring Boot基本上是Spring框架的扩展，主要是简化了大量的配置工作。以约定优于配置、开箱即用策略，提供了一个可以快速搭建应用的框架。springcloud是一种微服务架构，SpringBoot是springcloud的基础，提供了微服务架构下的各个组件的集成</p>
+<p>NO.1:$和#区别</p>
+<p>1.#{}是预编译处理，${}是字符串替换。 2.Mybatis在处理#{}时，会将sql中的#{}替换为?号，调用PreparedStatement的set方法来赋值； 3.Mybatis在处理${}时，就是把${}替换成变量的值。 4.使用#{}可以有效的防止SQL注入，提高系统安全性。</p>
+<p>NO.2:线程池有哪些</p>
+<p>1.newSingleThreadExecutor：创建一个单线程的线程池，此线程池保证所有任务的执行顺序按 照任务的提交顺序执行。（核心线程数就一个） 2.newFixedThreadPool：创建固定大小的线程池，每次提交一个任务就创建一个线程，直到线 程达到线程池的最大大小。（核心线程数和最大线程数相等） 3.newCachedThreadPool：创建一个可缓存的线程池，此线程池不会对线程池大小做限制，线 程池大小完全依赖于操作系统（或者说JVM）能够创建的最大线程大小。 4.newScheduledThreadPool：创建一个大小无限的线程池，此线程池支持定时以及周期性执行 任务的需求。</p>
+<p>NO.3:一级缓存和二级缓存的区别</p>
+<p>1，首先呢 ，mybatis 设置了二级缓存，提升了数据的一个检索效率，避免每一次数据检索，都去查询数据· 库。 2. 一级缓存是Sqlsession级别 的一个缓存，也叫本地缓存，因为每一个用户在查询的时候，都需要使用Sqlsession来执行。为了避免每一次查询都走数据库，mybatis把查询的数据都缓存到Sqlsession的本地缓存里，后续Sql 在命中缓存的情况下，就可以直接在本地缓存读取这样一个数据。 3. 如果想要实现跨Sqlsession级别的一个缓存，那么一级缓存是无法做到的，因此在mybatis引入了二级缓存这一设计，也就是说当多个用户查询数据的时候，只要有任何一个Sqlsession拿到数据，就会放入二级缓存中，那么其他的Sqlsession，就会从二级缓存中加载数据， 顺序：二级缓存 -&gt; 一级缓存 -&gt; 数据库 4一级缓存是Sqlsession级别的，只要Sqlsession关闭了，一级缓存就释放了。 5.二级缓存是Sqlsessionfactory级别的,与应用同生共死，所以二级缓存提高性能，在一个SqlSession中执行了增，删，改，也会清除一级缓存 6.一级缓存默认开启，二级缓存需要手动开启，开启之后要手动指定Mapper，二级缓存要求序列化的类必须实现序列化接口。</p>
+<p>NO.1:说一下你数据库的表，有哪些表，哪些字段</p>
+<p>正常回答</p>
+<p>NO.2:主要是问项目中的写的那个点</p>
+<p>看自己吧</p>
+<p>NO.3:说一下你遇到哪些异常</p>
+<p>空指针异常，数组越界异常，类型转换异常等</p>
+<p>NO.4:你最晚加班到几点</p>
+<p>根据自己随便说</p>
+<p>NO.5:说一下mysql内连接与外连接的区别</p>
+<p>内连接：只有两个元素表相匹配才能在结果集中显示 左外连接：以左边为驱动表，驱动表的数据全部显示，不匹配的不会显示 右外连接：以右边为驱动表，驱动表的数据全部显示，不匹配的不会显示</p>
+<p>NO.6:说一下JQuery的元素选择器</p>
+<p>属性选择器 元素选择器 随便说一下其中一两个</p>
+<p>NO.7:用代码编写一个单例</p>
+<p>伪代码说一下就行</p>
+<p>NO.8:什么SpringAop？</p>
+<p>就说是根据动态代理实现的，在说一下Jdk动态代理和Cglib动态代理</p>
+<p>NO.1:介绍自己说下项目</p>
+<p>按照魔板说嘛</p>
+<p>NO.2:秒杀模块多并发情况下如何处理</p>
+<p>说了项目中的方法 还有分布式锁</p>
+<p>NO.3:如何判断一个常量一个变量是否相等</p>
+<p>没听明白想问啥？？？ 后来扯回&#x3D;&#x3D;跟eqauls</p>
+<p>NO.4:int跟integer的区别</p>
+<p>巴拉巴拉巴不过感觉说的有点浅</p>
+<p>NO.5:mysql优化</p>
+<p>几个层面说 数据库设计 sql语句 索引的创建 然后慢查询优化 给哥们说的口都干了</p>
+<p>NO.6:如何看待项目中用了老技术</p>
+<p>巴拉巴巴拉</p>
+<p>NO.7:怎么自学的java 过了四级没 会不会说广door话</p>
+<p>学校自学 没过但是会听听写不会说 听得懂不会说</p>
+<p>NO.8:上家公司多少人</p>
+<p>巴拉巴拉巴拉</p>
+<p>NO.9:有什么想问的</p>
+<p>按魔板说</p>
+<p>NO.1:英语四级有没有过</p>
+<p>考了400多分 差一点 ，没有过。</p>
+<p>NO.2:你在项目里怎么判断幂等性的。</p>
+<p>回答分布式锁如何实现的，以及注意事项，再扯到防止超卖上。</p>
+<p>NO.3:springMVC的执行流程</p>
+<p>没答上来</p>
+<p>NO.4:springBOOt的核心注解有哪些？</p>
+<p>回答几个就行</p>
+<p>NO.5:你项目里的MQ是怎么保证消息的可靠生产和可靠消费的。</p>
+<p>按老袁讲的答。</p>
+<p>NO.6:谈谈你对Java集合类的理解？</p>
+<p>把你知道的所有集合说一说，原理，区别，优劣。</p>
+<p>NO.1:jdk，jre区别</p>
+<p>随便答</p>
+<p>NO.2:从ArrayList中删除一些元素可以使用哪些方式</p>
+<p>倒叙遍历，remove。。。。</p>
+<p>NO.3:linux重命名</p>
+<p>MV，rename</p>
+<p>NO.4:说一下juc</p>
+<p>太宽泛了本来了解的也少，我也不知道咋说随便说了下</p>
+<p>NO.5:autowire注解和resource区别</p>
+<p>1</p>
+<p>NO.6:springboot自动加载流程?</p>
+<p>很长自己看</p>
+<p>NO.1:string常用api</p>
+<p>自己看</p>
+<p>NO.2:redis如何保证密等性</p>
+<p>setnx</p>
+<p>NO.3:redis枷锁</p>
+<p>不知道</p>
+<p>NO.4:bean生命周期</p>
+<p>自己百度</p>
+<p>NO.5:mysql索引，为什么选择这个</p>
+<p>。。。</p>
+<p>NO.6:定义一个和lang里string一样的string的类，会加载哪一个</p>
+<p>自己百度</p>
+<p>NO.1:在商品中，有用到幂等性，怎么实现的</p>
+<p>redis的setnx特性和分布式锁</p>
+<p>NO.2:做幂等性既然是为了避免重复消费，那对于发生这种情况，怎么对传进来得数据进行判断，判断这不是相同的数据</p>
+<p>这个问题聊了很久，他一直引导我去讲，在做幂等性前，如何对传进来的数据，怎么去判断传入的数据重复，从这个角度来考虑，然后讲了一个思路，但是说没有完全解决，思路还需要在打开，但是没有继续去谈了。</p>
+<p>NO.3:在项目中，redis用到了哪些数据类型</p>
+<p>String 、list 、set 、zset 、hash没有用到，稍微提了一下</p>
+<p>NO.1:项目中使用的jdk是哪个版本 ？1.8跟1.7有什么区别</p>
+<p>jdk1.8 区别：说了几个 没答全他就会问 就这些吗？</p>
+<p>NO.2:Spring 和Springboot的区别</p>
+<p>说了一些区别 但是他要听的是底层</p>
+<p>NO.3:说说对反射的理解 项目当中用到了反射吗？</p>
+<p>自行百度 我是没答全</p>
+<p>NO.4:说说动态代理 项目中用到了动态代理吗 说一下</p>
+<p>我跟他说了 openfeign</p>
+<p>NO.1:为什么在公司干了两年才离职？</p>
+<p>实习加工作两年，疫情冲击，市场效益不好，解散了项目组。</p>
+<p>NO.2:项目开发流程，做项目的时候，怎么去进行开发的?</p>
+<p>有需求文档，项目组长划分模块给我，根据需求文档进行业务代码编写</p>
+<p>NO.3:项目中有没有遇到功能需要变更，怎么知道修改哪些代码？</p>
+<p>根据需要变更的需求，分析原来业务，找出需要变更的代码，上报组长，需要对这部分代码进行变更。</p>
+<p>NO.4:有没有测试计划，写测试文档，根据文档进行测试？</p>
+<p>说平常只是对自己开发的代码进行测试，自己没有正规的一个测试流程</p>
+<p>NO.5:最近一个项目多少人？</p>
+<p>说了十几个人，面试官说这么多，就补了句加上老板、项目经理加起来这么多</p>
+<p>NO.6:对加班怎么看？</p>
+<p>上一家公司忙起来也是一个996的状态，甚至在项目急着交付时还会通宵</p>
+<p>NO.7:能不能接受，在几个工作点工作？</p>
+<p>问了下频率高不高，面试官说一两个月换一次（多个人轮流），然后我说可以</p>
+<p>NO.8:会不会用linux 批处理命令（shell脚本），用批处理命令测试一些功能？</p>
+<p>只会linux基本常用命令，只听过，没用过shell脚本</p>
+<p>NO.9:linux常用命令</p>
+<p>查看 创建 删除 文件和文件夹 systemctl 启动停止服务 ps查看进程 kill结束进程 防火墙相关命令</p>
+<p>NO.10:linux使用什么防火墙命令？</p>
+<p>centos内置的firewalld-cmd 或者 软路由 iptable</p>
+<p>NO.11:还有什么想问的吗？</p>
+<p>如果我进入公司，主要负责什么工作 面试结果大概什么会有回复</p>
+<p>NO.1:string有哪些api</p>
+<p>substring，charAt，length，equals，valueof</p>
+<p>NO.2:你了解哪些设计模式</p>
+<p>工厂模式，他让我举例我没说出来</p>
+<p>NO.3:你项目中有什么让你感觉非常有亮点的地方吗</p>
+<p>….</p>
+<p>NO.4:你能说下synchronized和volatile的区别吗</p>
+<p>volatile是线程同步的轻量级实现，性能比synchronized的要好 volatile只能修饰变量，synchronized可以修饰方法、代码块 volatile被多线程访问不会被阻塞，synchronized会 volatile保证数据可见性、有序性，synchronized保证原子性，可见性 volatile保证多线程之间数据可见性，synchronized保证多线程间资源同步问题，两个一般配合使用(我只回答了一两点)</p>
+<p>NO.1:是否用过本地事务</p>
+<p>用过，在写消费功能时用过，注解开启事务</p>
+<p>NO.2:事务的传播方式</p>
+<p>回答了其中两种</p>
+<p>NO.3:反射你了解吗？项目中是否用过反射</p>
+<p>反射有了解，要讲spring的反射和jdbc的反射不让讲，让讲项目中使用的反射</p>
+<p>NO.4:aop了解吗？项目中哪里用到aop？</p>
+<p>讲了下aop是什么，原理，项目中用到aop的地方</p>
+<p>NO.5:springboot与spring的区别</p>
+<p>引导他问我springboot的注解</p>
+<p>NO.6:springboot的注解</p>
+<p>讲了注入注解，然后讲了启动类注解</p>
+<p>NO.7:springboot的自动装配原理</p>
+<p>讲了自动装配的注解和spring.fac文件</p>
+<p>NO.8:jdk1.8的新特性</p>
+<p>讲了lambda表达式和stream流</p>
+<p>NO.9:问了了解springjpa吗</p>
+<p>这个不了解，没答上来</p>
+<p>NO.10:你还有什么要问的吗</p>
+<p>问了技术栈 项目周期</p>
+<p>NO.1:rabbitmq在消息重试时怎么确保不被重复消费，比如消费时间10秒，运行了12秒，那这条消息如何处理</p>
+<p>生产者发送消息的时候生产一个唯一Id，用来去重和幂等，使用重试机制处理</p>
+<p>NO.2:RabbitMQ的Ack机制</p>
+<p>在处理消息过程中，消费者处理消息时出现异常，可能没有完成消息消费，数据可能丢失，为了不让消息丢失，使用了消费确认机制，在消息处理完成后返回给生产者ACK来确认是否被消费</p>
+<p>NO.3:了解数据库索引中的组合索引吗，如果有ABC三个列组成的索引在查AC列的时候会走索引吗</p>
+<p>多列组成的索引叫组合索引，也叫复合索引，会走索引，会走A列索引</p>
+<p>NO.4:Redis分布式锁你是用在项目中哪个地方的</p>
+<p>用在订单模块，采用Redis的setnx设置释放锁</p>
+<p>NO.5:RabbitMQ如何实现的延迟队列</p>
+<p>RabbitMQ本身没有直接支持延迟队列的功能，但是可以通过TTL和DLX模拟出延迟队列的功能。通过消息存活时间和死信队列模拟延迟队列</p>
+<p>NO.6:其他问题没记住</p>
+<p>NO.1:商品有没有做搜索功能</p>
+<p>没有用ES插件，考虑到商品的数据量没有那么大，所以是把所有信息放到Redis里，通过限定内存，加上过期淘汰策略和内存淘汰机制，来保证存储的都是热点访问数据，然后新查询的数据则是先判断有无存在Redis，再考虑是否查询数据库（现在想想，好像回答的牛头不对马嘴）</p>
+<p>NO.2:微服务的组件</p>
+<p>nacos 还顺带讲了下和为什么不用Eureka；网关，说了网关作用，还用了hystrix（这里说错了，应该是Sentinel，后面还好扯过去了）</p>
+<p>NO.3:说一下SpringCloud和spring cloud alibaba的对比 alibaba的优势在哪里？</p>
+<p>应该可以从nacos来讲，我当时没有答出来</p>
+<p>NO.4:#{}和${}的区别</p>
+<p>一个是#占位符$是拼接符，用#可以避免sql注入</p>
+<p>NO.5:查询数据库的时候，悲观锁和乐观锁的实现</p>
+<p>没答上来，忘了</p>
+<p>NO.6:数据库隔离级别</p>
+<p>读未提交、读已提交、可重复读、串行化</p>
+<p>NO.7:多线程的使用，有没有具体使用过</p>
+<p>没答上来</p>
+<p>NO.8:SpringBoot的核心注解</p>
+<p>@springbootapplication @ComponentScan @Configuration @Autowired</p>
+<p>NO.1:英语过四级了吗，项目中需求文档等全部是英文的</p>
+<p>没有，需要借助翻译软件</p>
+<p>NO.2:看了个英文需求文档，能答上多少</p>
+<p>大概看明白了一半</p>
+<p>NO.3:会粤语吗</p>
+<p>不会</p>
+<p>NO.4:1.愿意接受加班吗 2.那如果通宵到白天67点呢</p>
+<p>1.可以的，加班挺正常 2.偶尔通宵没有问题，经常这样身体吃不消</p>
+<p>NO.5:1.看重技术，还是薪资，还是稳定工作 2.但我们项目因为是银行，以安全为主，用到的多是老框架</p>
+<p>1.目前希望以技术为主，想要不断学习和积累。。。 2.当然能在一家公司长久工作下去，也是我的首选，工作中用老技术也会更加顺手，在家也能学习新知识让自己。。。</p>
+<p>NO.6:对string stringbuffer等理解</p>
+<p>string是。。。 stringbuffer是。。。 以及还有个stringbulider。。。</p>
+<p>NO.7:经常出现哪些异常</p>
+<p>分为运行时和编译时异常，其中像空指针的经常出现</p>
+<p>NO.8:tomcat了解吗，部署过吗 版本控制工具用哪个 mq用过吗</p>
+<p>了解，组长部署 git 用过</p>
+<p>NO.9:回调函数了解吗</p>
+<p>忘了</p>
+<p>NO.1:redis 使用场景</p>
+<p>1</p>
+<p>NO.2:sql优化</p>
+<p>1</p>
+<p>NO.3:线程池</p>
+<p>1</p>
+<p>NO.4:mysql 索引的了解</p>
+<p>1</p>
+<p>NO.5:jvm 底层原理</p>
+<p>1</p>
+<p>NO.6:详细说一下登录模块</p>
+<p>1</p>
+<p>NO.1:怎么在测试环境调用生成环境的接口</p>
+<p>通过服务的详细地址</p>
+<p>NO.2:哪些地方需要怎么限流</p>
+<p>非核心业务</p>
+<p>NO.1:为什么在公司干了两年才离职？</p>
+<p>实习加工作两年，疫情冲击，市场效益不好，解散了项目组。</p>
+<p>NO.2:项目开发流程，做项目的时候，怎么去进行开发的?</p>
+<p>有需求文档，项目组长划分模块给我，根据需求文档进行业务代码编写</p>
+<p>NO.3:项目中有没有遇到功能需要变更，怎么知道修改哪些代码？</p>
+<p>根据需要变更的需求，分析原来业务，找出需要变更的代码，上报组长，需要对这部分代码进行变更。</p>
+<p>NO.4:有没有测试计划，写测试文档，根据文档进行测试？</p>
+<p>说平常只是对自己开发的代码进行测试，自己没有正规的一个测试流程</p>
+<p>NO.5:最近一个项目多少人？</p>
+<p>说了十几个人，面试官说这么多，就补了句加上老板、项目经理加起来这么多</p>
+<p>NO.6:对加班怎么看？</p>
+<p>上一家公司忙起来也是一个996的状态，甚至在项目急着交付时还会通宵</p>
+<p>NO.7:能不能接受，在几个工作点工作？</p>
+<p>问了下频率高不高，面试官说一两个月换一次（多个人轮流），然后我说可以</p>
+<p>NO.8:会不会用linux 批处理命令（shell脚本），用批处理命令测试一些功能？</p>
+<p>只会linux基本常用命令，只听过，没用过shell脚本</p>
+<p>NO.9:linux常用命令</p>
+<p>查看 创建 删除 文件和文件夹 systemctl 启动停止服务 ps查看进程 kill结束进程 防火墙相关命令</p>
+<p>NO.10:linux使用什么防火墙命令？</p>
+<p>centos内置的firewalld-cmd 或者 软路由 iptable</p>
+<p>NO.11:还有什么想问的吗？</p>
+<p>如果我进入公司，主要负责什么工作 面试结果大概什么会有回复</p>
+<p>NO.1:上家公司离职原因</p>
+<p>受疫情冲击，公司效益不好，公司解散了项目小组。个人想要在一线城市发展，深圳的互联网行业位于国内前列，所有来到深圳。</p>
+<p>NO.2:问最近一个项目的主要哪些模块</p>
+<p>我反问了下，是我主要负责的模块吗？ 然后说了下比较熟的一个业务流程</p>
+<p>NO.3:问项目问题</p>
+<p>。。。。</p>
+<p>NO.4:对多线程了不了解？</p>
+<p>先说了下线程创建的四种方式，thread、Runnable、Callable、线程池 说一般使用线程池来创建线程，说线程的七个参数（核心线程数、最大线程数，线程空闲回收时间，时间单位，工作队列，线程工厂，拒绝策略） 继续说拒绝策略是在工作队列满了，线程也满了，怎么拒绝任务的，比如丢掉，报错，把工作队列中任务等待时间最长的丢掉等。</p>
+<p>NO.5:一个主线程开了多个子线程，需要子线程执行完，主线程才退出?</p>
+<p>思考。。说没使用过，说自己一般在rabbitmq处理消息积压时会用到。 面试官也说没有这个业务场景</p>
+<p>NO.6:使用多线程提mq消费者能力，怎么保证rabbitmq 消息完整性，就是保证所有接收到的消息一定消费成功？</p>
+<p>没听清，听不太懂，没回答。</p>
+<p>NO.7:上个问题没回答，然后问我什么怎么在rabbitmq使用线程处理消息积压的</p>
+<p>说rabbitmq可以通过设置参数一次获取多个消息，然后用线程中的线程去消费消息，然后签收。</p>
+<p>NO.8:问是自己定义的线程还是rabbitmq自己开多线程？</p>
+<p>没听清，听不太懂。就说使用的时候就是rabbitmq一次取多个消息，然后使用线程池去消费，然后签收。</p>
+<p>NO.9:sql优化这方面有没有经验？</p>
+<p>说sql语句避免浪费性能比如使用select * 说要正确使用索引，不要让索引失效，不要在不建议加的字段加索引</p>
+<p>NO.10:追问索引哪些情况会失效？</p>
+<p>说组合索引没有使用最左匹配原则 模糊查询使用左% 索引列参与计算 索引列有隐式转换，像索引列是字符串，值int转成varchar字符串 组合索引使用 范围查询 比如 &gt; 后面的索引列会失效 order by没用主键索引排序，不同版本，可能会失效</p>
+<p>NO.11:linux常用命令？</p>
+<p>ll ls cd mkdir cp rm ping ifconfig tar systemctl ps</p>
+<p>NO.12:最近项目多少个人？</p>
+<p>6个后端、前端、u、测试加起来6个</p>
+<p>NO.13:定时执行批量处理操作？</p>
+<p>表格导入使用到批量插入，使用easy poi 底层是Apache poi</p>
+<p>NO.1:你不是本专业的，为什么不做本专业的工作</p>
+<p>自身对Java感兴趣</p>
+<p>NO.2:你的职业规划是什么</p>
+<p>我的目标是，在1到2年内达到中级开发工程师的水准。拓宽我的知识面还有加深对已掌握技术的理解，计划在每天工作之余抽出一个小时来去CSDN或官方文档学习，节假日至少抽出5个小时。</p>
+<p>NO.3:你了解我们公司吗</p>
+<p>了解一点</p>
+<p>NO.4:你会接受加班吗</p>
+<p>可以接受</p>
+<p>NO.1:说一下单例模式</p>
+<p>单例模式就是确保一个类只有一个实例</p>
+<p>NO.2:说一下懒汉式和饿汉式</p>
+<p>饿汉式就在类加载的时候就已经把单例初始化，懒汉式是在调用的时候才去初始化这个单例</p>
+<p>NO.3:说一下hashMap</p>
+<p>数据存储结构为：键值对 Jdk1.7 数组+链表 jdk1.8 数组+链表+红黑二叉树</p>
+<p>NO.4:linux常用命令</p>
+<p>有一些都记不清了， ls 文件列表 cd进入目录 cp复制 mkdir 创建文件夹</p>
+<p>NO.5:抽象类和接口的区别</p>
+<p>1.抽象类只能被继承，接口要被类实现 2.一个类可以实现多个接口，但只能继承一个抽象类 还有其他区别 但是一时间想不起来了。</p>
+<p>NO.6:MySQl左连接，右连接</p>
+<p>这个没有答好</p>
+<p>NO.7:接下来就是项目问题，使用了什么技术，学到了什么，表是怎么设计的</p>
+<p>回答的不好</p>
+<p>NO.1:1、项目中用到分布式事务吗？</p>
+<p>我说当时项目设计的时候没有考虑到分布式事务（其实是答不上来）</p>
+<p>NO.2:2、项目中用到分布式锁吗？</p>
+<p>没有用到（分布式锁没有印象） 一般用到redis分布锁： redis 底层的setnx操作指令，程序中的RedisTemplate.opsForValue().setIfAbsent()方法</p>
+<p>NO.3:3、SQL优化？</p>
+<p>好多条。我只说到两条 尽量避免使用select *； 使用小表驱动大表（in和exsist 的区别）； 可以看面试题或者百度。</p>
+<p>NO.4:4、你在项目中碰到什么问题？</p>
+<p>我说使用在项目中使用新工具，elasticsearch</p>
+<p>NO.1:做乘法用什么方法效率高</p>
+<p>一开始答不上来，后来他给提示：箭头 位移运算</p>
+<p>NO.2:线程池用哪种</p>
+<p>我：schedule 具体看业务</p>
+<p>NO.3:创建单线程有几种方式</p>
+<p>4种 Thread类 Runnable Callable 线程池 分别说一下</p>
+<p>NO.4:String、Stringbuffer、StringBuilder的区别</p>
+<p>String底层是数组 Stringbuffer线程安全 StringBuilder线程不安全</p>
+<p>NO.5:用到哪些集合</p>
+<p>（list、set和map）</p>
+<p>NO.6:怎么解决arrayList造成的线程不安全</p>
+<p>（用锁）</p>
+<p>NO.7:有什么锁 有什么区别</p>
+<p>synchronize 造成死锁 无法手动解锁 ReentrantLock 不会死锁 可以手动解锁</p>
+<p>NO.8:redis常用数据类型</p>
+<p>string、list、hash、set、zset</p>
+<p>NO.9:用什么数据库</p>
+<p>mysql</p>
+<p>NO.10:mysql什么时候索引会失效</p>
+<p>最左匹配 select * from 使用函数 使用运算</p>
+<p>NO.11:聚簇索引和非聚簇索引</p>
+<p>聚簇索引又称主键索引 叶子节点存储的是数据 非聚簇索引，除了主键索引以外的，叶子节点存储主键值</p>
+<p>NO.12:openfeign底层实现了什么接口</p>
+<p>没答上来</p>
+<p>NO.13:#{}，${}的区别</p>
+<p>#{} 占位符 编译时会替换为？？？ ${} 拼接符 字符串替换</p>
+<p>NO.14:gateway网关用来干嘛</p>
+<p>限流+鉴权（他对限流提出质疑）</p>
+<p>NO.15:接口缓存</p>
+<p>没答上来</p>
+<p>NO.1:redis的常用数据类型</p>
+<p>list set zset hash string</p>
+<p>NO.2:spring的常用注解</p>
+<p>@Component、@Service、@Controller、@Autowired、@Configuration、@Bean。。。。</p>
+<p>NO.3:创建多线程的方式</p>
+<p>1、继承Thread 类的子类 ，并重写该类的 run 方法 ，该 run 方法的方法体就代表了线程要完成的任务。 2、实现 runnable 接口的实现类 ，并重写该接口的 run()方法 ，该 run()方法的方法体同样是该线程的线程执行体。 3、实现Callable 接口的实现类 ，并实现 call()方法 ，该 call()方法将作为线程执行体 ，并且有返回值 4、使用线程池创建线程</p>
+<p>NO.4:SQL优化、索引失效</p>
+<p>like 查询是以%开头 如果列类型是字符串 ，那一定要在条件中将数据使用引号引用起来,否则不使用索引 对索引列进行运算.需要建立函数索引.否则索引会失效</p>
+<p>NO.5:RabbitMQ怎么保证消息的幂等性</p>
+<p>设置全局唯一ID</p>
+<p>NO.6:list、map，底层</p>
+<p>巴拉巴拉一大堆全说了</p>
+<p>NO.7:剩下的就是项目问题</p>
+<p>………</p>
+<p>NO.1:RabbitMQ怎么保证消息幂等性</p>
+<p>消息唯一ID</p>
+<p>NO.2:redis数据结构</p>
+<p>String list hash set zset</p>
+<p>NO.3:spring常用注解</p>
+<p>11111</p>
+<p>NO.4:多线程创建</p>
+<p>四种1234</p>
+<p>NO.5:&#x3D;&#x3D;和equals的区别</p>
+<p>讲过</p>
+<p>NO.6:String、Stringbuffer、StringBuilder的区别。</p>
+<p>巴拉巴拉</p>
+<p>NO.7:#{}，${}的区别</p>
+<p>巴拉巴拉</p>
+<p>NO.1:分布式锁有用到吗？在哪个地方使用的？</p>
+<p>订单模块用到redis分布式锁</p>
+<p>NO.2:springboot和spring的区别</p>
+<p>按面试笔记回答的</p>
+<p>NO.3:详细说一下控制反转IOC与面向切面AOP的原理</p>
+<p>面试题有</p>
+<p>NO.4:springboot的核心注解</p>
+<p>@SpringBootApplication注解</p>
+<p>NO.5:springboot启动顺序</p>
+<p>先执行Web.xml文件，然后初始化上下文，初始化ApplicationContext，创建WebApplicationContext，加载Bean，创建完毕，放入全局变量</p>
+<p>NO.6:spring框架的事务隔离级别</p>
+<p>四大隔离级别：串行化，重复度，读已提交，读未提交</p>
+<p>NO.7:数据库锁都有哪些，锁的具体实现</p>
+<p>说了乐观锁悲观锁，具体实现没答上来</p>
+<p>NO.8:大数据库量的SQL优化</p>
+<p>对查询进行优化 ，应尽量避免全表扫描 ，尽量避免在 where 子句中对字段进行 null 值判断，添加索引，然后在说索引的各种优化命中</p>
+<p>NO.9:平时开发中有写接口执行计划吗？</p>
+<p>有点没听清是不是这样问的，没回答上来</p>
+<p>NO.10:讲一下list、set和map</p>
+<p>巴拉巴拉一大堆</p>
+<p>NO.11:hashmap的哈希碰撞怎么解决</p>
+<p>说了1.7单链表解决，1.8采用单链表加红黑树解决</p>
+<p>NO.12:项目中有用到多线程吗</p>
+<p>订单模块</p>
+<p>NO.13:说一下设计模式，以及设计模式的具体实现</p>
+<p>简单工厂，工厂模式，单例模式，适配器之类的，具体实现未答上来</p>
+<p>NO.14:jvm内存模型</p>
+<p>主要分五个区，堆可分为 ：新生代和老年代两块区域。java虚拟机栈：主要存放局部变量表，本地方法栈：调用C&#x2F;C++库接口，pc寄存器，为线程之间的切换提供保障，方法区：主要存储类信息、 运行时常量池、 静态变量</p>
+<p>NO.15:平时开发过程中代码规范是怎么做的？</p>
+<p>根据公司的规定来决定</p>
+<p>NO.1:rabbitmq在消息重试时怎么确保不被重复消费，比如消费时间10秒，运行了12秒，那这条消息如何处理</p>
+<p>生产者发送消息的时候生产一个唯一Id，用来去重和幂等，使用重试机制处理</p>
+<p>NO.2:RabbitMQ的Ack机制</p>
+<p>在处理消息过程中，消费者处理消息时出现异常，可能没有完成消息消费，数据可能丢失，为了不让消息丢失，使用了消费确认机制，在消息处理完成后返回给生产者ACK来确认是否被消费</p>
+<p>NO.3:了解数据库索引中的组合索引吗，如果有ABC三个列组成的索引在查AC列的时候会走索引吗</p>
+<p>多列组成的索引叫组合索引，也叫复合索引，会走索引，会走A列索引</p>
+<p>NO.4:Redis分布式锁你是用在项目中哪个地方的</p>
+<p>用在订单模块，采用Redis的setnx设置释放锁</p>
+<p>NO.5:RabbitMQ如何实现的延迟队列</p>
+<p>RabbitMQ本身没有直接支持延迟队列的功能，但是可以通过TTL和DLX模拟出延迟队列的功能。通过消息存活时间和死信队列模拟延迟队列</p>
+<p>NO.6:其他问题没记住</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>面经_四方精创</div>
+      <div>https://leeloveki.github.io/2022/11/03/面经_四方精创/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E9%9D%A2%E8%AF%95Spring/" title="面试Spring">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">面试Spring</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E9%9D%A2%E7%BB%8F_%E4%B8%AD%E8%BD%AF/" title="面经_中软">
+                        <span class="hidden-mobile">面经_中软</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

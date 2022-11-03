@@ -1,0 +1,866 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Tomcattomcat是开源的java web服务器, 实现了Servlet JSP Java WebScoket等web技术 Tomcat目录解析:    目录 作用    lib 存放java的jar包   bin 二进制可执行文件   conf 存放配置   logs 存放日志   webapps 存放所有部署的web项目   当前常用的Tomcat版本为8.0对应Servlet3.1 t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/Tomcat/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="Tomcattomcat是开源的java web服务器, 实现了Servlet JSP Java WebScoket等web技术 Tomcat目录解析:    目录 作用    lib 存放java的jar包   bin 二进制可执行文件   conf 存放配置   logs 存放日志   webapps 存放所有部署的web项目   当前常用的Tomcat版本为8.0对应Servlet3.1 t">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-03T11:59:43.426Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:43.426Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Tomcat - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Tomcat"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          44 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Tomcat</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><p>tomcat是开源的java web服务器, 实现了Servlet JSP Java WebScoket等web技术</p>
+<p>Tomcat目录解析:</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lib</td>
+<td>存放java的jar包</td>
+</tr>
+<tr>
+<td>bin</td>
+<td>二进制可执行文件</td>
+</tr>
+<tr>
+<td>conf</td>
+<td>存放配置</td>
+</tr>
+<tr>
+<td>logs</td>
+<td>存放日志</td>
+</tr>
+<tr>
+<td>webapps</td>
+<td>存放所有部署的web项目</td>
+</tr>
+</tbody></table>
+<p>当前常用的Tomcat版本为8.0对应Servlet3.1</p>
+<p>tomcat配置server.xml解决乱码</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml">&lt;--!解决乱码--&gt;<br><span class="hljs-tag">&lt;<span class="hljs-name">Connector</span> <span class="hljs-attr">port</span>=<span class="hljs-string">&quot;8080&quot;</span> <span class="hljs-attr">protocol</span>=<span class="hljs-string">&quot;HTTP/1.1&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">connectionTimeout</span>=<span class="hljs-string">&quot;20000&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">redirectPort</span>=<span class="hljs-string">&quot;8443&quot;</span> </span><br><span class="hljs-tag">        <span class="hljs-attr">URIEncoding</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Connector</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>当web程序部署到tomcat时, web文件夹会作为项目的根目录, src下面的资源会被编译为字节码后放到web-INF的class目录下</p>
+<h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><p>servlet和tomcat处理用户请求的步骤</p>
+<ol start="0">
+<li><p>浏览器对指定的url发送请求(post,get等)到特定的服务器</p>
+</li>
+<li><p>服务器(tomcat)接收请求并解析</p>
+</li>
+<li><p>服务器(tomcat)根据uri将请求转发给对应的servlet</p>
+<blockquote>
+<p>如果对应的servlet对象还不存在将创建servlet对象, 运行的servlet对象都将由tomcat统一管理</p>
+</blockquote>
+</li>
+<li><p>servlet对象处理请求并生成响应</p>
+</li>
+<li><p>服务器(tomcat)将响应转发给对应的用户</p>
+</li>
+</ol>
+<p>创建一个简单servlet程序的步骤:</p>
+<ol>
+<li>创建servlet类需要继承HttpServlet类并重写其doGet和doPost方法</li>
+<li>在doGet或doPost方法中处理请求(req)并生成响应(sesp)</li>
+<li>使用web.xml或@WebServlet注解将servlet类映射到对应的url路径中(触发关系)</li>
+<li>在前端中调用接口地址</li>
+</ol>
+<p>web.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--一个类可以对应多个servlet-name--&gt;</span><br><span class="hljs-comment">&lt;!--一个servlet-name可以对应多个url--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>servlet名<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">servlet-class</span>&gt;</span>servlet类名(全限定名)<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-class</span>&gt;</span><br>    <span class="hljs-comment">&lt;!--配置servlet中使用的参数--&gt;</span><br>    <span class="hljs-comment">&lt;!--通过servletconfig来获取--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">init-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>username<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>admin<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">init-param</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">servlet-mapping</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">servlet-name</span>&gt;</span>配置好的servlet名<span class="hljs-tag">&lt;/<span class="hljs-name">servlet-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">url-pattern</span>&gt;</span>servlet对应的url路径(注意路径前一般要加/)<span class="hljs-tag">&lt;/<span class="hljs-name">url-pattern</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">servlet-mapping</span>&gt;</span><br><span class="hljs-comment">&lt;!--配置全局参数--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">context-param</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">param-name</span>&gt;</span>encoding<span class="hljs-tag">&lt;/<span class="hljs-name">param-name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">param-value</span>&gt;</span>utf-8<span class="hljs-tag">&lt;/<span class="hljs-name">param-value</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">context-param</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>init-param只能在单个servlet中配置和使用</p>
+<p>context-param可以在整个web程序中配置和使用</p>
+</blockquote>
+<p>全局参数一般用来配置编码或加载初始化文件</p>
+<p>@webServlet注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@WebServlet(urlPatterns=&quot;/register&quot;)</span><br><span class="hljs-comment">//绑定多个url</span><br><span class="hljs-meta">@WebServlet(name=&quot;loginServlet&quot;,urlPatterns=&#123;&quot;/login01&quot;,&quot;/login02&quot;&#125;)</span><br><span class="hljs-comment">//注意urlPatterns的路径可以使用*通配符进行范围匹配对应的url</span><br><span class="hljs-string">&quot;/*/abc&quot;</span>注意这个url会匹配所有的url，实际上等同于<span class="hljs-string">&quot;/*&quot;</span><br><span class="hljs-meta">@WebServlet(urlPatterns=&quot;/register02&quot;,</span><br><span class="hljs-meta">           initParams=&#123;</span><br><span class="hljs-meta">               @WebInitParam(name=&quot;username&quot;,value=&quot;admin&quot;)</span><br><span class="hljs-meta">           &#125;)</span><br></code></pre></td></tr></table></figure>
+
+<p>获取配置中的参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">ServletConfig servletConfig=getServletConfig();<br>String username=servletConfig.getInitParameter(<span class="hljs-string">&quot;username&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p><strong>servlet是单实例多线程的对象</strong></p>
+<p>在tomcat中一个servlet只能对应一个实例, 但是该实例可以被多个线程同时访问(一个servlet对象同时服务多个请求)</p>
+<blockquote>
+<p>意味着tomcat中只需要创建一个servlet就同时可以处理多个请求, 不需要创建重复的对象</p>
+</blockquote>
+<p>servlet的生命周期:</p>
+<p>编译 加载 实例化 服务化 销毁</p>
+<p>由于servlet单实例多线程的特性, 因此编译 加载 实例化都只需要进行一次, 而服务化在一个生命周期中可以重复进行多次直到销毁</p>
+<h2 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h2><p>在java中servlet是一个接口, javax.servlet, 需要从外部导入使用(不属于JDK自带的类库)</p>
+<p>实现一个servlet类有三种方法:</p>
+<ol>
+<li>实现Servlet接口, 并实现该接口的所有方法</li>
+<li>继承HttpServlet类, 并实现doPost或doGet方法</li>
+<li>继承GenericServlet类, 实现service()方法</li>
+</ol>
+<p>继承关系: GenericServlet类实现了Servlet接口, HttpServlet继承了GenericServlet类</p>
+<p><strong>Servlet接口的</strong></p>
+<p>Servlet接口需要实现5个方法</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>init</td>
+<td>初始化时执行, 对应生命周期的实例化, 每个生命周期内只会执行一次</td>
+</tr>
+<tr>
+<td>service</td>
+<td>对应生命周期的服务化, 每次处理请求都会调用</td>
+</tr>
+<tr>
+<td>destory</td>
+<td>对应生命周期的销毁,在tomcat关闭时被自动调用</td>
+</tr>
+<tr>
+<td>getServletConfig</td>
+<td>获取servlet的配置</td>
+</tr>
+<tr>
+<td>getServletInfo</td>
+<td>获取servlet对象的状态信息</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>实现Servlet的service方法并调用自定义的doPost或doGet方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//service方法的参数均由tomcat传入</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">service</span><span class="hljs-params">(ServletRequest servletRequest, ServletResponse servletResponse)</span> <span class="hljs-keyword">throws</span> ServletException, IOException &#123;<br>    HttpServletRequest req=(HttpServletRequest)servletRequest;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">method</span> <span class="hljs-operator">=</span> req.getMethod();<br>    <span class="hljs-keyword">if</span>(method.equals(<span class="hljs-string">&quot;GET&quot;</span>))&#123;<br>        doGet();<br>    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(method.equals(<span class="hljs-string">&quot;POST&quot;</span>))&#123;<br>        doPost();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>面试题</p>
+<p>jsp和servlet的区别</p>
+<p>单独使用jsp或者servlet都可以编写一个网页应用</p>
+<p>jsp和servlet都可以包含html代码和java代码</p>
+<table>
+<thead>
+<tr>
+<th>区别</th>
+<th>servlet</th>
+<th>jsp</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>后端</td>
+<td>前端</td>
+</tr>
+<tr>
+<td>本质</td>
+<td>java后端api, 可以在java中写html</td>
+<td>一种动态网页, 本质是在html代码中插入java代码 servlet</td>
+</tr>
+<tr>
+<td>mvc模型</td>
+<td>属于controller控制器</td>
+<td>属于view视图</td>
+</tr>
+<tr>
+<td>重写service()方法</td>
+<td>可以</td>
+<td>不可以</td>
+</tr>
+<tr>
+<td>接受的请求协议</td>
+<td>所有协议都支持</td>
+<td>http请求</td>
+</tr>
+<tr>
+<td>会话管理</td>
+<td>默认开启</td>
+<td>默认关闭</td>
+</tr>
+<tr>
+<td>修改后如何生效</td>
+<td>需要重新编译和重启服务器</td>
+<td>直接刷新页面</td>
+</tr>
+<tr>
+<td>隐式对象</td>
+<td>没有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>导包</td>
+<td>作为库导入</td>
+<td>将包导入jsp代码中</td>
+</tr>
+</tbody></table>
+<h2 id="ServletContext"><a href="#ServletContext" class="headerlink" title="ServletContext"></a>ServletContext</h2><p>ServletContext是由Tomcat提供的上下文对象, 每个运行的servlet web程序都有一个对应的ServletContext对象</p>
+<p>该对象的生命周期与对应web程序的生命周期相同</p>
+<p>ServletContext对象是tomcat和web程序通信的唯一方法, 可以用于数据通信, servlet间的数据共享, 全局配置</p>
+<p>有4种对象都提供了相同的方法来获取ServletContext</p>
+<p>getServletContext()方法</p>
+<ol>
+<li>ServletConfig对象</li>
+<li>HttpServlet对象</li>
+<li>HttpSession对象</li>
+<li>ServletContextEven对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//在HttpServlet中可以调用父类的getServletContext()方法;</span><br>getServletContext();<br><span class="hljs-comment">//通过config获取</span><br>getServletConfig.getServletContext();<br><span class="hljs-comment">//通过session获取</span><br>req.getSession().getServletContext();<br></code></pre></td></tr></table></figure>
+
+<p>Java Web四大域对象:</p>
+<ol>
+<li>ServletContext</li>
+<li>PageContext</li>
+<li>ServletRequest</li>
+<li>HttpSession</li>
+</ol>
+<p>这些域对象使用map来提供数据存储功能</p>
+<p>servletContext有各种实例方法</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>setAttribute</td>
+<td>键,值</td>
+<td>存储context属性</td>
+</tr>
+<tr>
+<td>getAttribute</td>
+<td>键</td>
+<td>读取</td>
+</tr>
+<tr>
+<td>removeAttribute</td>
+<td>键</td>
+<td>删除对应的context属性</td>
+</tr>
+<tr>
+<td>getRealPath</td>
+<td>相对路径</td>
+<td>获取绝对路径</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>getRealPath通常用于读取项目中的资源(调用字节流读取时需要提供绝对路径)</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//这里的相对路径中 /代表classes目录</span><br><span class="hljs-comment">//  不加/或者./ 代表当前所在package的目录</span><br>servlet类.class.getResourceAsStream(<span class="hljs-string">&quot;相对路径&quot;</span>);<br><span class="hljs-comment">//这里的相对路径 /代表web目录</span><br>servletContext.getResourceAsStream(<span class="hljs-string">&quot;相对路径&quot;</span>);<br>String path=servletContext对象.getRealPath(<span class="hljs-string">&quot;相对路径&quot;</span>);<br>InutStream(path);<br></code></pre></td></tr></table></figure>
+
+<p><strong>重定向和转发</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//转发请求</span><br>requestDispatcher.forward(req,resp);<br><span class="hljs-comment">//重定向过程</span><br><span class="hljs-comment">//手动重定向</span><br><span class="hljs-comment">//设置302响应码</span><br>resp.setStatus(<span class="hljs-number">302</span>);<br>resp.setHeader(<span class="hljs-string">&quot;Location&quot;</span>,<span class="hljs-string">&quot;url地址&quot;</span>);<br><span class="hljs-comment">//使用resp自带的重定向方法</span><br>resp.sendRedirect(<span class="hljs-string">&quot;url地址&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<p><strong>jsp</strong></p>
+<p>jsp是一种动态网页技术, 可以视为简化的servlet(可以用于实现servlet的功能)</p>
+<p>jsp不能直接被浏览器解析, 必须在tomcat容器中运行, 会被服务器解析为对应的html代码</p>
+<p><strong>applet</strong></p>
+<p>applet是一种过时的java Web技术, applet的代码可以直接被浏览器解析成应用(网页), 相对于一种前端技术</p>
+<blockquote>
+<p>目前applet技术已经被淘汰, 主流浏览器中只有IE浏览器还在支持applet</p>
+</blockquote>
+<p><strong>通过反射将map封装为对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> User <span class="hljs-title function_">mapToBean</span><span class="hljs-params">(Map&lt;String,Object&gt; map,Class&lt;User&gt; clazz)</span> <span class="hljs-keyword">throws</span> IllegalAccessException &#123;<br>    Field[] fields = clazz.getDeclaredFields();<br>    <span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>    <span class="hljs-comment">//通过反射遍历属性名</span><br>    <span class="hljs-keyword">for</span> (Field field : fields) &#123;<br>        <span class="hljs-comment">//关闭安全检查</span><br>        field.setAccessible(<span class="hljs-literal">true</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> field.getName();<br>        Class&lt;?&gt; type = field.getType();<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> map.get(key);<br>        <span class="hljs-comment">//对user对象的特定属性进行赋值</span><br>        field.set(user,o);<br>    &#125;<br>    <span class="hljs-keyword">return</span> user;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Tomcat</div>
+      <div>https://leeloveki.github.io/2022/11/03/Tomcat/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/TreeSet/" title="TreeSet">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TreeSet</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/Swagger/" title="Swagger">
+                        <span class="hidden-mobile">Swagger</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

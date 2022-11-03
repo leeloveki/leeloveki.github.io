@@ -1,0 +1,824 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Dockerdocker是基于Go语言开发的虚拟容器引擎, 实现了对cgroup，namespeace，rootfs三个内核资源的虚拟化(隔离和控制)  由于cgroup和namespage这两个内核特性是基于Linux的, 因此docker的虚拟化也是基于linux的  虚拟机和容器的区别    虚拟机 容器    安全性高, 与宿主机相互独立 安全性低, 会影响到宿主机   整个计算机虚拟化(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/Docker/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="Dockerdocker是基于Go语言开发的虚拟容器引擎, 实现了对cgroup，namespeace，rootfs三个内核资源的虚拟化(隔离和控制)  由于cgroup和namespage这两个内核特性是基于Linux的, 因此docker的虚拟化也是基于linux的  虚拟机和容器的区别    虚拟机 容器    安全性高, 与宿主机相互独立 安全性低, 会影响到宿主机   整个计算机虚拟化(">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/Docker/image-20220722153250677.png">
+<meta property="article:published_time" content="2022-11-03T11:59:42.941Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:42.941Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leeloveki.github.io/2022/11/03/Docker/image-20220722153250677.png">
+  
+  
+  
+  <title>Docker - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Docker"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Docker</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>docker是基于Go语言开发的虚拟容器引擎, 实现了对cgroup，namespeace，rootfs三个内核资源的虚拟化(隔离和控制)</p>
+<blockquote>
+<p>由于cgroup和namespage这两个内核特性是基于Linux的, 因此docker的虚拟化也是基于linux的</p>
+</blockquote>
+<p>虚拟机和容器的区别</p>
+<table>
+<thead>
+<tr>
+<th>虚拟机</th>
+<th>容器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>安全性高, 与宿主机相互独立</td>
+<td>安全性低, 会影响到宿主机</td>
+</tr>
+<tr>
+<td>整个计算机虚拟化(包括内存 网络 硬盘 cpu)</td>
+<td>namespace(用户空间)的虚拟化</td>
+</tr>
+<tr>
+<td>开销高</td>
+<td>开销低</td>
+</tr>
+<tr>
+<td>包含模拟层和管理层</td>
+<td>直接调用操作系统的接口</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>早期docker的底层是linux系统提供的LXC(内核容器虚拟化) ,现代的docker已经不需要使用lxc, 而是使用go从底层重新实现</p>
+</blockquote>
+<p>docker是一个高级容器引擎, 将容器的复杂操作进行封装, 使容器的创建和管理简单化</p>
+<p>docker优点: 简单, 高性能, 组装化, 实现了运行环境的移植性缩短了应用开发上线的周期时间(一次封装，到处运行)</p>
+<p>docker推荐一个容器只运行一个</p>
+<p>docker的镜像代表一个应用环境, 通过镜像可以创建容器并运行, 通过同一个镜像产生的容器的运行环境完全相同, 容器的特点是可读可写</p>
+<p>docker常用命令:</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v</td>
+<td>显示docker的版本</td>
+</tr>
+<tr>
+<td>container list -a</td>
+<td>列出所有的容器</td>
+</tr>
+<tr>
+<td>start 容器名</td>
+<td>启动容器</td>
+</tr>
+<tr>
+<td>stop 容器</td>
+<td>停止容器运行</td>
+</tr>
+<tr>
+<td>rm 容器名</td>
+<td>删除容器</td>
+</tr>
+<tr>
+<td>rmi 镜像名</td>
+<td>删除镜像</td>
+</tr>
+<tr>
+<td>exec -it 容器名 &#x2F;bin&#x2F;bash</td>
+<td>进去容器中(进入bash)</td>
+</tr>
+<tr>
+<td>run  镜像:版本</td>
+<td>根据镜像启动一个容器</td>
+</tr>
+<tr>
+<td>search 镜像名</td>
+<td>搜索对应名称的镜像</td>
+</tr>
+<tr>
+<td>pull 镜像:版本</td>
+<td>远程拉取镜像</td>
+</tr>
+<tr>
+<td>images</td>
+<td>列出本地仓库中的所有镜像</td>
+</tr>
+<tr>
+<td>build -f 指定的dockerfile路径 -t 自定义镜像:版本</td>
+<td>根据dockerfile生成一个镜像</td>
+</tr>
+<tr>
+<td>commit 容器id 镜像名称:版本号</td>
+<td>根据容器生成镜像</td>
+</tr>
+<tr>
+<td>save -o ab.tar 镜像名称:版本号</td>
+<td>将镜像导出为压缩文件</td>
+</tr>
+<tr>
+<td>load -i ab.tar</td>
+<td>根据压缩文件导入镜像</td>
+</tr>
+</tbody></table>
+<p>docker run参数:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>保留交互界面</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>启动守护进程</td>
+</tr>
+<tr>
+<td>-t &#x2F;bin&#x2F;bash</td>
+<td>在容器启动后进入命令行</td>
+</tr>
+<tr>
+<td>-p host端口:容器端口</td>
+<td>端口映射</td>
+</tr>
+<tr>
+<td>-v 主机目录:容器目录</td>
+<td>文件目录映射</td>
+</tr>
+<tr>
+<td>–name 容器名称</td>
+<td>设置容器名称</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>设置环境</td>
+</tr>
+</tbody></table>
+<p>docker镜像:</p>
+<p>linux的文件系统有两部分: bootfs和rootfs</p>
+<blockquote>
+<p>bootfs: boot文件系统, 包含bootloader和kernel, 在系统启动时被加载</p>
+<p>rootfs: root文件系统, 根文件目录, 包含系统启动后才运行的标准文件</p>
+</blockquote>
+<p>linux不同发行版本的bootfs基本相同, 但是rootfs(配套软件)的区别很大</p>
+<p>docker镜像的底层是自定义的rootfs文件, 被称为base image, 同时镜像也依赖于host的bootfs</p>
+<blockquote>
+<p>tomcat容器的分层架构</p>
+</blockquote>
+<p><img src="/2022/11/03/Docker/image-20220722153250677.png" srcset="/img/loading.gif" lazyload alt="image-20220722153250677"></p>
+<p>使用一个镜像创建并启动容器时, docker会在镜像的文件系统顶层加载一个可读写文件系统, 这个文件系统就是容器 </p>
+<blockquote>
+<p>多个相同镜像的容器会共用同一个镜像作为底层文件系统,只有顶层的可读写文件系统是不同的</p>
+</blockquote>
+<p><strong>镜像的文件系统对于容器来说是只读的</strong></p>
+<p><strong>dockerfile</strong>用于根据配置的参数创建自定义的镜像</p>
+<p>dockerfile可以分为4部分: 基础镜像 维护者信息 镜像创建时的操作指令 容器启动时的操作指令 </p>
+<p>dockerfile内容:</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FROM</td>
+<td>指定基础镜像</td>
+</tr>
+<tr>
+<td>MAINTAINER 作者名</td>
+<td>设置作者信息</td>
+</tr>
+<tr>
+<td>ENV 键 值</td>
+<td>设置环境变量</td>
+</tr>
+<tr>
+<td>RUN command</td>
+<td>构建镜像时运行指定的bash命令</td>
+</tr>
+<tr>
+<td>ADD source_path dest_path</td>
+<td>将指定路径的文件或目录拷贝到镜像中的路径, 会自动解压, 或者下载url</td>
+</tr>
+<tr>
+<td>COPY source_path dest_path</td>
+<td>跟add类似, 但没有自动解压功能</td>
+</tr>
+<tr>
+<td>WORKDIR path_dir</td>
+<td>指定dockerfile运行命令的工作目录</td>
+</tr>
+<tr>
+<td>CMD command</td>
+<td>设置容器运行时会自动执行的bash命令</td>
+</tr>
+</tbody></table>
+<p><strong>docker-compose</strong></p>
+<p>docker-compose用于根据配置的参数创建容器</p>
+<blockquote>
+<p>docker-compose.yaml</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.9&#x27;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">my-nginx-service:</span><br>    <span class="hljs-attr">container_name:</span> <span class="hljs-string">my-website</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">my-nginx-image:latest</span><br>    <span class="hljs-attr">cpus:</span> <span class="hljs-number">1.5</span><br>    <span class="hljs-attr">mem_limit:</span> <span class="hljs-string">2048m</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;8080:80&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Docker</div>
+      <div>https://leeloveki.github.io/2022/11/03/Docker/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/HTTP/" title="HTTP">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">HTTP</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/Elastic/" title="Elastic">
+                        <span class="hidden-mobile">Elastic</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

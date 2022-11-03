@@ -1,0 +1,1312 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Web互联网被称为www(world wide web) 大部分网站系统都是C&#x2F;S架构(Client Service) 其中Client分为浏览器(瘦客户端) 手机APP 电脑程序 Client是前端 Serivce是后端 前端前端三件套 HTML	CSS	JavaScript HTML和CSS负责页面布局的展示 JavaScript负责业务逻辑的编程  注意常见的前端框架如Vue Re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/Web/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="Web互联网被称为www(world wide web) 大部分网站系统都是C&#x2F;S架构(Client Service) 其中Client分为浏览器(瘦客户端) 手机APP 电脑程序 Client是前端 Serivce是后端 前端前端三件套 HTML	CSS	JavaScript HTML和CSS负责页面布局的展示 JavaScript负责业务逻辑的编程  注意常见的前端框架如Vue Re">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/Web/image-20220615093421505.png">
+<meta property="article:published_time" content="2022-11-03T11:59:43.473Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:43.473Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leeloveki.github.io/2022/11/03/Web/image-20220615093421505.png">
+  
+  
+  
+  <title>Web - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Web"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Web</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><p>互联网被称为www(world wide web)</p>
+<p>大部分网站系统都是C&#x2F;S架构(Client Service)</p>
+<p>其中Client分为浏览器(瘦客户端) 手机APP 电脑程序</p>
+<p>Client是前端 Serivce是后端</p>
+<h1 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h1><p>前端三件套</p>
+<p>HTML	CSS	JavaScript</p>
+<p>HTML和CSS负责页面布局的展示</p>
+<p>JavaScript负责业务逻辑的编程</p>
+<blockquote>
+<p>注意常见的前端框架如Vue React都是JS底层的后端框架, 它们使用自定义的JavaScript作为动态功能, 编写的代码会在服务端解析为html和css返回给用户(响应式布局)</p>
+</blockquote>
+<p>最新的HTML版本为HTML5.0简称H5</p>
+<p>HTML: 超文本标记语言 Hyper Text Markup Language</p>
+<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><p>HTML的标签由W3C机构严格定义, 无法自定义扩展</p>
+<p>标签特点:</p>
+<ol>
+<li>有开始标签和结束标签组成</li>
+<li>标签都是放在&lt;&gt;里的</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>头标签</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;head&gt;</td>
+<td>存放元信息 子标签:title link meta script style base</td>
+</tr>
+<tr>
+<td>&lt;title&gt;</td>
+<td>网页标题(不会显示在网页主体body中, 显示在浏览器的标签标题中)</td>
+</tr>
+<tr>
+<td>&lt;link&gt;</td>
+<td>引入外部资源(JS脚本, css文件)</td>
+</tr>
+<tr>
+<td>&lt;script&gt;</td>
+<td>内嵌JS脚本</td>
+</tr>
+<tr>
+<td>&lt;style&gt;</td>
+<td>内嵌样式表</td>
+</tr>
+<tr>
+<td>&lt;meta&gt;</td>
+<td>元信息</td>
+</tr>
+<tr>
+<td>文本标签</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;h1&gt;</td>
+<td>标题标签,  有6级:h1 h2 h3 h4 h5 h6</td>
+</tr>
+<tr>
+<td>&lt;p&gt;</td>
+<td>文章的一段</td>
+</tr>
+<tr>
+<td>&lt;b&gt;</td>
+<td>加粗</td>
+</tr>
+<tr>
+<td>&lt;strong&gt;</td>
+<td>加粗, 语义强调&#x2F;重要(被程序解析时会加上语言, 在视觉上与b没有区别)</td>
+</tr>
+<tr>
+<td>&lt;i&gt;</td>
+<td>斜体</td>
+</tr>
+<tr>
+<td>&lt;em&gt;</td>
+<td>斜体, 语义强调&#x2F;重要(被程序解析时会加上语言, 在视觉上与em没有区别)</td>
+</tr>
+<tr>
+<td>其他</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;img&gt;</td>
+<td>图片标签, 有三个属性: src(图片路径或链接) alt(加载失败时显示的信息) title(加载成功时显示的信息)</td>
+</tr>
+<tr>
+<td>&lt;a&gt;</td>
+<td>超链接标签, 可以跳转到指定的网页或者当前网页的某个位置 有href属性和targer属性 target属性可以赋_blank self</td>
+</tr>
+<tr>
+<td>&lt;div&gt;</td>
+<td>分块标签</td>
+</tr>
+<tr>
+<td>列表标签</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;ol&gt;</td>
+<td>有序列表</td>
+</tr>
+<tr>
+<td>&lt;ul&gt;</td>
+<td>无序列表</td>
+</tr>
+<tr>
+<td>&lt;li&gt;</td>
+<td>列表项</td>
+</tr>
+<tr>
+<td>&lt;dl&gt;</td>
+<td>定义列表</td>
+</tr>
+<tr>
+<td>&lt;dt&gt;</td>
+<td>定义项目</td>
+</tr>
+<tr>
+<td>&lt;dd&gt;</td>
+<td>定义描述</td>
+</tr>
+<tr>
+<td>媒体标签</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;audio&gt;</td>
+<td>音频</td>
+</tr>
+<tr>
+<td>&lt;video&gt;</td>
+<td>视频</td>
+</tr>
+<tr>
+<td>表单标签</td>
+<td></td>
+</tr>
+<tr>
+<td>form</td>
+<td>表单主体 action指定url作为提交数据的链接, method有GET和POST两种</td>
+</tr>
+<tr>
+<td>input</td>
+<td>type属性有很多类型: text password hidden file date radio checkbox button submit(提交按钮) reset(重置按钮) name属性作为提交的key和value作为提交的值(一个name会有多个value可选)</td>
+</tr>
+<tr>
+<td>textarea</td>
+<td>可以输入多行文本的框</td>
+</tr>
+<tr>
+<td>select</td>
+<td>下拉框</td>
+</tr>
+<tr>
+<td>option</td>
+<td>select的选项</td>
+</tr>
+<tr>
+<td>表格标签</td>
+<td></td>
+</tr>
+<tr>
+<td>table</td>
+<td>整个表格</td>
+</tr>
+<tr>
+<td>thead</td>
+<td>表头</td>
+</tr>
+<tr>
+<td>th</td>
+<td>表头的每个单元格</td>
+</tr>
+<tr>
+<td>tr</td>
+<td>表格的每行</td>
+</tr>
+<tr>
+<td>td</td>
+<td>表格的每个单元格, 属性: colspan合并列 rowspan 合并行</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>实体符号</p>
+</blockquote>
+<p>实体标签是html中的特殊符号, 直接输入这些符号不会被浏览器解析并显示, 只有输入实体符号才能在浏览器中显示对应的符号</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>显示</th>
+<th>实体符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空格</td>
+<td></td>
+<td>&amp;nbsp;</td>
+</tr>
+<tr>
+<td>小于号</td>
+<td>&lt;</td>
+<td>&amp;lt;</td>
+</tr>
+<tr>
+<td>大于号</td>
+<td>&gt;</td>
+<td>&amp;gt;</td>
+</tr>
+<tr>
+<td>引号</td>
+<td>“</td>
+<td>&amp;quot;</td>
+</tr>
+<tr>
+<td>和号</td>
+<td>&amp;</td>
+<td>&amp;amp;</td>
+</tr>
+<tr>
+<td>撤号</td>
+<td>&#96;</td>
+<td>&amp;apos</td>
+</tr>
+<tr>
+<td>乘</td>
+<td>&amp;times;</td>
+<td>&amp;times;</td>
+</tr>
+<tr>
+<td>除</td>
+<td>&amp;divide;</td>
+<td>&amp;divide;</td>
+</tr>
+</tbody></table>
+<h2 id="块级标签和行级标签"><a href="#块级标签和行级标签" class="headerlink" title="块级标签和行级标签"></a>块级标签和行级标签</h2><p>html中的标签都可以分为块级标签和行级标签</p>
+<p>块级标签: 单独占一整行空间, 可以设置高度</p>
+<p>行级标签(也可以称为行内标签, 一般放在块级标签的内部): 只占一行的部分空间, 无法设置高度, 根据内部填充的内容自动调整高度</p>
+<p>常见块级标签: div	p	h1-h6	ul	ol	dl	li	dd	dt	hr	br	table	thead	tbody	tfoot	tr	h5	header</p>
+<p>常见行级标签: span a img select strong b eem i small sup sub form label button</p>
+<p>框架集标签: frameset frame</p>
+<blockquote>
+<p>框架集标签已经是Deprecated废弃状态, 不推荐使用</p>
+</blockquote>
+<p><strong>Deprecated状态处以待淘汰状态, 目前还是被浏览器支持但是会在未来被淘汰</strong></p>
+<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><p>css: 层叠样式表 (Cascading style sheet)</p>
+<p>css有三种: 行内样式表  内嵌样式表	外联样式表</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>helloCss<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css">        &lt;!-内嵌样式表--&gt;</span><br><span class="language-css">        <span class="hljs-selector-tag">h1</span> &#123;</span><br><span class="language-css">            <span class="hljs-attribute">color</span>: red;</span><br><span class="language-css">            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">13px</span>;</span><br><span class="language-css">        &#125;</span><br><span class="language-css">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br>    &lt;!-引入外联样式表--&gt;<br>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;hello.css&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    &lt;!-行内样式表--&gt;<br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;title&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;title01&quot;</span>&gt;</span>蜗牛学苑<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>hello<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>外联样式表的语法跟内嵌样式表相同</p>
+<p>(但是注释是用&#x2F;&#x2F;, 内嵌样式表由于还在html文件中需要用&lt;!—&gt;来注释)</p>
+<blockquote>
+<p>注意内嵌js脚本可以用&#x2F;&#x2F;注释</p>
+</blockquote>
+<p>生效优先级(范围小的优先级最高,范围大的优先级最低):</p>
+<p>行内样式表&gt;内嵌样式表&gt;外联样式表</p>
+<h2 id="元素选择器"><a href="#元素选择器" class="headerlink" title="元素选择器"></a>元素选择器</h2><p>CSS中的元素选择器有4类:</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>通配选择器</td>
+<td>*{}</td>
+</tr>
+<tr>
+<td>标签选择器</td>
+<td>div{}</td>
+</tr>
+<tr>
+<td>类选择器</td>
+<td>.class{}</td>
+</tr>
+<tr>
+<td>ID选择器</td>
+<td>#id{}</td>
+</tr>
+</tbody></table>
+<p>生效优先级(范围小的优先级最高,范围大的优先级最低):</p>
+<p>ID&gt;类&gt;标签&gt;通配</p>
+<h2 id="背景样式-background-style"><a href="#背景样式-background-style" class="headerlink" title="背景样式(background-style)"></a>背景样式(background-style)</h2><blockquote>
+<p>背景样式的前面都要加上background-前缀</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>样式名</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>background-color</td>
+<td>16进制或rgb颜色值</td>
+<td>背景颜色</td>
+</tr>
+<tr>
+<td>background-image</td>
+<td>url或路径</td>
+<td>设置背景照片</td>
+</tr>
+<tr>
+<td>background-size</td>
+<td>像素或百分比</td>
+<td>设置背景大小</td>
+</tr>
+<tr>
+<td>background-repeat</td>
+<td>no-repeat, repeat-x, repeat-y, repeat</td>
+<td>设置背景图是否重复平铺</td>
+</tr>
+<tr>
+<td>background-position</td>
+<td>top center bottom left center  right或x% y%或x,y</td>
+<td>设置背景图片的起始位置(左上角位置)</td>
+</tr>
+<tr>
+<td>background-attachment</td>
+<td>scroll(默认, 随着页面一起滚动), fixed(固定, 不滚动), inherit(继承父元素的attachment属性)</td>
+<td>设置背景是否滚动</td>
+</tr>
+</tbody></table>
+<h2 id="字体样式-font-style"><a href="#字体样式-font-style" class="headerlink" title="字体样式(font-style)"></a>字体样式(font-style)</h2><blockquote>
+<p>字体样式会绑定属性内显示的文本内容</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>样式名</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>font-family</td>
+<td>仿宋(字体名, 中文或英文)</td>
+<td>设置字体的种类</td>
+</tr>
+<tr>
+<td>font-size</td>
+<td>px(像素)</td>
+<td>设置字体大小</td>
+</tr>
+<tr>
+<td>font-style</td>
+<td>italic(斜体)bold(粗体)</td>
+<td>设置字体的风格</td>
+</tr>
+<tr>
+<td>font-weight</td>
+<td>100-900</td>
+<td>加粗</td>
+</tr>
+<tr>
+<td>color</td>
+<td>16进制或rgb颜色值</td>
+<td>设置字体颜色</td>
+</tr>
+<tr>
+<td>opacity</td>
+<td>0.0-1.0</td>
+<td>透明度</td>
+</tr>
+</tbody></table>
+<h2 id="文本样式-text-style"><a href="#文本样式-text-style" class="headerlink" title="文本样式(text-style)"></a>文本样式(text-style)</h2><p>文本样式设定整个文本的样式</p>
+<blockquote>
+<p>文本样式都要加上text-前缀, 除了line-height和letter-spacing</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>样式名</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>text-align</td>
+<td>center left right</td>
+<td>设置文字对齐的方向</td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td>underline overline line-through</td>
+<td>添加下划线 上划线 删除线</td>
+</tr>
+<tr>
+<td>text-transform</td>
+<td>uppercase lowercase capitalize</td>
+<td>全部大写 全部小写 首字母大写</td>
+</tr>
+<tr>
+<td>text-shadow</td>
+<td>px px px color</td>
+<td>横向距离 纵向距离 阴影模糊程度 阴影颜色</td>
+</tr>
+<tr>
+<td>letter-spacing</td>
+<td></td>
+<td>字间距</td>
+</tr>
+<tr>
+<td>line-height</td>
+<td></td>
+<td>行高</td>
+</tr>
+</tbody></table>
+<h2 id="列表样式-lists-style"><a href="#列表样式-lists-style" class="headerlink" title="列表样式(lists-style)"></a>列表样式(lists-style)</h2><p>列表样式可以应用于li</p>
+<table>
+<thead>
+<tr>
+<th>样式名</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>list-style-type</td>
+<td>square upper-roman none</td>
+<td>设置列表左边的1. 2. 3.的样式</td>
+</tr>
+<tr>
+<td>list-style-image</td>
+<td>url</td>
+<td>设置列表左边为图标</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>不同的选择器可以叠加为后代选择器</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">//选择类为classd的父元素下面对应id的子元素<br><span class="hljs-selector-class">.class</span> <span class="hljs-selector-id">#id</span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="边框样式-border-style"><a href="#边框样式-border-style" class="headerlink" title="边框样式(border-style)"></a>边框样式(border-style)</h2><p>边框样式可以用于表格元素</p>
+<table>
+<thead>
+<tr>
+<th>样式名</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>border</td>
+<td>px solid color</td>
+<td>设置边框的宽度 样式 颜色</td>
+</tr>
+<tr>
+<td>border-spacing</td>
+<td>px</td>
+<td>边框间距</td>
+</tr>
+<tr>
+<td>border-collapse</td>
+<td>collapse</td>
+<td>合并边框</td>
+</tr>
+<tr>
+<td>border-radius</td>
+<td>px</td>
+<td>设置边框圆角</td>
+</tr>
+</tbody></table>
+<h2 id="状态-伪类-选择器"><a href="#状态-伪类-选择器" class="headerlink" title="状态(伪类)选择器"></a>状态(伪类)选择器</h2><blockquote>
+<p>一般的类选择器在元素上设置class</p>
+</blockquote>
+<p>伪类选择器不需要手动设置class, 会将元素的状态作为类名来选择, 从而实现同一元素在不同状态下样式的更新</p>
+<p>伪类选择器一般应用场景: a标签(链接标签的样式变化), 鼠标选择元素的样式变化</p>
+<p>状态选择器的语法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">便签名:状态选择器<br>a:visited&#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>状态选择器种类</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>状态选择器</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>link</td>
+<td>未点击过的链接</td>
+</tr>
+<tr>
+<td>visited</td>
+<td>已点击过的链接</td>
+</tr>
+<tr>
+<td>hover</td>
+<td>正在被鼠标指向(悬停)的链接</td>
+</tr>
+<tr>
+<td>active</td>
+<td>正准备访问的链接(鼠标按下还没放开)</td>
+</tr>
+<tr>
+<td>鼠标焦点</td>
+<td></td>
+</tr>
+<tr>
+<td>enabled</td>
+<td></td>
+</tr>
+<tr>
+<td>focus</td>
+<td></td>
+</tr>
+<tr>
+<td>disabled</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p>html中每个标签都是一个盒子: 由外边距(margin) 边框(border) 内边距(padding) 内容(content)  组成</p>
+<blockquote>
+<p>盒子模型</p>
+</blockquote>
+<p><img src="/2022/11/03/Web/image-20220615093421505.png" srcset="/img/loading.gif" lazyload alt="同时"></p>
+<p>同时margin border padding也分为四个方向</p>
+<blockquote>
+<p>如margin-top marigin-right marigin-bottom marigin-left</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>样式</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mairgin</td>
+<td>px</td>
+<td>可以按照上右下左的顺时针方向设置内边距大小(一个px只能对应一个方向)</td>
+</tr>
+<tr>
+<td>border</td>
+<td>px style color</td>
+<td>px会同时对应四个方向</td>
+</tr>
+<tr>
+<td>padding</td>
+<td>px</td>
+<td>可以按照上右下左的顺时针方向设置内边距大小(一个px只能对应一个方向)</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>css中的样式赋多个值时用空格隔开</p>
+</blockquote>
+<p><strong>一般css中为顺时针方向, 上右下左</strong></p>
+<h2 id="float"><a href="#float" class="headerlink" title="float"></a>float</h2><p>浮动(float)属性可以让标签浮动</p>
+<p>块级元素: 独占一行的标签(自带换行)</p>
+<p>行级元素: 占一行的一部分(不会自动换行)</p>
+<table>
+<thead>
+<tr>
+<th>样式</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>float</td>
+<td>方向(left right top bottom)</td>
+<td>使标签向某个方向浮动</td>
+</tr>
+<tr>
+<td>clear</td>
+<td>both</td>
+<td>清除浮动</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>float可以使块级标签无法独占一行(行级标签的特性), 但是同时会有可能影响到父元素(如造成父元素边框塌陷)</p>
+</blockquote>
+<h2 id="CSS元素常用样式"><a href="#CSS元素常用样式" class="headerlink" title="CSS元素常用样式"></a>CSS元素常用样式</h2><table>
+<thead>
+<tr>
+<th>样式名</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>width</td>
+<td>px</td>
+<td>设置元素的宽度</td>
+</tr>
+<tr>
+<td>height</td>
+<td>px</td>
+<td>设置元素的长度</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>text-decoration</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="定位移动样式"><a href="#定位移动样式" class="headerlink" title="定位移动样式"></a>定位移动样式</h2><p>定位移动样式有4种:top bottom right left</p>
+<p><strong>定位移动样式只会影响已定位的元素, 对未定位元素没有任何影响</strong></p>
+<p>定位: position, 如果position是static, 那么定位移动样式没有任何作用</p>
+<p>css中有四种position:</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>定位技术</th>
+<th>作用</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>absolution</td>
+<td>绝对定位</td>
+<td>相对于父元素&#x2F;浏览器的左上角进行定位, 并且移动后会释放原有空间</td>
+<td>会导致元素重叠</td>
+</tr>
+<tr>
+<td>relative</td>
+<td>相对定位</td>
+<td>相对于原有位置进行定位, 并且不会释放原有空间</td>
+<td>不会导致元素重叠</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>固定定位</td>
+<td>相对于浏览器的左上角进行定位, 并且移动后会释放原有空间</td>
+<td>会导致元素重叠</td>
+</tr>
+<tr>
+<td>static</td>
+<td>静态定位</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>定位移动</strong></p>
+<blockquote>
+<p>定位移动是根据position的定位进行移动, 与margin的作用不同</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>样式</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>position</td>
+<td>absolution fixed relative static sticky</td>
+<td>定位</td>
+</tr>
+<tr>
+<td>top</td>
+<td>px</td>
+<td>将元素的位置向下移动px</td>
+</tr>
+<tr>
+<td>bottom</td>
+<td>px</td>
+<td></td>
+</tr>
+<tr>
+<td>right</td>
+<td>px</td>
+<td></td>
+</tr>
+<tr>
+<td>left</td>
+<td>px</td>
+<td></td>
+</tr>
+</tbody></table>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Web</div>
+      <div>https://leeloveki.github.io/2022/11/03/Web/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/offer%E6%9D%A5%E4%BA%86-%20java%E5%9F%BA%E7%A1%80/" title="offer来了- java基础">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">offer来了- java基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/TreeSet/" title="TreeSet">
+                        <span class="hidden-mobile">TreeSet</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

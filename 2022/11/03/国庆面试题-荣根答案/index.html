@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="国庆面试题-荣根答案面试题一 一、 线程又几种创建方式和区别： 1：继承Thread类，2：实现Runnable接口，3：实现Callable接口4：使用线程池 区别：线程只是实现Runnable或实现Callable接口，还可以继承其他类。这种方式下，多个线程可以共享一个target对象，非常适合多线程处理同一份资源的情形。但是编程稍微复杂，如果需要访问当前线程，必须调用Thread.curre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="国庆面试题-荣根答案">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/%E5%9B%BD%E5%BA%86%E9%9D%A2%E8%AF%95%E9%A2%98-%E8%8D%A3%E6%A0%B9%E7%AD%94%E6%A1%88/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="国庆面试题-荣根答案面试题一 一、 线程又几种创建方式和区别： 1：继承Thread类，2：实现Runnable接口，3：实现Callable接口4：使用线程池 区别：线程只是实现Runnable或实现Callable接口，还可以继承其他类。这种方式下，多个线程可以共享一个target对象，非常适合多线程处理同一份资源的情形。但是编程稍微复杂，如果需要访问当前线程，必须调用Thread.curre">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-03T11:59:43.786Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:43.786Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>国庆面试题-荣根答案 - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="国庆面试题-荣根答案"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          104 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">国庆面试题-荣根答案</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="国庆面试题-荣根答案"><a href="#国庆面试题-荣根答案" class="headerlink" title="国庆面试题-荣根答案"></a>国庆面试题-荣根答案</h1><p>面试题一</p>
+<p>一、 线程又几种创建方式和区别：</p>
+<p>1：继承Thread类，2：实现Runnable接口，3：实现Callable接口4：使用线程池</p>
+<p>区别：线程只是实现Runnable或实现Callable接口，还可以继承其他类。这种方式下，多个线程可以共享一个target对象，非常适合多线程处理同一份资源的情形。但是编程稍微复杂，如果需要访问当前线程，必须调用Thread.currentThread()方法。继承Thread类的线程类不能再继承其他父类（Java单继承决定）。前三种的线程如果创建关闭频繁会消耗系统资源影响性能，而使用线程池可以不用线程的时候放回线程池，用的时候再从线程池取，项目开发中主要使用线程池</p>
+<p>二、你能说下synchronized和lock的区别吗：</p>
+<p>1.synchronized时关键字，lock是接口，并且有实现类（比如ReentrantLock）</p>
+<p>2.synchronized会自动释放锁，Lock必须手动释放锁</p>
+<p>3.synchronized是不可中断的，lock的lock不可中断，trylock可以中断</p>
+<p>4.synchronized不知道线程是否拿到锁，lock可以知道线程是否拿到锁，因为比如lock.tryLock有返回值，可以判断是否拿到锁</p>
+<p>5.synchronized能锁方法或者代码块，lock只能锁代码块6.lock可以使用读锁（Lock的实现类ReentrantReadWriteLock）提高多线程读的效率（它允许多个线程读）</p>
+<p>6.synchronized是非公平锁（释放锁之后并不按线程等待的顺序唤醒，而是随机唤醒线程），reentrantlock可以控制是否公平（new ReentrantLock(true)有参构造传入一个true值来控制他是公平的）</p>
+<p>三、</p>
+<p>set和list的区别：</p>
+<p>list底层是数组，有下标有序可元素重复，set底层是hashMap的键，无下标可有序也可无序元素不可重复</p>
+<p>四、索引失效：1、查询所有数据，2、索引列参与运算，3、不满足最左化原则，4使用or分割条件查询时后面的条件没有索引</p>
+<p>5、隐式类型转换（查询时没有对字符串加单引号），6、查询时使用%开头的模糊查询，7、非主键索引使用order by或者limit操作时可能会根据数据库版本出现索引失效</p>
+<p>五、GET请求和POST请求：1、get请求一般是用来获取数据的，post请求则是用来提交数据，2、get请求参数会在url中隐私性安全性差，post请求参数放在body中，3、get请求长度有限制，post请求没有，4、get请求可以被浏览器缓存，post请求不会，5、get请求只能进行url编码，post请求支持多种编码方式</p>
+<p>六、缓存穿透怎么解决：缓存穿透是指，前端大量请求过来想要获取redis和数据库中都没有的数据，造成redis和数据库的资源被占用或者宕机。解决方案：将请求的值做为key，存入redis中并设置过期时间，或者使用布隆过滤器对访问redis的请求进行拦截校验</p>
+<p>七、redis持久化机制：RDB（Redis DataBase）持久化是把当前Redis中全部数据生成快照保存在硬盘上。RDB持久化可以手动触发，也可以自动触发RDB文件是一个紧凑的二进制压缩文件，是Redis在某个时间点的全部数据快照。所以使用RDB恢复数据的速度远远比AOF的快，非常适合备份、全量复制、灾难恢复等场景。。AOF（Append Only File）持久化是把每次写命令追加写入日志中，当需要恢复数据时重新执行AOF文件中的命令就可以了。AOF解决了数据持久化的实时性，也是目前主流的Redis持久化方式。</p>
+<p>八、<strong>mysql执行计划怎么查看：</strong>把explain关键字放在sql查询语句前面再执行就可以看到sql的运行状况，id值越大执行顺序越前，select_type表示语句的复杂度，table表示数据库中的表，type表示查询的类型，possible_keys表示这条语句可能用到的索引，key表示这条语句用到的索引，</p>
+<p>九、<strong>RabbitMQ消息可靠性怎么保证：</strong>消息发送可靠性，生产者发送消息引入确认机制，确保消息到达交换机，发送消息时设置回退的回调，无法到达交换机的消息会触发回调，队列，交换机做持久化</p>
+<p>消息消费可靠性消费者设置重试机制，避免出现未捕获异常时循环消费消息，循环异常的问题。开启消费者手动确认，设置死信队列</p>
+<p>十、<strong>Gateway过滤器怎么实现：</strong>全局过滤器再yml文件中配置，自定义全局过滤器实现GlobalFilter, Ordered接口并重写filter方法可以获取到请求参数，请求头、请求路径、请求ip地址、如此可实现限流，权限校验等功能</p>
+<p> 面试题二</p>
+<p>一、<strong>多线程有哪几种状态？</strong>五种状态：1，新建：当我们新建一个线程时还么有调用start方法就是新建状态；2、就绪：调用start方法后线程就进入就绪状态，等待cpu资源来运行run方法；3、运行当线程获取到cpu的资源后可执行run方法进入运行状态；4、阻塞：当线程被调用sleep方法线程进入休眠、线程调用wait方法线程进入等待，当线程获取同步锁，而同步锁被其他线程占有时都会进入阻塞状态；5、死亡：当线程正常执行完任务后，或者因为抛出某种异常都会使线程进入死亡状态；</p>
+<p>二、<strong>线程池有几种：</strong>1、可缓存的线程池，创建一个可根据需要创建新线程的线程池，但是在以前构造的线程可用时将重用它们。对于执行很多短期异步任务的程序而言，这些线程池通常可提高程序性能。 调用 execute 将重用以前构造的线程（如果线程可用）。如果现有线程没有可用的，则创建一个新线程并添加到池中。终止并从缓存中移除那些已有 60 秒钟未被使用的线程。 因此，长时间保持空闲的线程池不会使用任何资源；</p>
+<p>2、单线程线程池，这个线程池可以在线程死后（或发生异常时）重新启动一个线程来替代原来的线程继续执行下去；</p>
+<p>3、指定工作线程的线程池，创建一个可重用固定线程数的线程池，以共享的无界队列方式来运行这些线程。在任意点，在大多数 nThreads 线程会处于处理任务的活动状态。如果在所有线程处于活动状态时提交附加任务，则在有可用线程之前，附加任务将在队列中等待。如果在关闭前的执行期间由于失败而导致任何线程终止，那么一个新线程将代替它执行后续的任务（如果需要）。在某个线程被显式地关闭之前，池中的线程将一直存在</p>
+<p>4、定时任务线程池，它可安排在给定延迟后运行命令或者定期地执行。</p>
+<p>三、<strong>Map的添加操做：</strong>hashMap使用put前会先判断该table是否为空，为空则初始化然后计算hash值直接添加，不为空添加的时候他会先对元素的key进行进行散列，得到hsahCode再经过计算得到该元素应该存储的节点位置，去判断节点位置是否有元素，没有元素则添加到该位置，有元素则使用equals（）比较两个元素的值是否是一致的，一致则替换该值，不一致则创建一个新的Node节点，并使用尾插法将其插入到原数据的节点后面形成链表</p>
+<p>四、<strong>反射原理：</strong>通过拿到class对象对其进行反编译拿到它的Java对象，使用JDBC的时候,创建数据库的链接,可以通过反射机制加载数据库的驱动程序 多数框架都支持注解和XML配置,从配置中解析出来的类是字符串,需要利用反射机制实例化. 面相切面(AOP)的实现方案,是在程序运行时创建目标对象的代理类,这必须有反射机制来实现.</p>
+<p>五、<strong>什么是回表查询？</strong>MySQL中的索引分为聚簇索引和非聚簇索引，索引结构是B+树，他的非叶子节点是不存储数据的。如果表中有多个索引都是由主键索引为聚簇索引（数据在索引上），其他索引都为非聚簇索引（存储字段数据以及主键索引的指针），回表查询先通过普通索引定位到主键值，在通过聚集索引定位到行记录；需查询两遍索引树效率相对低一点。优化：使用联合索引（索引覆盖）来查询；</p>
+<p>六、<strong>慢SQL日志怎么开 怎么看？</strong>打开：SHOW VARIABLES LIKE ‘%slow_query_log%’; 设置查询语句时间超过3秒会被记录：SET GLOBAL long_query_time&#x3D;3; 查看：cat &#x2F;文件路径&#x2F;slow_query_log</p>
+<p>七、<strong>springboot的核心注解有哪些？</strong>1、**@SpringBootApplication<strong>这个注解是Spring Boot最核心的注解，用在 Spring Boot的主类上，标识这是一个 Spring Boot 应用，用来开启 Spring Boot 的各项能力。实际上这个注解是</strong>@Configuration,@EnableAutoConfiguration,@ComponentScan**三个注解的组合。由于这些注解一般都是一起使用，所以Spring Boot提供了一个统一的注解@SpringBootApplication，目的是开启自动配置</p>
+<p><strong>2、@EnableAutoConfiguration ，3、@Configuration，4、@ComponentScan</strong></p>
+<p><strong>5、@Service，6、@RestController，7、@ResponseBody，8、@Component</strong></p>
+<p><strong>9、@Bean</strong></p>
+<p>八、<strong>springboot启动流程？</strong>springboot的启动流程：1、首先从main找到run()方法，在执行run()方法之前new一个SpringApplication对象，2、进入run()方法，创建应用监听器SpringApplicationRunListeners开始监听然后加载SpringBoot配置环境(ConfigurableEnvironment)，3、然后把配置环境(Environment)加入监听对象中，4、然后加载应用上下文(ConfigurableApplicationContext)，当做run方法的返回对象，5、最后创建Spring容器，refreshContext(context)，实现starter自动化配置和bean的实例化等工作。</p>
+<p>九：<strong>redis主从复制？</strong>主从复制：使用一个redis实例作为主机，其余的作为备份机，主机和备份机的数据完全一致，主机支持数据的写入和读取等各项操作，而从及只支持与主机数据同步与读取。主从模式很好的解决了数据备份问题，并且由于主从服务数据几乎是一致的，因而可以将写入数据的命令发送给主机执行，而读取数据的命令发送给不同的从机执行，从而达到读写分离的目的。优点：读写分离，提高效率，数据热备份，提供多个副本；缺点：主节点故障，集群则无法进行工作，可用性比较低，从节点升主节点需要人工手动干预单点容易造成性能低下主节点的存储能力受到限制主节点的写受到限制（只有一个主节点）全量同步可能会造成毫秒或者秒级的卡顿现象哨兵机制：在主从模式下，master节点负责写请求，然后异步同步给slave节点，从节点负责处理读请求。如果master宕机了，需要手动将从节点晋升为主节点，并且还要切换客户端的连接数据源。这就无法达到高可用，而通过哨兵模式就可以解决这一问题。哨兵模式是Redis的高可用方式，哨兵节点是特殊的redis服务，不提供读写服务，主要用来监控redis实例节点。 哨兵架构下client端第一次从哨兵找出redis的主节点，后续就直接访问redis的主节点，不会每次都通过sentinel代理访问redis的主节点，当redis的主节点挂掉时，哨兵会第一时间感知到，并且在slave节点中重新选出来一个新的master，然后将新的master信息通知给client端，从而实现高可用。这里面redis的client端一般都实现了订阅功能，订阅sentinel发布的节点变动消息。</p>
+<p>哨兵机制功能：监控，提醒，自动故障转移</p>
+<p>十：<strong>微服务服务降级、熔断的实现？</strong>服务熔断：当下游的服务因为某种原因突然变得不可用或响应过慢，上游服务为了保证自己整体服务的可用性，不再继续调用目标服务，直接返回，快速释放资源。如果目标服务情况好转则恢复调用。</p>
+<p>服务降级：下游的服务因为某种原因响应过慢，下游服务主动停掉一些不太重要的业务，释放出服务器资源，增加响应速度！当下游的服务因为某种原因不可用，上游主动调用本地的一些降级逻辑，避免卡顿，迅速返回给用户pom文件中加入sentinel依赖，yml文件中开启熔断或降级的机制，重写降级的实现方法</p>
+<h1 id="面试题三"><a href="#面试题三" class="headerlink" title="面试题三"></a>面试题三</h1><p>一、<strong>说一下你对线程安全的理解？</strong>因为在Java虚拟机中，堆的内存是所有线程共享的，在并发情况下多个线程访问一个资源就会出现内存泄漏，如果不用进行额外的控制或协调操作，访问这个资源的对象都能获得正确的结果，那这就是线程安全。通过资源加锁解决线程安全问题</p>
+<p>二、<strong>volatile是否能保证线程安全？</strong>不能，因为volatile不能保证变量操作的原子性，所以试图通过volatile来保证线程安全性是不靠谱的</p>
+<p>三、<strong>arraylist怎么实现扩容？</strong>arraylist的底层结构式数组默认长度为10，如果添加的元素超过当前容量数组长度就会扩容成当前的1.5倍。数组进行扩容时会将老数组的元素拷贝到新数组中，每次数组容量的增长大约是其原容量的1.5倍。这样代价是很高的，因此在实际使用时，我们应该尽量避免数组容量的扩张。尽可能指定其容量，以避免数组扩容的发生。</p>
+<p>四、<strong>MySQL为什么要使用事务？</strong>事务是一组操作指令的集合，只能全都成功或者全部失败，数据库的作用就是用来确保数据的安全可靠下存储数据和共享数据，如果数据库中的多条数据需要同步更新在没有事务的情况下就会出现数据不同步的问题 ；例如：张三给李四转账，张三扣款成功而李四收款失败了，那这钱到哪去了，张三是不是还要给李四在转一次？为了解决上述的问题，就需要通过数据库的事务来完成，我们只需要在业务逻辑执行之前开启事务，执行完毕后提交事务。如果执行过程中报错，则回滚事务，把数据恢复到事务开始之前的状态</p>
+<p>五、<strong>说一下你对数据库索引的理解？</strong>索引就例如书的目录，能够加快数据库的查询速度，我们通常所说的索引，包括聚集索引、覆盖索引、组合索引、前缀索引、唯一索引等默认使用B+树结构。索引虽然会提高查询效率，但是会降低更新表的效率。比如每次对表进行增删改操作，MySQL不仅要保存数据，还有保存或者更新对应的索引文件。</p>
+<p>六、<strong>springbean的生命周期？</strong>1.实例化，2.属性赋值，3.初始化，4.销毁，四个阶段</p>
+<p>第一阶段：实例化一个bean对象，第二阶段：为bean设置相关属性和依赖；第三阶段：1、检查Aware相关接口并设置相关依赖，2、BeanPostProcessor 前置处理，3、若实现 InitializingBean 接口，调用 afterPropertiesSet() 方法，4、若配置自定义的 init-method方法，则执行，5、BeanPostProceesor 后置处理；第四阶段：1、注册Destruction相关回调接口，2、是否实现DisposableBean，3、若实现 DisposableBean 接口，则执行 destory()方法</p>
+<p>七、<strong>spring自动装配？</strong>@SpringBootApplication是一个由@SpringBootConfiguration注解，@EnableAutoConfiguration和@ComponentScan组合起来的注解。@SpringBootConfiguration注解使用了@Configuration注解：允许在上下文中注册额外的 bean 或导入其他配置类；@EnableAutoConfiguration：启用 SpringBoot 的自动配置机制；@ComponentScan：扫描被@Component (@Service,@Controller)注解的 bean，注解默认会扫描启动类所在的包下所有的类 ，可以自定义不扫描某些 bean</p>
+<p>八、<strong>项目中怎么使用****RabbitMQ？</strong>车品商城服务，通过mq延时队列错开高峰期完成保存订单信息以及库存修改等操作，通过死信队列和死信消费者实现订单超时未付款过期功能</p>
+<p>九、<strong>远程调用中服务超时怎么处理？</strong>检查超时时间是否太短了，使用Hystrix或者sentinel进行服务降级或熔断，对超时业务进行日志记录，或者配置链路追踪</p>
+<p>十、<strong>说一下你了解的微服务组件？</strong>微服务组件：注册中心Eureka，nacos（配置中心），网关getaway，远程调用OpenFeign，dubbo，服务降级流量监控sentinel，Hystrix</p>
+<h1 id="面试题四"><a href="#面试题四" class="headerlink" title="面试题四"></a>面试题四</h1><p>一、<strong>线程池核心参数？</strong>1核心线程数，2、最大线程数，3、空闲线程存活时间，4、时间单位，5、线程工厂，6、阻塞队列，7、拒绝策略</p>
+<p>二、<strong>start()和run()的区别？</strong>线程中的start()方法和run()方法的主要区别在于，当程序调用start()方法，将会创建一个新线程去执行run()方法中的代码。但是如果直接调用run()方法的话，会直接在当前线程中执行run()中的代码，注意，这里不会创建新线程。这样run()就像一个普通方法一样，2、另外当一个线程启动之后，不能重复调用start()，否则会报IllegalStateException异常。但是可以重复调用run()方法</p>
+<p>三、<strong>stream流的ap</strong>iStream是Java8中处理集合的关键抽象概念。Stream<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=API&spm=1001.2101.3001.7020">I</a>对集合数据进行操作，类似于使用SQL执行的数据库查询。是一种高效且易于使用处理数据的方式。1、filter - 接收lambda，从流中排除某些元素。2、limit - 截断流，使其元素不超过给定的数量。3、skip（n）- 跳过元素，返回一个扔掉了前n个元素的流，若流中的元素不足n个，则返回一个空流，与limit（n）互补。4、distinct - 筛选，通过流所生成的元素hashCode和equals（）去除重复元素。5、map - 接收lambda，将元素转换成其他形式或提取信息，接受一个函数作为参数，该函数会被应用到每一个元素上，并将其映射成一个新的元素。</p>
+<p>四、<strong>mybatis传递多个参数的方法？</strong>@Param注解，#{}里面的名称对应的是注解 @Param括号里面修饰的名称，Map，#{}里面的名称对应的是 Map里面的key名称。Java bean对象，#{}里面的名称对应的是 User类里面的成员属性。</p>
+<p>五、<strong>SQL语句查询优化：</strong>1、少使用select * ，尽量使用具体字段；2、对于条件来说等号两边的字段类型要一致，字符串不加单引号索引会失效；3、尽量少使用Order By 排序，对于需要多个字段进行排序的可以使用组合索引；4、对于group by 语句要先过滤后分组；5、在查询时减少使用null，对字段有多个null的可以加默认值；6、少使用like，对于需要使用的， 如需要使用尽量用 like abc%这种，不要把%放字段前面；7、在where后面少使用函数或者算数运算；8、去除的distinct 过滤字段要少，避免 distinct * ；</p>
+<p>六、<strong>spring事务失效场景</strong>：1、方法修饰符不是public，2、数据库不支持事务，3、事务方法未被spring管理，4、同一类中调用，其中一个方法未使用事务注解，5、未配置事务管理器，6、方法的事务传播类型不支持事务，7、不正确的异常捕获，8、错误的标注异常类型</p>
+<p>七、**@Autowired和@Resource的区别**：1、提供方不同@Autowired是由Spring提供的，@Resource是J2EE提供的；2、默认装配类型不同 @Autowired只按type装配,@Resource默认是按name装配。3、使用区别：@Autowired与@Resource都可以用来装配bean，都可以写在字段或setter方法上Autowired默认按类型装配，默认情况下必须要求依赖对象存在，如果要允许null值，可以设置它的required属性为false。如果想使用名称装配可以结合@Qualifier注解进行使用。@Resource，默认按照名称进行装配，名称可以通过name属性进行指定，如果没有指定name属性，当注解写在字段上时，默认取字段名进行名称查找。如果注解写在setter方法上默认取属性名进行装配。当找不到与名称匹配的bean时才按照类型进行装配。但是需要注意的是，如果name属性一旦指定，就只会按照名称进行装配。</p>
+<p>八、<strong>redis分布式锁：</strong>使用setnx修改redis数据，向 Redis 中添加一个 lockKey 锁标志位, 如果添加成功则能够继续向下执行修改操作, 最后再释放此标志位，如果没有释放标志位，就成了死锁；使用Redisson框架，只要线程一加锁成功，就会启动一个watch dog看门狗，它是一个后台线程，会每隔10秒检查一下，如果线程1还持有锁，那么就会不断的延长锁key的生存时间。因此，Redisson就是使用Redisson解决了「锁过期释放，业务没执行完」问题</p>
+<p>九、<strong>Rabbit MQ的重要组件：</strong>1、Publisher：是Message的生产者，Publisher这个Clients产生了一些Message。2、Consumer：Message的消费者，Publisher产生的Message，最终要到达Consumer这个Clients，进行消费。3、Exchange：指定消息按什么规则，路由到哪个Queue，Message消息先要到达Exchange，在Server中承担着从Produce接收Message的责任。4、Queue：到达Exchange的消息，根据制定的规则（Routing key）到达对应的Queue，在Server中承担着装载Message，是Message的容器，等待被消费出去。5、Routing key：在Exchange和Queue之间隐藏有一条黑线，可以将这条黑线看成是Routing key，Exchange就是根据这些定义好的Routing key，将Message送到对应的Queue中去，是Exchange和Queue之间的桥梁。</p>
+<p>十、<strong>项目中****Sentinel的使用</strong>：Sentinel是阿里开源的项目，提供了流量控制、熔断降级、系统负载保护等多个维度来保障服务的稳定性。可以实时监控服务的访问情况，可以在簇点链路中添加流控，熔断、热点或授权规则；</p>
+<h1 id="面试题五"><a href="#面试题五" class="headerlink" title="面试题五"></a>面试题五</h1><p>一、<strong>线程中锁的升级过程？无锁状态：</strong>没有对资源进行锁定，所有线程都能修改，但同时只能有一个线程能够修改成功，其他修改失败后会一直重试知道修改成功；</p>
+<p><strong>偏向锁：</strong>对象的代码一直被同一线程执行，不存在多个线程竞争，该线程后续执行中自动获取锁，，降低获取锁带来的性能开销。偏向锁，指的就是偏向第一个加锁线程，该线程是不会主动释放偏向锁的，只有当其他线程尝试竞争偏向锁才会被释放。偏向锁的撤销，需要在某个时间点上没有字节码正在执行时，先暂停拥有偏向锁的线程，然后判断锁对象是否处于被锁定状态。如果线程不处于活动状态，则将对象头设置成无锁状态，并撤销偏向锁；如果线程处于活动状态，升级为轻量级锁的状态。</p>
+<p><strong>轻量级锁</strong>：轻量级锁是指当锁是偏向锁的时候，被第二个线程 B 所访问，此时偏向锁就会升级为轻量级锁，线程 B 会通过自旋的形式尝试获取锁，线程不会阻塞，从而提高性能。当前只有一个等待线程，则该线程将通过自旋进行等待。但是当自旋超过一定的次数时，轻量级锁便会升级为重量级锁；当一个线程已持有锁，另一个线程在自旋，而此时又有第三个线程来访时，轻量级锁也会升级为重量级锁。</p>
+<p><strong>重量级锁：</strong>指当有一个线程获取锁之后，其余所有等待获取该锁的线程都会处于阻塞状态。重量级锁通过对象内部的监视器（monitor）实现，而其中 monitor 的本质是依赖于底层操作系统的 Mutex Lock 实现，操作系统实现线程之间的切换需要从用户态切换到内核态，切换成本非常高。</p>
+<p>二、<strong>MySQL事务隔离级别：读取未提交</strong>（READ-UNCOMMITTED）最低的隔离级别，允许读取尚未提交的数据变更，可能造成脏读、不可重复读、幻读。<strong>读取已提交</strong>（READ-COMMITTED）允许读取并发事务已经提交的数据，可以避免脏读，但是可能造成不可重复、幻读。<strong>可重复读</strong>（REPEATABLE-READ）对同一字段多次读取的结果都是一致的，除非本身事务修改，可以避免脏读和不可重复读，但是可能造成幻读。<strong>可串行化</strong>（SERIALIZABLE）最高的隔离级别，完全服从ACID的隔离级别，所以的事务依次执行，可以避免脏读、不可重复读、幻读。</p>
+<p>三、<strong>索引分类，索引失效场景：</strong>聚簇索引（主键索引），非聚簇索引（普通索引，唯一索引，复合索引），索引列是函数的参数，多个条件不满足最左侧原则，索引列参与计算，查询所有的列，模糊查询左边使用%，使用or来查询</p>
+<p>四、<strong>SpringBoot启动流程：</strong>启动类上使用的@SpringBootApplication注解是一个组合注解，由@SpringBootConfiguration &#x2F;&#x2F; 继承了Configuration，表示当前是注解类</p>
+<p>@EnableAutoConfiguration &#x2F;&#x2F; 开启springboot的自动装配功能</p>
+<p>@ComponentScan(excludeFilters &#x3D; { &#x2F;&#x2F; 扫描路径设置（将bean对象加载到ioc容器）三个注解组合而来，首先从main找到run()方法，在执行run()方法之前new一个SpringApplication对象然后加载SpringBoot配置环境(ConfigurableEnvironment)，然后把配置环境(Environment)加入监听对象中然后加载应用上下文(ConfigurableApplicationContext)，当做run方法的返回对象最后创建Spring容器，refreshContext(context)，实现starter自动化配置和bean的实例化等工作</p>
+<p>五、<strong>SpringMVC执行流程：</strong>1、用户点击某个请求路径，发起一个HTTP request请求，该请求会被提交到Dispatcher Servlet（前端控制器）； 2、由Dispatcher Servlet请求一个或多个Handler Mapping(处理器映射器)，并返回一个执行链（Handler Execution Chain）；</p>
+<p>3、Dispatcher Servlet将Handler Mapping返回的执行链中的Handler信息发送给Handler Adapter（处理器适配器）；4、HandlerAdapter 根据 Handler 信息找到并执行相应的 Handler（常称为 Controller）；5、Handler 执行完毕后会返回给 HandlerAdapter 一个 ModelAndView 对象（Spring MVC的底层对象，包括 Model 数据模型和 View 视图信息）；6、HandlerAdapter 接收到 ModelAndView 对象后，将其返回给 DispatcherServlet ；7、DispatcherServlet 接收到 ModelAndView 对象后，会请求 ViewResolver（视图解析器）对视图进行解析；8、ViewResolver 根据 View 信息匹配到相应的视图结果，并返回给 DispatcherServlet；9、DispatcherServlet 接收到具体的 View 视图后，进行视图渲染，将 Model 中的模型数据填充到 View 视图中的 request 域，生成最终的 View（视图）； 10、视图负责将结果显示到浏览器（客户端）</p>
+<p>六、<strong>redis持久化机制：</strong>AOF和RDB，RDB 持久化可以在指定的时间间隔内生成数据集的时间点快照，AOF 持久化记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集。 AOF 文件中的命令全部以 Redis 协议的格式来保存，新命令会被追加到文件的末尾。 Redis 还可以在后台对 AOF 文件进行重写(rewrite)，使得 AOF 文件的体积不会超出保存数据集状态所需的实际大小；</p>
+<p>七、<strong>redis主从复制</strong>？主从复制是指将一台Redis服务器的数据，复制到其他的Redis服务器。前者是主服务器，后者是从服务器，只能存在一个主服务器；可以有多个从服务器。主服务器负责写操作，从服务器负责读操作，复制是单向的，只能由主服务器复制到从服务器，作用：1、读写分离：主服务器负责写操作，从服务器负责读操作。可以分担服务器压力，提高并发量，2、高可用：主服务器出现故障时，从服务器可以升级为主服务器，迅速恢复服务</p>
+<p>八、<strong>RabbitMQ消息幂等性</strong>？每条消息都有唯一消费id，消费前校验id是否已经存在，存在则不消费，消费后消息存储到数据库；</p>
+<p>九、Nacos是什么？阿里的一个开源产品，是针对微服务架构中的服务发现、配置管理、服务治理的综合型解决方案。（用来实现配置中心和服务注册中心）</p>
+<p>四大功能：1、服务发现和服务健康监测（使服务更容易注册，并通过DNS或HTTP接口发现其他服务，还提供服务的实时健康检查，以防 止向不健康的主机或服务实例发送请求。 ）2、动态配置服务以中心化、外部化和动态化的方式管理所有环境的应用配置和服务配置。消除了配置变更时重新部署应用和服务的需要，让配置管理变得更加高效和敏捷。配置中心化管理让实现无状态服务变得更简单，让服务按需弹性扩展变得更容易。3、动态 DNS 服务动态 DNS 服务支持权重路由，更容易地实现中间层负载均衡、更灵活的路由策略、流量控制以及数据中心内网的简单DNS解析服务。动态DNS服务还能更容易地实现以 DNS 协议为基础的服务发现，消除耦合到厂商私有服务发现 API 上的风险。4、服务及其元数据管理从微服务平台建设的视角管理数据中心的所有服务及元数据，包括管理服务的描述、生命周期、服务的静态依赖分析、服务的健康状态、服务的流量管理、路由及安全策略、服务的 SLA 以及最首要的 metrics 统计数据。</p>
+<p>十、分布式事务</p>
+<p>AT和XA的优缺点？AT优点：1、一阶段完成直接提交事务，释放数据库资源，性能比较好，2、利用全局锁实现读写隔离，3没有代码侵入，框架自动完成回滚和提交</p>
+<p>AT缺点：1、两阶段之间属于软状态，属于最终一致，2、框架的快照功能会影响性能，但比XA模式要好很多</p>
+<p>XA优点：1、事务的强一致性，满足ACID原则。2、常用数据库都支持，实现简单，并且没有代码侵入</p>
+<p>XA缺点：1、因为一阶段需要锁定数据库资源，等待二阶段结束才释放，2、性能较差依赖关系型数据库实现事务</p>
+<p>Redis CAP(高可用理论)</p>
+<p>C一致性 A可用性 P分区容错性</p>
+<p>CP</p>
+<p>AP</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>国庆面试题-荣根答案</div>
+      <div>https://leeloveki.github.io/2022/11/03/国庆面试题-荣根答案/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E5%9B%BD%E5%BA%86%E9%9D%A2%E8%AF%95%E9%A2%98/" title="国庆面试题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">国庆面试题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E5%90%91%E4%B8%8A%E8%BD%AC%E5%9E%8B/" title="向上转型">
+                        <span class="hidden-mobile">向上转型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

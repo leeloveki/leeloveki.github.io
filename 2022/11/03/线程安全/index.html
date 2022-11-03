@@ -1,0 +1,899 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="线程安全线程安全的本质是对资源访问是否具有独占性问题 多个线程同时对资源进行写入和读取操作时会发生线程不安全 如何保证线程安全: 确保资源的独占性: 同一时刻只能有一个线程在访问临界资源  也被称为序列化访问临界资源方案或者称为同步互斥访问  java中有两种线程锁机制来实现同步互斥访问的方法: synchronized	Lock Synchronized(互斥锁)synchronized被称为互">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程安全">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="线程安全线程安全的本质是对资源访问是否具有独占性问题 多个线程同时对资源进行写入和读取操作时会发生线程不安全 如何保证线程安全: 确保资源的独占性: 同一时刻只能有一个线程在访问临界资源  也被称为序列化访问临界资源方案或者称为同步互斥访问  java中有两种线程锁机制来实现同步互斥访问的方法: synchronized	Lock Synchronized(互斥锁)synchronized被称为互">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220608141653164.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220608113859771.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220608175231759.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220609141752996.png">
+<meta property="article:published_time" content="2022-11-03T11:59:44.348Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:44.348Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leeloveki.github.io/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220608141653164.png">
+  
+  
+  
+  <title>线程安全 - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="线程安全"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">线程安全</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>线程安全的本质是对资源访问是否具有独占性问题</p>
+<p>多个线程同时对资源进行写入和读取操作时会发生线程不安全</p>
+<p>如何保证线程安全:</p>
+<p>确保资源的独占性: 同一时刻只能有一个线程在访问临界资源</p>
+<blockquote>
+<p>也被称为序列化访问临界资源方案或者称为同步互斥访问</p>
+</blockquote>
+<p>java中有两种线程锁机制来实现同步互斥访问的方法: synchronized	Lock</p>
+<h2 id="Synchronized-互斥锁"><a href="#Synchronized-互斥锁" class="headerlink" title="Synchronized(互斥锁)"></a>Synchronized(互斥锁)</h2><p>synchronized被称为互斥锁, 是Java中的一个关键字</p>
+<p>synchronized可以用于标记方法或代码块</p>
+<p>synchronized特性:</p>
+<ol>
+<li>互斥: 对象锁只能被一个线程获得, 不能被其他线程抢占</li>
+<li>重入: 一个线程获得对象锁后, 该线程的不同方法可以抢占这个对象锁</li>
+</ol>
+<p>java中每个对象都有monitor属性, 也被称为锁标记或监视器</p>
+<p>当多线程执行体试图访问某个对象时, 需要先获取该对象的monitor才能访问</p>
+<p>当synchronized标记的代码块或者方法执行时需要先获取指定对象的monitor, 其他需要获取monitor的线程会被锁定直到monitor被释放才能继续执行</p>
+<blockquote>
+<p>只有整个代码块或方法结束才会释放锁定的monitor</p>
+</blockquote>
+<p>通常使用synchronized代码块, 更加灵活</p>
+<blockquote>
+<p>同步锁的代码量越少, 多线程效率越高</p>
+</blockquote>
+<p><strong>面试题</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//获取当前对象的锁</span><br><span class="hljs-keyword">synchronized</span>(<span class="hljs-built_in">this</span>)&#123;&#125;<br><span class="hljs-comment">//获取当前对象的锁</span><br><span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;&#125;<br><span class="hljs-comment">//获取Object类的class类对象的锁</span><br><span class="hljs-keyword">synchronized</span>(Object class)&#123;&#125;<br><span class="hljs-comment">//获取当前类的class类对象的锁</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;&#125;<br><span class="hljs-comment">//获取user对象的锁</span><br><span class="hljs-keyword">synchronized</span>(<span class="hljs-built_in">this</span>)&#123;user&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>锁升级是面试时需要掌握的知识</strong></p>
+<p>synchronized会根据线程数量决定加锁的方式(等级)</p>
+<p>有4种锁等级:	无锁(无线程)	偏向锁(1线程)	轻量级锁(双线程)	重量级锁(三个线程以上)</p>
+<blockquote>
+<p>下面的线程必须被synchronized修饰</p>
+</blockquote>
+<p>无锁:	对象刚创建没有被线程使用时处于无锁状态(偏向位0, 标志01)</p>
+<p>偏向锁:	对象被一个线程操作时, 处于偏向锁状态(偏向位1, 标志01)</p>
+<p>轻量锁:	两个线程需要操作同一对象时, 升级于轻量锁状态, 偏向位空,标志00	并且使用CAS算法进行两个线程间的锁交换</p>
+<p>重量锁:	三个以上的线程都需要操作同一对象时升级为重量锁状态, 偏向位为空, 标志10, 并且不再使用CAS算法而是使用底层CPU的进程同步算法进行锁交换 </p>
+<blockquote>
+<p>同步锁只能升级, 一旦升级不会再降级</p>
+</blockquote>
+<p><img src="/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220608141653164.png" srcset="/img/loading.gif" lazyload alt="image-20220608141653164"></p>
+<h2 id="线程执行顺序控制"><a href="#线程执行顺序控制" class="headerlink" title="线程执行顺序控制"></a>线程执行顺序控制</h2><p>Object类提供了实例方法用于控制使用该对象的monitor锁的进程: wait	notify	notifyAll</p>
+<p><strong>复习:	Object类提供的常用方法有:</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static方法</td>
+<td></td>
+</tr>
+<tr>
+<td>clone</td>
+<td>复制指定的对象, 返回副本</td>
+</tr>
+<tr>
+<td>equals</td>
+<td>比较两个对象是否相等</td>
+</tr>
+<tr>
+<td>非static方法</td>
+<td></td>
+</tr>
+<tr>
+<td>finalize</td>
+<td>被GC调用, 回收该对象</td>
+</tr>
+<tr>
+<td>getClass</td>
+<td>获取该对象的运行时类类型(指向的实际类)</td>
+</tr>
+<tr>
+<td>hashCode</td>
+<td>获取对象的hash值</td>
+</tr>
+<tr>
+<td>toString</td>
+<td>将该对象打印为字符串</td>
+</tr>
+<tr>
+<td>线程控制</td>
+<td></td>
+</tr>
+<tr>
+<td>notify</td>
+<td>随机唤醒该对象上一个处于等待状态的线程</td>
+</tr>
+<tr>
+<td>notifyAll</td>
+<td>唤醒该对象上所有的处于等待状态的线程</td>
+</tr>
+<tr>
+<td>wait</td>
+<td>使当前线程进入等待(阻塞)状态, 并释放其占用的monitor, 需要被手动唤醒</td>
+</tr>
+<tr>
+<td>wait(long timeout)</td>
+<td>与wait类似, 但是超过timeout时间后会自动唤醒</td>
+</tr>
+</tbody></table>
+<p><strong>Thread.sleep和Object.wait()的区别</strong>:</p>
+<ol>
+<li>sleep会暂停当前线程的执行, sleep期间该不能被手动唤醒, 并且不会释放monitor资源</li>
+<li>wait()也会暂停当前线程的执行, 可以被notify手动唤醒, 并且会将占用的monitor资源释放</li>
+</ol>
+<p>相似之处:</p>
+<ol>
+<li>都会线程进入Not Runnable状态</li>
+<li>都是底层由C语言写的native方法</li>
+</ol>
+<blockquote>
+<p>sleep状态的线程如果被中断会引发InterruptedException异常</p>
+</blockquote>
+<p><strong>java中还有一个线程安全关键字volatile</strong></p>
+<p>volatile用于修饰变量, 作用有:</p>
+<ol>
+<li>保证内存可见性</li>
+<li>防止指令重排序</li>
+</ol>
+<p>当一个变量被volatile修饰时, 线程对变量的操作将写入缓存, 并同步到主存中, 然后基于CPU缓存一致性(MESI)协议来更新其他线程的变量值</p>
+<blockquote>
+<p>volatile不能严格保证线程安全, 只能减少一部分的同步问题</p>
+</blockquote>
+<p><img src="/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220608113859771.png" srcset="/img/loading.gif" lazyload alt="image-20220608113859771"></p>
+<h2 id="Lock框架"><a href="#Lock框架" class="headerlink" title="Lock框架"></a>Lock框架</h2><p>Java.util.concurrent.lock是java中的独占锁框架, 有多个实现类</p>
+<p>ReentrantLocak	可重入锁, 采用递归无阻塞同步机制 底层是CAS原理实现, 与synchronized的行为类似, 但是比syn更灵活更强大, 增加了轮询 超时 中断等高级功能, 支持取锁的公平选择和非公平选择</p>
+<p>ReadWriteLock	读写锁</p>
+<p><strong>ThreadLocal直接负责管理资源, 线程通过调用ThreadLocal的api来读写资源</strong></p>
+<p>synchronized和Lock的区别</p>
+<ol>
+<li>synchronized是关键字, Lock是接口</li>
+<li>synchronized通过对象身上的monitor机制来实现同步锁</li>
+<li>Lock属于一种自定义的锁, 与monitor无关</li>
+<li>synchronized无法手动判断锁的状态, Lock可以通过tryLock判断锁状态</li>
+<li>synchronized有自动释放锁的机制, 而Lock只能手动调用unlock()来释放锁, 否则将称为死锁</li>
+<li>synchronized的线程需要等待锁的释放, Lock不一定</li>
+<li>synchronized可重入 不可中断 非公平锁</li>
+<li>Lock可重入 可中断 有公平锁和非公平锁</li>
+<li>synchronized由于只能自动释放锁导致灵活性较低, 适合用于少量代码, Lock适合用于复杂大量代码的情况</li>
+</ol>
+<p>总结</p>
+<ol>
+<li>synchronized支持同步块和同步方法</li>
+<li>不同monitor对象的区别需要重点掌握</li>
+<li>Lock框架采用CAS原理, 提供公平选择和非公平选择取锁</li>
+<li>ThreadLocal负责管理资源副本, 不直接控制线程, 会为每个线程都产生一个独立的关联资源对象</li>
+</ol>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p>线程池用于进行多个线程的管理和复用</p>
+<blockquote>
+<p>线程池图解</p>
+</blockquote>
+<p><img src="/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220608175231759.png" srcset="/img/loading.gif" lazyload alt="image-20220608175231759"></p>
+<p>线程池的组成:</p>
+<ol>
+<li>任务队列: 使进程按照FIFO(先进先出)的队列模式进行排队</li>
+<li>工作线程: 执行任务(多线程对象)的线程</li>
+<li>任务对接接口: 线程池接收任务的接口</li>
+<li>线程管理器: 管理线程池中每个线程的生命周期</li>
+</ol>
+<blockquote>
+<p>FIFO是队列结构的特性</p>
+</blockquote>
+<p>线程池分为简单线程池和复杂线程池</p>
+<p>Executors	ThreadPoolExecutors</p>
+<blockquote>
+<p>创建简单线程池</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//创建单线程线程池</span><br>Executors.newSingleThreadExecutor();<br><span class="hljs-comment">//创建具有缓存线程能力的线程池</span><br>Executors.newCachedThreadPool();<br><span class="hljs-comment">//创建线程数量固定的线程池</span><br>Executors.newFixedThreadPool(<span class="hljs-number">10</span>);<br><span class="hljs-comment">//创建指定线程数量的定时任务线程池</span><br>Executors.newScheduledThreadPool(<span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>复杂线程池ThreadPoolExecutor的构造器</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">ThreadPoolExecutor</span><span class="hljs-params">(<span class="hljs-type">int</span> corePoolSize,</span><br><span class="hljs-params">                              <span class="hljs-type">int</span> maximumPoolSize,</span><br><span class="hljs-params">                              <span class="hljs-type">long</span> keepAliveTime,</span><br><span class="hljs-params">                              TimeUnit unit,</span><br><span class="hljs-params">                              BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="hljs-params">                              ThreadFactory threadFactory,</span><br><span class="hljs-params">                              RejectedExecutionHandler handler)</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>参数解释:</p>
+</blockquote>
+<p>int corePoolSize: 指定线程池的初始化线程数量</p>
+<p>int maximumPoolSize: 线程池的最大线程容量</p>
+<p>long keepAliveTime: 线程允许的最大空闲时间, 超出该时间将该空闲线程结束掉</p>
+<p>TimeUnit unit: keepAliveTime的时间单位</p>
+<p>ThreadFactory threadFactory:	Executors下面的线程工厂</p>
+<p>RejectedExecutionHandler hanlder 任务(Execution)拒绝策略</p>
+<p>复杂线程池可以针对线上生产环境进行调优</p>
+<ol>
+<li>Tomcat服务器调优</li>
+<li>RebbitMQ服务器, 提高消费者消费能力</li>
+</ol>
+<p>任务拒绝策略(RejectedExecutionHandler)有4种</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AbortPolicy</td>
+<td>拒绝新任务, 并抛出异常</td>
+</tr>
+<tr>
+<td>DiscardPolicy</td>
+<td>拒绝新任务, 不抛异常</td>
+</tr>
+<tr>
+<td>CallerRunsPolicy</td>
+<td>拒绝新任务, 交给提交者处理</td>
+</tr>
+<tr>
+<td>DiscardOldestPolicy</td>
+<td>将任务队列中等待最久的任务抛弃, 将新任务加入任务队列</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>这些策略都是ThreadPoolExecutor包下的类</p>
+</blockquote>
+<p>线程池在不同任务量下的状态:</p>
+<ol>
+<li>线程池初始化指定数量的线程</li>
+<li>线程池中有空闲线程时, 直接分配任务给线程处理</li>
+<li>线程都在处理任务的状态下, 将后续的任务进入任务队列</li>
+<li>当线程都在工作状态, 并且任务队列也满了时, 扩增线程池的线程数量</li>
+<li>当线程池的线程数量已经达到最大值, 当线程都在工作状态, 并且任务队列也满了时,开启任务拒绝策略</li>
+</ol>
+<p>线程池有execute和submit实例方法用于执行线程对象</p>
+<blockquote>
+<p>execute对应Runnable实现类的对象	submit对应Callable实现类的对象</p>
+<p>使用线程池时可以直接运行Runnable或Callable的实现类, 不需要再实现Thread类调用start方法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//声明一个复杂线程池</span><br>ThreadPoolExecutor pools=<br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">ThreadPoolExecutor</span>(<span class="hljs-number">10</span>,<span class="hljs-number">200</span>,<br>                        <span class="hljs-number">5</span>,TimeUnit.MINUTES,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedBlockingDeque</span>&lt;&gt;(),<br>                        Executors.defaultThreadFactory(),<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">ThreadPoolExecutor</span>.DiscardOldestPolicy()<br>                        );<br><span class="hljs-comment">//声明一个简单线程池</span><br>ExecutorService es=Executors.newFixedThreadPool(<span class="hljs-number">5</span>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>生产者消费者模式</strong></p>
+<p>producer consumer</p>
+<p>生产者消费者模式基于队列模型实现, 可以用于实现多线程的线程间通信</p>
+<p>好处:</p>
+<ol>
+<li>生产者和消费者间为松散耦合关系</li>
+<li>可以实现多线程数据的统一处理</li>
+</ol>
+<p>队列 Queue </p>
+<p>java中的队列提供了add和poll用于向队列加入元素和取出元素</p>
+<blockquote>
+<p>用队列实现生产者消费者模式</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span>&#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;<br>        Queue&lt;String&gt; queque=<span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedBlockingQueue</span>&lt;&gt;(<span class="hljs-number">200</span>);<br>        ExecutorService es=Executors.newFixedThreadPool(<span class="hljs-number">5</span>);<br>        es.execute(()-&gt;&#123;<br>            queue.add(<span class="hljs-string">&quot;A&quot;</span>);<br>        &#125;);<br>        es.execute(()-&gt;&#123;<br>            queue.add(<span class="hljs-string">&quot;B&quot;</span>);<br>        &#125;);<br>        es.execute(()-&gt;&#123;<br>            queue.add(<span class="hljs-string">&quot;B&quot;</span>);<br>        &#125;);<br>        es.execute(()-&gt;&#123;<br>            queue.add(<span class="hljs-string">&quot;B&quot;</span>);<br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="定时线程池"><a href="#定时线程池" class="headerlink" title="定时线程池"></a>定时线程池</h2><p>ScheduledThreadPoolExecutor可以实现线程的定时执行</p>
+<p>其属于ScheduledExecutorService的子类</p>
+<p>该线程池类有实例方法schedule和scheduleAtFixedRate用于执行线程对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">ScheduledExecutorService ses=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ScheduledThreadPoolExecutor</span>(<span class="hljs-number">10</span>);<br><span class="hljs-comment">//5秒后执行一次ps1线程对象(定时执行一次)</span><br>ses.schedule(ps1,<span class="hljs-number">5</span>,TimeUnit.SECONDS);<br><span class="hljs-comment">//7秒后开始每隔1s执行一次ps1线程对象(定时周期性执行)</span><br>ses.scheduleAtFixedRate(ps2,<span class="hljs-number">7</span>,<span class="hljs-number">1</span>,TimeUnit.SECONDS);<br></code></pre></td></tr></table></figure>
+
+<h1 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h1><p>死锁是指多线程运作时发生了锁无法被自动解开, 无限期锁死的情况</p>
+<p><img src="/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/image-20220609141752996.png" srcset="/img/loading.gif" lazyload alt="image-20220609141752996"></p>
+<p>死锁发生的条件:</p>
+<ol>
+<li>一定是互斥锁被使用</li>
+<li>锁的占用是无限期, 没有时效</li>
+<li>锁无法被其他线程抢占, 只能被一个线程主动释放</li>
+<li>多个线程保持死锁状态</li>
+</ol>
+<p>死锁发生的根本原因是业务逻辑有问题</p>
+<p>如何解决死锁:</p>
+<ol>
+<li>选用时效锁,如redis</li>
+<li>统一加锁顺序</li>
+</ol>
+<h1 id="Daemon-thread-守护线程"><a href="#Daemon-thread-守护线程" class="headerlink" title="Daemon thread(守护线程)"></a>Daemon thread(守护线程)</h1><p>java中的daemon thread(守护线程)是运行在后台, 负责管理或者辅助其他线程运行的线程</p>
+<p>java中的GC(垃圾回收器)也是一个守护线程</p>
+<p>特点:</p>
+<ol>
+<li>守护线程是极低优先级线程, 当所有用户线程都运行结束时, JVM会自动关闭而不会考虑守护线程的运行状态</li>
+<li>JVM会强制关闭守护进程, 不会考虑其运行状态</li>
+</ol>
+<blockquote>
+<p>当JVM中最后一个非守护进程运行结束时, 所有守护进程会被强制结束</p>
+</blockquote>
+<p>Thread类中提供了实例方法setDaemon(boolean flag)用于将该线程对象设为守护进程或非守护进程</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>线程安全</div>
+      <div>https://leeloveki.github.io/2022/11/03/线程安全/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E7%BA%BF%E4%B8%8ABug%E5%88%86%E6%9E%90/" title="线上Bug分析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">线上Bug分析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" title="类加载器">
+                        <span class="hidden-mobile">类加载器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

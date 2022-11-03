@@ -1,0 +1,1099 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[toc] 数据库数据库基本概念数据库类型数据库按照历史发展顺序有如下4种  网状型数据库 层次型数据库 关系数据库 (SQL数据库) 非关系型数据库 (NO-SQL)  SQL和NO-SQL的区别关系型数据库和非关系型数据库也被称为SQL数据库和NO-SQL数据库 两者的区别在于关系型数据库存储数据以及数据间的关系,而非关系型数据库只存储数据  sql数据库代表: mysql sqlserver">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="[toc] 数据库数据库基本概念数据库类型数据库按照历史发展顺序有如下4种  网状型数据库 层次型数据库 关系数据库 (SQL数据库) 非关系型数据库 (NO-SQL)  SQL和NO-SQL的区别关系型数据库和非关系型数据库也被称为SQL数据库和NO-SQL数据库 两者的区别在于关系型数据库存储数据以及数据间的关系,而非关系型数据库只存储数据  sql数据库代表: mysql sqlserver">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220526154354456.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220527154444039.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220530111032633.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220527180430136.png">
+<meta property="article:published_time" content="2022-11-03T11:59:44.020Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:44.020Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leeloveki.github.io/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220526154354456.png">
+  
+  
+  
+  <title>数据库 - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>[toc]</p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="数据库基本概念"><a href="#数据库基本概念" class="headerlink" title="数据库基本概念"></a>数据库基本概念</h2><h3 id="数据库类型"><a href="#数据库类型" class="headerlink" title="数据库类型"></a>数据库类型</h3><p>数据库按照历史发展顺序有如下4种</p>
+<ol>
+<li>网状型数据库</li>
+<li>层次型数据库</li>
+<li>关系数据库 (SQL数据库)</li>
+<li>非关系型数据库 (NO-SQL)</li>
+</ol>
+<h3 id="SQL和NO-SQL的区别"><a href="#SQL和NO-SQL的区别" class="headerlink" title="SQL和NO-SQL的区别"></a>SQL和NO-SQL的区别</h3><p>关系型数据库和非关系型数据库也被称为SQL数据库和NO-SQL数据库</p>
+<p>两者的区别在于关系型数据库存储数据以及数据间的关系,而非关系型数据库只存储数据</p>
+<blockquote>
+<p>sql数据库代表: mysql sqlserver oracle db</p>
+<p>no-sql数据库代表: redis memcache hbase</p>
+</blockquote>
+<p>no-sql数据库是为了高并发的场景而设计, 将数据存储在内存中, 尽可能提高数据的读写速度</p>
+<h3 id="ER图"><a href="#ER图" class="headerlink" title="ER图"></a>ER图</h3><p>ER图也被称为实体关系图, 一般由产品经理在需求分析阶段提供, 用于设计对应的数据库</p>
+<p>ER图的组成部分: 矩形	椭圆	菱形</p>
+<blockquote>
+<p>矩形表示实体</p>
+<p>椭圆表示属性(实体的属性)</p>
+<p>菱形表示关系(实体间的关系)</p>
+</blockquote>
+<h3 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h3><p>SQL是关系型数据库的基础, 用于处理数据间的关系</p>
+<p>数据库中的数据存储在表中, 而表的数据也可以分为行和列</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>表</td>
+<td>存储数据以及数据间的关系</td>
+</tr>
+<tr>
+<td>记录</td>
+<td>表的行被称为记录</td>
+</tr>
+<tr>
+<td>字段</td>
+<td>表的列被称为字段,字段是记录中的某个特性</td>
+</tr>
+</tbody></table>
+<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><p>jdbc是java数据库编程的基础, 提供了一套API用于在数据库中执行sql语句</p>
+<p>JDBC工作步骤:</p>
+<ol>
+<li>连接数据库</li>
+<li>在数据库中执行sql语句</li>
+<li>将sql语句的执行结果返回</li>
+</ol>
+<p><img src="/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220526154354456.png" srcset="/img/loading.gif" lazyload alt="image-20220526154354456"></p>
+<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="mysql概念"><a href="#mysql概念" class="headerlink" title="mysql概念"></a>mysql概念</h3><p><strong>mysq是一种DBMS, 属于关系型数据库</strong></p>
+<p>mysql的一个实例(server instance)可以包含多个数据库, 通过use命令切换数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">#显示当前mysql服务器实例下的所有数据库<br><span class="hljs-keyword">show</span> databases;<br></code></pre></td></tr></table></figure>
+
+<h3 id="mysql数据类型"><a href="#mysql数据类型" class="headerlink" title="mysql数据类型"></a>mysql数据类型</h3><p>mysql中的数据类型主要有3种: 数值类型 字符串类型  日期类型</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>具体类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数值类型</td>
+<td>严格数值类型 近似数值类型</td>
+</tr>
+<tr>
+<td>字符串类型</td>
+<td>char, varchar, binary, varbinary, blob, text, enum, set</td>
+</tr>
+<tr>
+<td>日期类型</td>
+<td>datetime, timestamp, date, time, year</td>
+</tr>
+</tbody></table>
+<p><strong>mysql支持所有标准sql数值类型</strong></p>
+<p>严格数值类型:	integer(int) smallint decimal(dec) numeric</p>
+<p>近似数值类型:	float real double precision</p>
+<h3 id="mysql架构"><a href="#mysql架构" class="headerlink" title="mysql架构"></a>mysql架构</h3><p><strong>mysql作为DBMS有三层架构</strong></p>
+<ol>
+<li>连接层 处理客户端连接和鉴权认证</li>
+<li>服务层 负责查询语句(select语句)的解析 优化 缓存, 还有内置函数和存储过程的实现</li>
+<li>存储引擎  负责数据库中数据的存储 提取(write read)</li>
+</ol>
+<p><img src="/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220527154444039.png" srcset="/img/loading.gif" lazyload alt="image-20220527154444039"></p>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>事务是数据库操作的执行基本单位, 事务可以包含一个或多个sql语句</p>
+<p>事务四特性: ACID</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>要求</th>
+<th>英文</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原子性</td>
+<td>事务不可再分</td>
+<td>atomicity</td>
+</tr>
+<tr>
+<td>一致性</td>
+<td>同一事务的数据准确无误, 不能有差异</td>
+<td>consistency</td>
+</tr>
+<tr>
+<td>隔离性</td>
+<td>不同事务间相互独立, 互不干扰</td>
+<td>isolation</td>
+</tr>
+<tr>
+<td>持久性</td>
+<td>一条事务被commit后存储到磁盘中, 在执行新事务前数据不能被修改</td>
+<td>durability</td>
+</tr>
+</tbody></table>
+<h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><p>存储引擎负责执行事务</p>
+<p><strong>存储引擎是DBMS架构的最底层并且最核心的组成部分, 直接负责事务的实现</strong></p>
+<p>面试题: myisam和innodb的区别</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>innodb</th>
+<th>myisam</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储限制</td>
+<td>64TB</td>
+<td>256TB</td>
+</tr>
+<tr>
+<td>事务支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>外键支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>数据缓存支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>默认储存引擎版本</td>
+<td>mysql5.5及之后</td>
+<td>mysql5.5之前</td>
+</tr>
+<tr>
+<td>事务多线程安全</td>
+<td>支持表锁</td>
+<td>支持行锁</td>
+</tr>
+<tr>
+<td>每个表对应的文件数目</td>
+<td>2个(frm,ibd)</td>
+<td>3个(frm,myd,myi)</td>
+</tr>
+<tr>
+<td>默认索引结构</td>
+<td>树形(B+树)</td>
+<td>B+树</td>
+</tr>
+<tr>
+<td>聚簇</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>范围查找</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+</tbody></table>
+<h3 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h3><p>索引用于快速查找数据库中的数据, 提高查询效率</p>
+<p>innodb和myisam都是用B+树作为索引结构, 但是在实现上有所区别</p>
+<blockquote>
+<p>myisam的索引树的叶子节点保存数据的内存地址</p>
+<p>innodb的叶子节点直接保存数据本身</p>
+</blockquote>
+<p>myisam索引结构实现:</p>
+<p><img src="/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220530111032633.png" srcset="/img/loading.gif" lazyload alt="image-20220530111032633"></p>
+<p>Innodb索引结构实现:</p>
+<p><img src="/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/image-20220527180430136.png" srcset="/img/loading.gif" lazyload alt="image-20220527180430136"></p>
+<blockquote>
+<p>B+树索引支持聚簇, 范围查询, 搜索效率高</p>
+</blockquote>
+<p>聚簇: 索引和数据放在同一个区域中</p>
+<p>非聚簇: 索引和数据放在不同的区域</p>
+<p>聚簇要求数据必须有主键, 然后按照主键进行聚簇</p>
+<blockquote>
+<p>如果表没有显示指定的主键, mysql会自动选择一个满足条件的字段作为主键, 如果不存在满足条件的字段, mysql会生成隐含字段作为聚簇的主键</p>
+<p>隐含字段的类型为长整型, 6个字节大小</p>
+</blockquote>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>视图 view被称为虚拟表, 视图本身不存储数据, 仅仅存储查询语句, 从数据库中读取数据并展示</p>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>SQL语言有五种: DDL	DML	DQL	DCL 还有事务控制语句</p>
+<p><strong>重点学习DQL, 数据库查询语句</strong></p>
+<p>DDL用于建库建表</p>
+<p>DML用于对表进行增删查改</p>
+<p>DQL用于在表中查询数据[重点学习]</p>
+<p>DCL用于设定权限(数据库 表 数据)</p>
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><p>约束(constraint)是对SQL数据库数据做的限制</p>
+<p>mysql中的约束有四种</p>
+<table>
+<thead>
+<tr>
+<th>约束名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>not null</td>
+<td>非空</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>唯一</td>
+</tr>
+<tr>
+<td>primary key</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>foreign key</td>
+<td>外键</td>
+</tr>
+</tbody></table>
+<h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DDL</td>
+<td>create  update  delete</td>
+</tr>
+<tr>
+<td>DML</td>
+<td>create  alter  drop  truncate</td>
+</tr>
+<tr>
+<td>DQL</td>
+<td>select</td>
+</tr>
+<tr>
+<td>DCL</td>
+<td>grant  revoke</td>
+</tr>
+<tr>
+<td>事务控制语句</td>
+<td>commit  rollback  savepoint add constraint</td>
+</tr>
+</tbody></table>
+<p><strong>SQL语句的关键字不区分大小写</strong></p>
+<blockquote>
+<p>注意标识符是区分大小写的</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>SQL命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>create</td>
+<td>创建数据库或者数据库对象</td>
+</tr>
+<tr>
+<td>drop</td>
+<td>删除数据库或者数据库对象</td>
+</tr>
+<tr>
+<td>alter</td>
+<td>更改数据库结构或属性</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>添加注释</td>
+</tr>
+<tr>
+<td>rename</td>
+<td>重命名数据库对象</td>
+</tr>
+<tr>
+<td>delete from</td>
+<td>逐行删除表的记录, 可以恢复</td>
+</tr>
+<tr>
+<td>truncate</td>
+<td>删除表的所有记录, 不可恢复</td>
+</tr>
+</tbody></table>
+<p><strong>delete from是逐行将整个表的数据删除, 有日志可以恢复</strong></p>
+<p><strong>truncate table是直接将整个表重置, 速度最快, 但是操作不可恢复</strong></p>
+<h3 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h3><p><strong>DQL也被称为查询语句, 是功能最复杂的SQL语句(面试重点)</strong></p>
+<p>最简单的DQL语句:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> 字段或(函数加字段) <span class="hljs-keyword">from</span> 表名; <br></code></pre></td></tr></table></figure>
+
+<p>完整DQL语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> 字段或(函数加字段) <span class="hljs-keyword">from</span> 表名 <span class="hljs-keyword">where</span> 查询条件 <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> 字段 <span class="hljs-keyword">having</span> 过滤条件 <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> 字段 limit (a,b)<br></code></pre></td></tr></table></figure>
+
+<p><strong>执行顺序从左向右</strong></p>
+<blockquote>
+<p>除了select字段语句是在where后执行, 但是实际上并不影响最终结果</p>
+</blockquote>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>DQL语句的函数不会修改数据源本身, 仅仅是将结果打印出来</p>
+<h5 id="字段函数"><a href="#字段函数" class="headerlink" title="字段函数"></a>字段函数</h5><blockquote>
+<p>字段函数操作对象为字段</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count</td>
+<td>计数</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg</td>
+<td>求平均值</td>
+</tr>
+<tr>
+<td>max</td>
+<td>求最大值</td>
+</tr>
+<tr>
+<td>min</td>
+<td>求最小值</td>
+</tr>
+<tr>
+<td>ifnull</td>
+<td>筛选并保留空值</td>
+</tr>
+<tr>
+<td>group_concat</td>
+<td>将某个字段的多行记录合并为一行记录, 用逗号分割</td>
+</tr>
+</tbody></table>
+<h5 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h5><blockquote>
+<p>字符串函数操作对象可以是字符串类型字段或字符串直接量</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>concat(a,b)</td>
+<td>拼接a和b</td>
+</tr>
+<tr>
+<td>substr( … from … for …)</td>
+<td>截取</td>
+</tr>
+<tr>
+<td>trim( a from b)</td>
+<td>从b中删除a(删除位置是开头和结尾,可以匹配多个, 不会删除中间被其他字符包围的a)</td>
+</tr>
+<tr>
+<td>trim(a)</td>
+<td>删除a中的空格</td>
+</tr>
+<tr>
+<td>uuid()</td>
+<td>没有操作对象, 直接返回一个36位的随机码(字符串)</td>
+</tr>
+</tbody></table>
+<h5 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h5><blockquote>
+<p>下列三个函数都没有操作对象, 直接返回一个表示当前时间的字符串</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>now()</td>
+<td>yyyy-MM-dd hh:mm:ss</td>
+</tr>
+<tr>
+<td>curdate()</td>
+<td>yyyy-MM-dd</td>
+</tr>
+<tr>
+<td>curtime()</td>
+<td>hh:mm:ss</td>
+</tr>
+</tbody></table>
+<p>year() month() day() 分别读取日期对象中的年份 月份 日</p>
+<h4 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h4><p>一般的函数都只能通过select语句调用, 意味着其返回结果只能打印出来而不能存储到数据库中</p>
+<p>存储过程是一个特殊的函数,不需要通过select语句执行</p>
+<h4 id="dual表"><a href="#dual表" class="headerlink" title="dual表"></a>dual表</h4><p><strong>dual表是一个虚拟表, 不包含任何数据 仅仅用于使sql命令符合语法要求</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql">#获取当前的年份<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">year</span>(now()) <span class="hljs-keyword">from</span> dual;<br>#获取当前的月份<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">month</span>(now()) <span class="hljs-keyword">from</span> dual;<br>#获取当前的天数<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">day</span>(now()) <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><p>查询语句中可以嵌套子查询, 子查询返回的结果实质为行内视图</p>
+<p>子查询语句可以放在三个地方 select后 from后 where in 后</p>
+<ol>
+<li>select … from … where … in (子查询)</li>
+<li>select 字段,(子查询) from …</li>
+<li>select … from (子查询)</li>
+</ol>
+<h4 id="union-连查表"><a href="#union-连查表" class="headerlink" title="union(连查表)"></a>union(连查表)</h4><p>连查表使用union或union all语句, 将多个select语句返回的视图进行合并展示</p>
+<p><strong>union要求两个view的字段数相同,字段类型不需要相同</strong></p>
+<h4 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h4><p>分组查询的语句有:</p>
+<ol>
+<li>.. group by …</li>
+<li>… group by … having …</li>
+<li>group_concat()函数</li>
+</ol>
+<h4 id="多表查询-连查"><a href="#多表查询-连查" class="headerlink" title="多表查询(连查)"></a>多表查询(连查)</h4><p>多表查询用于同时对多个表的数据进行查询</p>
+<blockquote>
+<p> 笛卡尔乘积</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">#直接将两个表的数据一条对应m条<br>#得到的组合表的记录数将是n<span class="hljs-operator">*</span>m<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> student,score;<br></code></pre></td></tr></table></figure>
+
+<p>mysql可以使用三种联查</p>
+<blockquote>
+<p>mysql支持左外联查和右外联查, 但是不支持全外联查</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>联查</th>
+<th>区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内联查</td>
+<td>只显示满足连接条件的数据</td>
+</tr>
+<tr>
+<td>左外联查</td>
+<td>将右表不满足连接条件的数据丢弃</td>
+</tr>
+<tr>
+<td>右外联查</td>
+<td>将左表不满足连接条件的数据丢弃</td>
+</tr>
+</tbody></table>
+<p><strong>联查语句都是使用on作为连接条件</strong></p>
+<h5 id="内联查"><a href="#内联查" class="headerlink" title="内联查"></a>内联查</h5><p>… inner join … on …</p>
+<p>内联查仅仅将两个表间有关联的记录拼接起来, 没有关联的记录会被丢弃</p>
+<h5 id="外联查"><a href="#外联查" class="headerlink" title="外联查"></a>外联查</h5><p>mysql中外联查分为左外联查和右外联查</p>
+<blockquote>
+<p>用外联查会导致另一个表中不符合筛选的数据被填充为null</p>
+</blockquote>
+<p>左外联查以左表为基础, 右外联查以右表为基础</p>
+<blockquote>
+<p>左联查</p>
+</blockquote>
+<p>… left join … on …</p>
+<blockquote>
+<p>右联查</p>
+</blockquote>
+<p>… right join … on …</p>
+<p>MySql回滚：</p>
+<blockquote>
+<p>如果数据库没有开启备份或者日志记录， 那么commit事务后是无法进行回滚操作的</p>
+</blockquote>
+<p>开启日志：binlog</p>
+<p>在服务器上设置定时任务手动备份数据库文件</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据库</div>
+      <div>https://leeloveki.github.io/2022/11/03/数据库/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8/" title="数据结构入门">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构入门</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" title="排序算法">
+                        <span class="hidden-mobile">排序算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

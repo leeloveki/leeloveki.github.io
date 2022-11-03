@@ -1,0 +1,734 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="mybatis SQL  下面两个sql语句相同  12select * from test where name like &amp;#x27;%$&amp;#123;name&amp;#125;%&amp;#x27;;select * from test where name like concat(&amp;#x27;%&amp;#x27;,#&amp;#123;name&amp;#125;,&amp;#x27;%&amp;#x27;);  Mybatis 动态SQL五">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis 动态SQL">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/Mybatis%20%E5%8A%A8%E6%80%81SQL/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="mybatis SQL  下面两个sql语句相同  12select * from test where name like &amp;#x27;%$&amp;#123;name&amp;#125;%&amp;#x27;;select * from test where name like concat(&amp;#x27;%&amp;#x27;,#&amp;#123;name&amp;#125;,&amp;#x27;%&amp;#x27;);  Mybatis 动态SQL五">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/Mybatis%20%E5%8A%A8%E6%80%81SQL/image-20220606174620339.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/Mybatis%20%E5%8A%A8%E6%80%81SQL/image-20220607142937162.png">
+<meta property="article:published_time" content="2022-11-03T11:59:43.113Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:43.113Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leeloveki.github.io/2022/11/03/Mybatis%20%E5%8A%A8%E6%80%81SQL/image-20220606174620339.png">
+  
+  
+  
+  <title>Mybatis 动态SQL - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Mybatis 动态SQL"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          55 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Mybatis 动态SQL</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>mybatis SQL</strong></p>
+<blockquote>
+<p>下面两个sql语句相同</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sq">select * from test where name like &#x27;%$&#123;name&#125;%&#x27;;<br>select * from test where name like concat(&#x27;%&#x27;,#&#123;name&#125;,&#x27;%&#x27;);<br></code></pre></td></tr></table></figure>
+
+<h1 id="Mybatis-动态SQL"><a href="#Mybatis-动态SQL" class="headerlink" title="Mybatis 动态SQL"></a>Mybatis 动态SQL</h1><p>五种动态SQL</p>
+<p>注意动态查询where和动态更新set标签都是为了if语句服务的, 否则加不加where或set标签没有区别</p>
+<ol>
+<li>where if</li>
+<li>set if</li>
+<li>foreach</li>
+<li>include</li>
+<li>choose when otherwise</li>
+</ol>
+<h2 id="动态查询"><a href="#动态查询" class="headerlink" title="动态查询"></a>动态查询</h2><p>动态查询由select where if 标签组成</p>
+<p>where便签会自动将内容插入到select语句的where位置</p>
+<p>if标签用于检查传入参数是否符合要求</p>
+<blockquote>
+<p>if标签内为传入参数的标识符, 并非sql中的字段</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;searchStudentByNameAndAge&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.lee.szdx03.bean.StudentBean&quot;</span>&gt;</span><br>        select * from student_info where stu_name=#&#123;name&#125; and age=#&#123;age&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;searchStudent&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.lee.szdx03.bean.StudentBean&quot;</span>&gt;</span><br>    select * from student_info<br>    <span class="hljs-tag">&lt;<span class="hljs-name">where</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;name!=null&quot;</span>&gt;</span><br>            stu_name like &#x27;%$&#123;name&#125;%&#x27;<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;age!=null&quot;</span>&gt;</span><br>            age=#&#123;age&#125;<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">where</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="动态循环"><a href="#动态循环" class="headerlink" title="动态循环"></a>动态循环</h1><p>通过foreach标签实现动态新增或动态删除</p>
+<blockquote>
+<p>动态新增</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;saveStu&quot;</span>&gt;</span><br>        insert into student_info(stu_no,stu_name,fk_class_id) values<br>    <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;stuList&quot;</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;stu&quot;</span> <span class="hljs-attr">separator</span>=<span class="hljs-string">&quot;,&quot;</span>&gt;</span><br>        (#&#123;stu.stuNo&#125;,#&#123;stu.stuName&#125;,#&#123;stu.fkClassId&#125;)<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>动态删除</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">delete</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;deleteStuByIdList&quot;</span>&gt;</span><br>        delete from student_info where id in<br>    <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;ids&quot;</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">separator</span>=<span class="hljs-string">&quot;,&quot;</span> <span class="hljs-attr">open</span>=<span class="hljs-string">&quot;(&quot;</span> <span class="hljs-attr">close</span>=<span class="hljs-string">&quot;)&quot;</span>&gt;</span><br>        #&#123;id&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">delete</span>&gt;</span><br><span class="hljs-comment">&lt;!--open和close属性可以手动添加开头结尾代替--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">delete</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;deleteStuByIdList&quot;</span>&gt;</span><br>        delete from student_info where id in (<br>    <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;ids&quot;</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">separator</span>=<span class="hljs-string">&quot;,&quot;</span>&gt;</span><br>        #&#123;id&#125;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br>    )<br><span class="hljs-tag">&lt;/<span class="hljs-name">delete</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="动态重复sql"><a href="#动态重复sql" class="headerlink" title="动态重复sql"></a>动态重复sql</h1><p>使用include和sql标签</p>
+<p>include通过refid属性指定对应id的sql标签填充在include标签所在位置</p>
+<p>sql里面包含重复的sql语句或者标签</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-operator">&lt;</span><span class="hljs-keyword">select</span> id<span class="hljs-operator">=</span>&quot;findStuByCommonSql&quot; resultType<span class="hljs-operator">=</span>&quot;com.lee.szdx03.bean.StudentBean&quot;<span class="hljs-operator">&gt;</span><br>        <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> student_info<br>    <span class="hljs-operator">&lt;</span>include refid<span class="hljs-operator">=</span>&quot;commonSql&quot;<span class="hljs-operator">&gt;</span><span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>include<span class="hljs-operator">&gt;</span><br><span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span><span class="hljs-keyword">select</span><span class="hljs-operator">&gt;</span><br><span class="hljs-operator">&lt;</span><span class="hljs-keyword">sql</span> id<span class="hljs-operator">=</span>&quot;commonSql&quot;<span class="hljs-operator">&gt;</span><br>    <span class="hljs-operator">&lt;</span><span class="hljs-keyword">where</span><span class="hljs-operator">&gt;</span><br>        <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;name!=null&quot;<span class="hljs-operator">&gt;</span><br>            stu_name <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%$&#123;name&#125;%&#x27;</span><br>        <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>        <span class="hljs-operator">&lt;</span>if test<span class="hljs-operator">=</span>&quot;age!=null&quot;<span class="hljs-operator">&gt;</span><br>            age<span class="hljs-operator">=</span>#&#123;age&#125;<br>        <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span>if<span class="hljs-operator">&gt;</span><br>    <span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span><span class="hljs-keyword">where</span><span class="hljs-operator">&gt;</span><br><span class="hljs-operator">&lt;</span><span class="hljs-operator">/</span><span class="hljs-keyword">sql</span><span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>动态选择了解即可</strong></p>
+<h1 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h1><p>关联查询有三种方式: 预加载	即时加载 延时加载(懒加载)</p>
+<p>按照数量关系也分为一对多查询	多对一查询	多对多查询</p>
+<p><strong>多对多查询仅需要了解即可</strong></p>
+<p>多表间映射关系:</p>
+<p>一对一映射:	任意一方引入另一个方的主键作为外键</p>
+<p>一对多映射:	多的一方</p>
+<p>多对多映射:	创建中间关系表, 引入两张表的主键作为外键</p>
+<h2 id="一对多查询"><a href="#一对多查询" class="headerlink" title="一对多查询"></a>一对多查询</h2><blockquote>
+<p>以班级和学生作为一对多关系进行解释</p>
+</blockquote>
+<p>预加载也被称为表连接查询</p>
+<blockquote>
+<p>在进行条件查询前, 先将两个表用连表查询关联为一张表</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--预加载查询--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">resultMap</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;classmap&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.lee.szdx03.bean.ClassBean&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;cid&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;long&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;className&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;class_name&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;classLeader&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;class_leader&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">collection</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;stus&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;list&quot;</span> <span class="hljs-attr">ofType</span>=<span class="hljs-string">&quot;com.lee.szdx03.bean.StudentBean&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;sid&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;long&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;stuNo&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;stu_no&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;stuName&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;stu_name&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">collection</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">resultMap</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;findClassByPreload&quot;</span> <span class="hljs-attr">resultMap</span>=<span class="hljs-string">&quot;classmap&quot;</span>&gt;</span><br>    select *,cl.id as cid,st.id as sid from class_info as cl inner join student_info as st on cl.id=st.fk_class_id where class_name like &#x27;%$&#123;className&#125;%&#x27;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ClassBean</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ClassBean</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">long</span> id;<br>    <span class="hljs-keyword">private</span> String className;<br>    <span class="hljs-keyword">private</span> String classLeader;<br>    <span class="hljs-comment">//需要添加stus列表来接收连查表中的student记录</span><br>    <span class="hljs-keyword">private</span> List&lt;StudentBean&gt; stus;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>及时加载也被称为分布查询</p>
+<blockquote>
+<p>将查询分为两步进行, 先查询班级对象, 然后通过外键在学生表中进行查询, 将查询到的学生对象集合封装到班级对象中</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--即时加载查询--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">resultMap</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;classmap02&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.lee.szdx03.bean.ClassBean&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;className&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;class_name&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;classLeader&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;class_leader&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>    <span class="hljs-comment">&lt;!--select属性指向第二步查询--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">collection</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;stus&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;list&quot;</span> <span class="hljs-attr">select</span>=<span class="hljs-string">&quot;getStuByClassId&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;id&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">collection</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">resultMap</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;getStuByClassId&quot;</span> <span class="hljs-attr">resultMap</span>=<span class="hljs-string">&quot;stumap&quot;</span>&gt;</span><br>    select * from student_info where fk_class_id=#&#123;id&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;findClassInTimeLoad&quot;</span> <span class="hljs-attr">resultMap</span>=<span class="hljs-string">&quot;classmap02&quot;</span>&gt;</span><br>    select * from class_info where class_name like &#x27;%$&#123;className&#125;%&#x27;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>懒加载需要配置mybatis-config.xml文件</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span><br>    <span class="hljs-comment">&lt;!--开启延迟加载--&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lazyLoadingEnabled&quot;</span> <span class="hljs-attr">values</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>开发中常用预加载和懒加载</p>
+<blockquote>
+<p>即时加载有可能会跟子查询一样, 造成大量次数的查询, 消耗大量资源, 效率低下</p>
+</blockquote>
+<h2 id="多对1查询"><a href="#多对1查询" class="headerlink" title="多对1查询"></a>多对1查询</h2><p>预加载	延迟加载</p>
+<blockquote>
+<p>多对一推荐使用预加载</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--预加载多对一查询--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">resultMap</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;stumap&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;com.lee.szdx03.bean.StudentBean&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;sid&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;long&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;stuNo&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;stu_no&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;stuName&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;stu_name&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;string&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">association</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;cls&quot;</span> <span class="hljs-attr">javaType</span>=<span class="hljs-string">&quot;com.lee.szdx03.bean.ClassBean&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">id</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;cid&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;className&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;class_name&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">result</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;classLeader&quot;</span> <span class="hljs-attr">column</span>=<span class="hljs-string">&quot;class_leader&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">result</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">association</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">resultMap</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;findStudentPreload&quot;</span> <span class="hljs-attr">resultMap</span>=<span class="hljs-string">&quot;stumap&quot;</span>&gt;</span><br>    select *,st.id as sid, cl.id as cid from student_info as st inner join class_info as cl on st.fk_class_id=cl.id where stu_name like &#x27;%$&#123;stuName&#125;%&#x27;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>延迟加载</p>
+</blockquote>
+<h2 id="mybatis缓存机制"><a href="#mybatis缓存机制" class="headerlink" title="mybatis缓存机制"></a>mybatis缓存机制</h2><p>面试知识:</p>
+<ol>
+<li>缓存存储在内存中, 读写速度快</li>
+<li>缓存分为本地缓存和分布式缓存</li>
+<li>本地缓存指本机的内存空间, 可以直接进行使用</li>
+<li>分布式缓存指多台机器上面的内存空间, 通过网络进行使用</li>
+</ol>
+<p>mybatis中有两级缓存, 一级缓存 二级缓存</p>
+<p>一级缓存: (默认开启)由SqlSession提供, 每个SqlSession对象对应一个一级缓存空间</p>
+<p>二级缓存: (默认关闭)由SessionFactory提供</p>
+<blockquote>
+<p>二级缓存架构图</p>
+</blockquote>
+<p><img src="/2022/11/03/Mybatis%20%E5%8A%A8%E6%80%81SQL/image-20220606174620339.png" srcset="/img/loading.gif" lazyload alt="image-20220606174620339"></p>
+<p>二级缓存有缺陷</p>
+<blockquote>
+<p>一级缓存会将相同的查询语句只执行一次, 将执行结果缓存起来直接返回给相同的查询语句</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">hm.findHouseByNumbersPreload(<span class="hljs-string">&quot;1&quot;</span>);<br>hm.findHouseByNumbersPreload(<span class="hljs-string">&quot;1&quot;</span>);<br><span class="hljs-comment">//上述代码只会在数据库中进行一次查询</span><br>pm.selectAllParking();<br>pm.selectAllParking();<br>pm.selectAllParking();<br><span class="hljs-comment">//为什么全表查询会进行两次查询</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>二级缓存有缺陷, 虽然是由SessionFactory提供, 但是会按照Mapper(namespace)来划分缓存空间</p>
+</blockquote>
+<p><img src="/2022/11/03/Mybatis%20%E5%8A%A8%E6%80%81SQL/image-20220607142937162.png" srcset="/img/loading.gif" lazyload alt="image-20220607142937162"></p>
+<blockquote>
+<p>开发中常用Redis作为缓存技术</p>
+</blockquote>
+<p>需要缓存的数据有:</p>
+<ol>
+<li>高命中热点数据</li>
+<li>空间占用量较小</li>
+<li>修改频率低</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Mybatis 动态SQL</div>
+      <div>https://leeloveki.github.io/2022/11/03/Mybatis 动态SQL/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/Mybatis%E5%A4%8D%E4%B9%A0/" title="Mybatis复习">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Mybatis复习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/Mybatis/" title="Mybatis">
+                        <span class="hidden-mobile">Mybatis</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

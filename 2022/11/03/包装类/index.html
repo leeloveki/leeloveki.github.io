@@ -1,0 +1,834 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="包装类Java中的8个基本类型都有对应的包装类  8种基本数据类型: byte short char int long float double boolean  包装类可以将基本数据类型的值转换成对象使用 并且JDK1.5提供了自动装箱和自动拆箱的功能 允许同类型的包装类对象和基本类型变量间可以直接赋值    基本数据类型 包装类    byte Byte   short Short   cha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="包装类">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="包装类Java中的8个基本类型都有对应的包装类  8种基本数据类型: byte short char int long float double boolean  包装类可以将基本数据类型的值转换成对象使用 并且JDK1.5提供了自动装箱和自动拆箱的功能 允许同类型的包装类对象和基本类型变量间可以直接赋值    基本数据类型 包装类    byte Byte   short Short   cha">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220506173943789.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220507111215881.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516145849340.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516193158131.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516193429760.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516193455333.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516193642011.png">
+<meta property="article:published_time" content="2022-11-03T11:59:43.739Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:43.739Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leeloveki.github.io/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220506173943789.png">
+  
+  
+  
+  <title>包装类 - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="包装类"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">包装类</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a>包装类</h1><p>Java中的8个基本类型都有对应的包装类</p>
+<blockquote>
+<p>8种基本数据类型: byte short char int long float double boolean</p>
+</blockquote>
+<p>包装类可以将基本数据类型的值转换成对象使用</p>
+<p>并且JDK1.5提供了自动装箱和自动拆箱的功能</p>
+<p>允许同类型的包装类对象和基本类型变量间可以直接赋值</p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>包装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+<p>除了int和char的对应包装类为其单词全写外, 其他包装类都是首字母大小即可</p>
+<p>在Java1.5提供自动装箱(Autoboxing)和自动拆箱(AutoUnboxing)之前必须使用包装类中的valueOf()和xxxValue()方法来实现基本数据类型和包装类对象的相互转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer integer1=Integer.valueOf(<span class="hljs-number">2</span>);<br><span class="hljs-comment">//手动装箱</span><br><span class="hljs-type">int</span> i2=integer1.intValue();<br><span class="hljs-comment">//手动拆箱</span><br>integer1=i2;<br><span class="hljs-comment">//自动装箱</span><br>i2=integer1;<br><span class="hljs-comment">//自动拆箱</span><br>String str2=<span class="hljs-string">&quot;2.2&quot;</span>;<br><span class="hljs-comment">//str2无法转换为Integer对象, 因为该字符串并非整数格式</span><br>String str2=<span class="hljs-string">&quot;2&quot;</span>;<br>integer1 =Integer.parseInt(str2);<br><span class="hljs-comment">//通过Integer.parseInt方法将字符串转为Integer对象</span><br>Double d=Double.parseDouble(str2);<br><span class="hljs-comment">//但是Double.parseDouble可以接受整数格式的字符串</span><br></code></pre></td></tr></table></figure>
+
+<p>如图:</p>
+<p><img src="/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220506173943789.png" srcset="/img/loading.gif" lazyload alt="image-20220506173943789"></p>
+<p>在包装类中, 还提供了将字符串和其他基本类型进行相互转换的方法</p>
+<ol>
+<li>parseXxx(String s) :除了Character类的所有包装类都提供该方法</li>
+<li>valueOf(String s)</li>
+</ol>
+<p>将基本类型变量与””空字符串进行拼接操作, 会自动将基本类型变量转换为字符串, 更方便</p>
+<blockquote>
+<p>包装类作为引用变量可以直接与基本类型变量进行比较(发生了自动拆箱)</p>
+<p>两个包装类对象引用变量进行比较时, 只有两个引用变量是指向同一个对象时才会返回true</p>
+</blockquote>
+<p>JDK1.5后的自动装箱有缓存机制, -128~127之间的整数装箱成Integer实例后将存储到一个cache数组中, 第二次使用时将直接从cache数组中取出不再重复创建</p>
+<p>所以-128~127自动装箱创建的实例进行相等比较将返回true</p>
+<blockquote>
+<p>byte范围-128~127</p>
+</blockquote>
+<p><strong>为什么byte的范围是-128~127</strong></p>
+<p>0000 0000</p>
+<p>byte</p>
+<p>00000000</p>
+<p>符号位占一位 存储数值的位有7位</p>
+<p>2^(8-1)-1</p>
+<p>128-1&#x3D;127</p>
+<blockquote>
+<p>Java使用二进制补码来存储负数</p>
+</blockquote>
+<p><img src="/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220507111215881.png" srcset="/img/loading.gif" lazyload alt="image-20220507111215881"></p>
+<p>正数和负数在计算机底层均以补码的形式存储</p>
+<p>2*(9-1)-1&#x3D;255</p>
+<p>255&#x3D;128+127</p>
+<blockquote>
+<p>-128以8位2进制表示: 1000 0000</p>
+<p>1000 0000补码</p>
+<p>0111 1111 +1</p>
+<p>1000 0000</p>
+<p>负数补码计算方式</p>
+<p>正数的补码是其本身</p>
+</blockquote>
+<p>Java7中提供了包装类对象的比较方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer.compare(Integer val1, Integer vla2)<br><br>Integer.compare(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>);<br><span class="hljs-comment">//输出1</span><br>Integer.compare(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>);<br><span class="hljs-comment">//输出-1</span><br>Integer.compare(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>);<br><span class="hljs-comment">//输出0</span><br></code></pre></td></tr></table></figure>
+
+<p>Java7中还为Character包装类增加了大量工具方法, 用于对字符进行判断</p>
+<p>Java8为整数包装类提供了无符号运算方法</p>
+<p>如:</p>
+<p>static String toUnsignedString(int&#x2F;long i):</p>
+<p>将int&#x2F;long整数转换为无符号整数对应的字符串</p>
+<blockquote>
+<p>这些方法好像有字符串拼接, 强制转换等替代方法可以实现相同的功能</p>
+</blockquote>
+<blockquote>
+<p>注意将负数转换成无符号整数时, 不会是直接取其绝对值, 而是将其补码的符号位1作为数值位, 作为原码计算出对应的无符号整数 </p>
+</blockquote>
+<p>如8位byte存储的-3</p>
+<p>原码: 1000 0011</p>
+<p>补码: 1111 1100+1</p>
+<p>1111 1101</p>
+<p>其无符号整数为253</p>
+<p><strong>自动装箱时, 如果数值在-128到 127之间的范围，Integer会有缓存机制</strong></p>
+<p><strong>所有的包装类都被final修饰, 不能被继承</strong></p>
+<p>常见API:</p>
+<ol>
+<li><p>两个类常量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer.MIN_VALUE;<br><span class="hljs-comment">//int类型的最小取值</span><br>Integer.MAX_VALUE; <br><span class="hljs-comment">//int类型的最大取值</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>将字符串转换为int</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer.parseInt(String str);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>将十进制转换为其他进制</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> i=<span class="hljs-number">15</span>;<br>Integer.toBinaryString(i);<br><span class="hljs-comment">//转换成2进制字符串</span><br>Integer.toOctalString(i);<br><span class="hljs-comment">//转换成8进制字符串</span><br>Integer.toHexString(i);<br><span class="hljs-comment">//转换成16进制字符串</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="Date类"><a href="#Date类" class="headerlink" title="Date类"></a>Date类</h1><blockquote>
+<p>Date中的大部分方法已经被废弃, 因为Date显示的时间为当前系统的所在时区的当地时间, 不支持国际化</p>
+<p>可以使用Calender类来代替Date类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">Date d=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(System.currentTimeMillis());<br><span class="hljs-comment">//以1970-1-1到某个时间的时间差(毫秒为单位)创建Date对象</span><br>Date d2=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();<br>Date d3=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();<br><span class="hljs-comment">//创建一个当前时间的Date对象</span><br>System.out.println(d);<br>System.out.println(d2);<br><span class="hljs-comment">//d和d2的输出相同</span><br>d.equals(d2);<br><span class="hljs-comment">//true</span><br>d3.equals(d2);<br><span class="hljs-comment">//true</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="Calendar类"><a href="#Calendar类" class="headerlink" title="Calendar类"></a>Calendar类</h1><p>需要先创建对象再通过对象调用实例方法</p>
+<p>getTime()</p>
+<blockquote>
+<p>将Calendar对象转换为Date对象</p>
+</blockquote>
+<p>get()	set()	add()	</p>
+<blockquote>
+<p>获取时间 修改时间 在存储的时间基础上加减时间</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Calendar</span> <span class="hljs-variable">cal</span> <span class="hljs-operator">=</span> Calendar.getInstance();<br><span class="hljs-comment">//注意Calendar对象储存的是创建的时间, 创建后不会变化</span><br>Date d1= cal.getTime();<br><span class="hljs-comment">//转换成Date对象</span><br>cal.get(Calendar.DAY_OF_YEAR);<br><span class="hljs-comment">//今年的第几天</span><br>cal.get(Calendar.DAY_OF_MONTH);<br><span class="hljs-comment">//这个月的第几天</span><br>cal.get(Calendar.DAY_OF_WEEK);<br><span class="hljs-comment">//这周的第几天</span><br>cal.get(Calendar.YEAR);<br><span class="hljs-comment">//公元第几年</span><br>cal.get(Calendar.MONTH);<br><span class="hljs-comment">//今年第几个月</span><br>cal.get(Calendar.DATE);<br><span class="hljs-comment">//和Calendar.DAY_OF_MONTH相同</span><br>cal.get(Calendar.HOUR_OF_DAY);<br><span class="hljs-comment">//今天的第几个小时</span><br>cal.get(Calendar.MINUTE);<br><span class="hljs-comment">//当前小时的第几分钟</span><br>cal.get(Calendar.SECOND);<br><span class="hljs-comment">//当前分钟的第几秒</span><br>cal.set(<span class="hljs-number">1997</span>,<span class="hljs-number">6</span>,<span class="hljs-number">1</span>);<br><span class="hljs-comment">//将时间修改为1997年6月1日,修改对象本身</span><br>cal.add(Calender.YEAR,<span class="hljs-number">60</span>);<br><span class="hljs-comment">//将时间修改为60年后, 会修改对象本身</span><br>cal.add(Calender.YEAR,-<span class="hljs-number">60</span>);<br><span class="hljs-comment">//将时间修改为60年前, 会修改对象本身</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h1><p>用于将字符串和Date对象按照一定格式进行相互转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ParseException &#123;<br>String str=<span class="hljs-string">&quot;2022-05-16 12:00:12&quot;</span>;<br>SimpleDateFormat sdf=<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleDateFormat</span>(<span class="hljs-string">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>);<br><span class="hljs-comment">//注意月份和分钟分别用大小写的M和m表示</span><br>Date date=sdf.parse(str);<br><span class="hljs-comment">//将格式的字符串转换成对应时间的Date对象</span><br>System.out.println(date);<br>Date date1=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();<br>sdf.format(date1);<br><span class="hljs-comment">//将Date对象转换成格式化的字符串</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>必须加上throws ParseException捕获异常, 否则编译会报错</p>
+<blockquote>
+<p>完整格式参考表格</p>
+</blockquote>
+<p><img src="/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516145849340.png" srcset="/img/loading.gif" lazyload alt="image-20220516145849340"></p>
+<h1 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h1><p><strong>LocalDate按照系统所在语言的格式来输出时区对应的日期</strong></p>
+<p><strong>注意LocalDate对象储存的是年月日, 不包含小时 分钟 秒</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java">LocalDate ld=LocalDate.now();<br><span class="hljs-comment">//创建LocalDate对象存储当前时间</span><br>System.out.println(ld);<br><span class="hljs-comment">//输出2022-05-16格式的年	月	日</span><br>ld.getYear();<br><span class="hljs-comment">//输出年份</span><br>ld.getMonth().getValue();<br><span class="hljs-comment">//输出第几个月</span><br><span class="hljs-comment">//使用ld.getMonth()会输出月份的英文单词</span><br>ld.getDayOfMonth();<br><span class="hljs-comment">//输出一个月中的第几天</span><br>ld.getDayOfYear();<br><span class="hljs-comment">//输出一年中的第几天</span><br>ld.getDayOfWeek();<br><span class="hljs-comment">//输出一周的第几天</span><br>LocalDate ld2=LocalDate.of(<span class="hljs-number">2022</span>,<span class="hljs-number">3</span>,<span class="hljs-number">15</span>);<br><span class="hljs-comment">//修改时间</span><br>ld2.isLeapYear();<br><span class="hljs-comment">//判断是否是闰年</span><br><span class="hljs-comment">//输出假</span><br>ld2.isAfter(ld);<br><span class="hljs-comment">//判断ld2的时间是否在ld之后</span><br><span class="hljs-comment">//输出假</span><br>String str=ld.format(DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;yyyy年MM月dd日 HH时-mm分钟-ss秒&quot;</span>));<br><span class="hljs-comment">//上行代码会报16错, 因为LocalDate对象中不存储小时 分钟 秒</span><br>String str=ld.format(DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;yyyy年MM月dd日&quot;</span>));<br><span class="hljs-comment">//将LocalDate对象转换为格式化字符串</span><br>String str2= <span class="hljs-string">&quot;2022年05月16日&quot;</span>;<br>LocalDate ld3=LocalDate.parse(str2,DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;yyyy年MM月dd日&quot;</span>));<br><span class="hljs-comment">//将字符串转换为LocalDate对象</span><br>LocalDate ld4=ld3.plusDays(<span class="hljs-number">10</span>);<br><span class="hljs-comment">//将时间加10天, 返回修改后的时间, 不会修改对象本身</span><br>ld4=ld4.plusDays(-<span class="hljs-number">10</span>);<br><span class="hljs-comment">//减10天, 不修改原对象</span><br>ld4=ld4.plusMonths(<span class="hljs-number">5</span>);<br><span class="hljs-comment">//加5个月,不修改原对象</span><br>ld4=ld4.plusYears(<span class="hljs-number">1</span>);<br><span class="hljs-comment">//加一年, 不修改原对象</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h1><p>跟LocalDate类似, 但是存储的是时分秒</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java">LocalTime lt= LocalTime.now();<br>lt.getHour();<br>lt.getMinute();<br>lt.getSecond();<br>lt=LocalTime.of(<span class="hljs-number">23</span>,<span class="hljs-number">12</span>,<span class="hljs-number">11</span>);<br><span class="hljs-comment">//修改时间</span><br>String str=lt.format(DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;HH:mm:ss&quot;</span>));<br><span class="hljs-comment">//不能使用hh,这里只能使用HH</span><br><span class="hljs-comment">//将LocalTime对象转换为字符串</span><br>lt=LocalTime.parse(<span class="hljs-string">&quot;11点45分30秒&quot;</span>,DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;HH点mm分ss秒&quot;</span>));<br><span class="hljs-comment">//不能使用hh,这里只能使用HH</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="LocalDateTime"><a href="#LocalDateTime" class="headerlink" title="LocalDateTime"></a>LocalDateTime</h1><p>存储年月日 时分秒</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">LocalDateTime ldt=LocalDateTime.now();<br>ldt.getDayOfYear();<br>ldt.getDayOfMonth();<br>ldt.getHour();<br>ldt=LocalDateTime.of(<span class="hljs-number">2022</span>,<span class="hljs-number">3</span>,<br>        <span class="hljs-number">4</span>,<span class="hljs-number">11</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>);<br>String str=ldt.format(DateTimeFormatter<br>        .ofPattern(<span class="hljs-string">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>));<br><span class="hljs-comment">//注意HH为24小时制</span><br><span class="hljs-comment">//hh为12小时制</span><br>ldt=LocalDateTime.parse(str,DateTimeFormatter<br>        .ofPattern(<span class="hljs-string">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>));<br></code></pre></td></tr></table></figure>
+
+<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>错误(error): 对程序来说不可预测, 不可避免</p>
+<blockquote>
+<p>例如OOM(out of memory) 内存不足导致程序被关闭</p>
+</blockquote>
+<p>异常(exception)分为编译时异常和运行时异常, 都可以通过修改代码处理</p>
+<p>编译时异常:	编译器编译时检查出的问题</p>
+<p>运行时异常:	程序运行时在JVM抛出的异常</p>
+<p><img src="/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516193158131.png" srcset="/img/loading.gif" lazyload alt="image-20220516193158131"></p>
+<blockquote>
+<p>异常继承树</p>
+</blockquote>
+<p><strong>exception可以通过代码来解决, 体现了Java的健壮性</strong></p>
+<blockquote>
+<p>编译时异常的父类是Exception</p>
+<p>运行时异常的父类是RuntimeException</p>
+</blockquote>
+<p>编译时异常有:</p>
+<p><img src="/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516193429760.png" srcset="/img/loading.gif" lazyload alt="image-20220516193429760"></p>
+<p>运行时异常有:</p>
+<p><img src="/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516193455333.png" srcset="/img/loading.gif" lazyload alt="image-20220516193455333"></p>
+<p>方法栈中的调用关系</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MainEnter</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;<br>        meth01();<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">meth01</span><span class="hljs-params">()</span> &#123;<br>        meth02();<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">meth02</span><span class="hljs-params">()</span> &#123;<br>        meth03();<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">meth03</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;猜猜我是谁！&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>上述代码中运行的方法栈如图所示</p>
+<p><img src="/2022/11/03/%E5%8C%85%E8%A3%85%E7%B1%BB/image-20220516193642011.png" srcset="/img/loading.gif" lazyload alt="image-20220516193642011"></p>
+<blockquote>
+<p>当一个方法主动抛出异常时, 将导致该方法被弹出方法栈, 并导致方法栈中在该方法上的方法也被弹出</p>
+</blockquote>
+<p>编译时异常的解决方案:</p>
+<ol>
+<li><p>不捕获异常, 直接向外抛出</p>
+<blockquote>
+<p>异常未被内部处理, 并且会异常方法会被弹出方法栈</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ParseException &#123;<br>    <span class="hljs-type">SimpleDateFormat</span> <span class="hljs-variable">sdf</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleDateFormat</span>(<span class="hljs-string">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>);<br>    <span class="hljs-type">Date</span> <span class="hljs-variable">date</span> <span class="hljs-operator">=</span> sdf.parse(<span class="hljs-string">&quot;wrong input&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>捕获异常, 但不抛出</p>
+<blockquote>
+<p>异常会被内部消化, 方法不会被弹出栈</p>
+<p>方法会全部执行完</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;<br>    <span class="hljs-type">SimpleDateFormat</span> <span class="hljs-variable">sdf</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleDateFormat</span>(<span class="hljs-string">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>);<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-type">Date</span> <span class="hljs-variable">date</span> <span class="hljs-operator">=</span> sdf.parse(<span class="hljs-string">&quot;wrong input&quot;</span>);<br>    &#125; <span class="hljs-keyword">catch</span> (ParseException e) &#123;<br>        e.printStackTrace();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>捕获异常并向外抛出</p>
+<blockquote>
+<p>异常被内部消化, 并告知调用的方法</p>
+<p>导致产生异常的方法被弹出方法栈</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> ParseException &#123;<br>    <span class="hljs-comment">//指定抛出异常的类型</span><br>    <span class="hljs-type">SimpleDateFormat</span> <span class="hljs-variable">sdf</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleDateFormat</span>(<span class="hljs-string">&quot;yyyy-MM-dd hh:mm:ss&quot;</span>);<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-type">Date</span> <span class="hljs-variable">date</span> <span class="hljs-operator">=</span> sdf.parse(<span class="hljs-string">&quot;wrong input&quot;</span>);<br>    &#125; <span class="hljs-keyword">catch</span> (ParseException e) &#123;<br>        e.printStackTrace();<br>        <span class="hljs-keyword">throw</span> e;<br>        <span class="hljs-comment">//将捕获到的异常抛出给外部</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>总结: 1,3会导致方法被弹出栈结构, 剩余代码不会被执行</p>
+<p>2不会弹出, 完整执行完方法的代码</p>
+<p>通常编程中使用1,2方案</p>
+<p>使用原则: 在栈结构允许的最高处捕获并处理异常, 其他层直接将异常外抛</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>包装类</div>
+      <div>https://leeloveki.github.io/2022/11/03/包装类/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E5%8F%8D%E5%B0%84/" title="反射">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">反射</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97/" title="初始化块">
+                        <span class="hidden-mobile">初始化块</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

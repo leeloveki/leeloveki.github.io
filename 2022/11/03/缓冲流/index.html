@@ -1,0 +1,841 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="缓冲流java中的大部分IO流都提供了缓冲功能, 不需要特别记忆 12345678&#x2F;&#x2F;缓冲流的默认缓冲区大小为8192byte, 可以通过size参数指定缓冲区大小BufferedInputStream bis&#x3D;new BufferedInputStream(file,int size);BufferedOutputStream bos&#x3D;new BufferedOutputStream(file,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="缓冲流">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="缓冲流java中的大部分IO流都提供了缓冲功能, 不需要特别记忆 12345678&#x2F;&#x2F;缓冲流的默认缓冲区大小为8192byte, 可以通过size参数指定缓冲区大小BufferedInputStream bis&#x3D;new BufferedInputStream(file,int size);BufferedOutputStream bos&#x3D;new BufferedOutputStream(file,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220530111032633.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220527180430136.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220526154354456.png">
+<meta property="og:image" content="https://leeloveki.github.io/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220531094503351.png">
+<meta property="article:published_time" content="2022-11-03T11:59:44.364Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:44.364Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://leeloveki.github.io/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220530111032633.png">
+  
+  
+  
+  <title>缓冲流 - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="缓冲流"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-03 19:59" pubdate>
+          2022年11月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          33 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">缓冲流</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h1><p>java中的大部分IO流都提供了缓冲功能, 不需要特别记忆</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//缓冲流的默认缓冲区大小为8192byte, 可以通过size参数指定缓冲区大小</span><br>BufferedInputStream bis=<span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedInputStream</span>(file,<span class="hljs-type">int</span> size);<br>BufferedOutputStream bos=<span class="hljs-keyword">new</span> <span class="hljs-title class_">BufferedOutputStream</span>(file,<span class="hljs-type">int</span> size);<br><span class="hljs-comment">//flush方法会将缓冲区的内容主动写入物理设备</span><br><span class="hljs-comment">//不调用flush时, 只有当缓冲区满才会自动将内容输出</span><br>bos.flush();<br><span class="hljs-comment">//close方法会自动调用flush方法, 不需要显示调用flush方法</span><br>bos.close();<br></code></pre></td></tr></table></figure>
+
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><p>数据库发展历史:</p>
+<p>第一代数据库: 层次, 网状数据库</p>
+<p>第二代数据库: 关系型数据库(SQL语句)</p>
+<p>第三代数据库: 对象数据库, nosql数据库</p>
+<p>表与表之间的关系有三种</p>
+<blockquote>
+<p>A表 B表</p>
+</blockquote>
+<ol>
+<li>一对一: 少见, A的一行只与B的一行相关, B的一行也只与A的一行相关, 双向关系</li>
+<li>一对多 : 常见, A的一行与B的多行相关, 但是B的一行只能与A的一行有关系r</li>
+</ol>
+<blockquote>
+<p>在一对多的关系中, 多边的B表被称为从表, 单边的A表被称为主表</p>
+</blockquote>
+<ol start="3">
+<li>多对多: A的一行与B的多行相关, 并且B的一行也会与A的多行相关</li>
+</ol>
+<blockquote>
+<p>在SQL数据库的设计中, 多对多的关系通过在两个表中增加连接表(Junction Table)来实现</p>
+</blockquote>
+<h1 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h1><p>索引用于快速查找数据库中的数据, 提高查询效率</p>
+<p>innodb和myisam都是用B+树作为索引结构, 但是在实现上有所区别</p>
+<p>myisam的索引树的叶子节点保存数据的内存地址</p>
+<p>innodb的叶子节点直接保存数据本身</p>
+<p>innodb使用聚簇索引, 物理位置顺序和索引顺序一致</p>
+<p><strong>myisam只能先取出数据再排序, 而innodb在取数据时已经是按主键排序</strong></p>
+<p>myisam索引结构实现:</p>
+<p><img src="/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220530111032633.png" srcset="/img/loading.gif" lazyload alt="image-20220530111032633"></p>
+<p>Innodb索引结构实现:</p>
+<p><img src="/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220527180430136.png" srcset="/img/loading.gif" lazyload alt="image-20220527180430136"></p>
+<blockquote>
+<p>B+树索引支持聚簇, 范围查询, 搜索效率高</p>
+</blockquote>
+<p>聚簇: 索引和数据放在同一个区域中</p>
+<p>非聚簇: 索引和数据放在不同的区域</p>
+<p>聚簇要求数据必须有主键, 然后按照主键进行聚簇</p>
+<blockquote>
+<p>如果表没有显示指定的主键, mysql会自动选择一个满足条件的字段作为主键, 如果不存在满足条件的字段, mysql会生成隐含字段作为聚簇的主键</p>
+<p>隐含字段的类型为长整型, 6个字节大小</p>
+</blockquote>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引用于提高搜索速度, 一个表可以包含多个索引, 每个索引都对应一个字段</p>
+<blockquote>
+<p>当一个表包含索引时, 更新(修改)该表需要花费的时间会增加. 因此尽量只对在搜索中频繁用到的字段建立索引</p>
+</blockquote>
+<p>索引字段应该满足的条件:</p>
+<ol>
+<li>在搜索中频繁用到</li>
+<li>重复数据尽量少</li>
+<li>变化改动尽量少</li>
+</ol>
+<blockquote>
+<p>索引中的字段发生变化时会导致索引需要重新生成, 消耗系统资源</p>
+</blockquote>
+<p>mysql的索引有四种</p>
+<p>主键索引 唯一索引 普通索引 组合索引</p>
+<blockquote>
+<p>注意添加主键约束或唯一约束时会自动生成主键索引或唯一索引</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql">#添加唯一约束时自动添加唯一索引<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> test <span class="hljs-keyword">add</span> <span class="hljs-keyword">unique</span>(id);<br>#用<span class="hljs-keyword">create</span>语句创建普通索引<br><span class="hljs-keyword">create</span> index test_index <span class="hljs-keyword">on</span> test (id);<br>#用<span class="hljs-keyword">alter</span>语句创建普通索引<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> test <span class="hljs-keyword">add</span> index test_index(id);<br>#删除索引<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> test <span class="hljs-keyword">drop</span> index test_index;<br></code></pre></td></tr></table></figure>
+
+<p>索引使用需要注意</p>
+<p>当select语句中的字段都有索引时, 语句执行速度将大大提高</p>
+<p>只要语句中存在一个没有索引的字段都会使查询速度变慢很多</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> test <span class="hljs-keyword">add</span> index test_index(id);<br>#可以命中索引<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id<span class="hljs-operator">%</span><span class="hljs-number">2</span><span class="hljs-operator">=</span><span class="hljs-number">0</span>;<br>#无法命中索引<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id<span class="hljs-operator">%</span><span class="hljs-number">2</span><span class="hljs-operator">=</span><span class="hljs-number">0</span> <span class="hljs-keyword">and</span> name<span class="hljs-operator">=</span>&quot;李%&quot;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>组合索引是指一个索引对应多个字段</strong></p>
+<blockquote>
+<p>注意select语句在使用组合索引必须满足最左前缀原则</p>
+</blockquote>
+<p>最左前缀匹配原则: </p>
+<ol>
+<li><p>当查询条件中出现的字段是索引中最左边的一列或连续的多列时才能命中索引</p>
+</li>
+<li><p>并且模糊搜索时必须是匹配前缀 例如 ‘李%’</p>
+</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql">#组合索引<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> test <span class="hljs-keyword">add</span> index test_index(id,name);<br>#可以命中索引<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> id<span class="hljs-operator">%</span><span class="hljs-number">2</span><span class="hljs-operator">=</span><span class="hljs-number">0</span> <span class="hljs-keyword">and</span> name<span class="hljs-operator">=</span>&quot;李%&quot;;<br>#无法命中索引, 必须在<span class="hljs-keyword">where</span>条件语句中包含最左字段<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test <span class="hljs-keyword">where</span> name<span class="hljs-operator">=</span>&quot;李%&quot;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>最左前缀匹配原则实质上是由B+树的索引结构所导致</strong></p>
+<p>不适合添加索引的字段:</p>
+<ol>
+<li>很少查询的字段</li>
+<li>频繁修改的字段</li>
+<li>字段中有大量重复数据</li>
+</ol>
+<p>面试题: 索引可能失效的情况</p>
+<ol>
+<li>select *</li>
+<li>模糊搜索没有用前缀 如like ‘%李’ :最左前缀匹配原则</li>
+<li>组合索引没有遵循最左前缀匹配原则</li>
+<li>数据库可以直接返回结果, 不需要用到索引</li>
+<li>sql中用到算数运算符如: limit (page-1)*rows,rows</li>
+<li>sql使用or   !&#x3D;   &lt;&gt; 运算符</li>
+</ol>
+<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><p>jdbc是java数据库编程的基础, 提供了一套API用于在数据库中执行sql语句</p>
+<p>JDBC生命周期:</p>
+<ol>
+<li>通过对应的驱动创建于数据库的连接</li>
+<li>创建sql编译对象, 编译sql语句</li>
+<li>在数据库中执行sql语句</li>
+<li>将sql语句的执行结果返回</li>
+<li>关闭连接</li>
+</ol>
+<p><img src="/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220526154354456.png" srcset="/img/loading.gif" lazyload alt="image-20220526154354456"></p>
+<blockquote>
+<p>jdbc语句</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span>&#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">test</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            Class.forName(<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);<br>            String url=<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/szdx2?useUnicode=true&amp;characterEncoding=utf8&quot;</span>;<br>            Connection conn= DriverManager.getConnection(url,<span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;liujinru&quot;</span>);<br>            System.out.println(conn);<br>            Statement stmt=conn.createStatement();<br>            <span class="hljs-comment">//执行查询语句</span><br>            <span class="hljs-type">ResultSet</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span>stmt.executeQuery(<span class="hljs-string">&quot;select * from class_info&quot;</span>);<br>            <span class="hljs-comment">//执行更新语句(数据库修改语句)</span><br>            stmt.executeUpdate();<br>            <span class="hljs-keyword">while</span>(rs.next())&#123;<br>                System.out.println(rs.getString(<span class="hljs-string">&quot;class_name&quot;</span>));<br>            &#125;<br>            &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h2><p>PreparedStatement 预编译</p>
+<p>Statement 直接编译</p>
+<p>预编译的优点是先预编译后设值, 使得语法可以复用,</p>
+<p>并且可以防止SQL注入攻击</p>
+<blockquote>
+<p>直接编译是用字符串拼接的方式组成sql语句, 容易出现sql注入攻击, 并且语法不能复用</p>
+</blockquote>
+<h2 id="Mysql和java数据类型对应关系"><a href="#Mysql和java数据类型对应关系" class="headerlink" title="Mysql和java数据类型对应关系"></a>Mysql和java数据类型对应关系</h2><table>
+<thead>
+<tr>
+<th>mysql</th>
+<th>java</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>String</td>
+</tr>
+<tr>
+<td>varchar</td>
+<td>String</td>
+</tr>
+<tr>
+<td>tinyint</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>short</td>
+</tr>
+<tr>
+<td>int</td>
+<td>int</td>
+</tr>
+<tr>
+<td>bitint</td>
+<td>long</td>
+</tr>
+<tr>
+<td>float</td>
+<td>float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>double</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>BigDecimal</td>
+</tr>
+<tr>
+<td>date, datetime</td>
+<td>java.util.Date, java.sql.Date</td>
+</tr>
+<tr>
+<td>time</td>
+<td>java.util.Time, java.sql.Time</td>
+</tr>
+</tbody></table>
+<h2 id="执行计划-explain"><a href="#执行计划-explain" class="headerlink" title="执行计划(explain)"></a>执行计划(explain)</h2><p>explain语句语法</p>
+<p>explain select …</p>
+<blockquote>
+<p>explain可以跟select delete insert replace update语句一起使用, 提供语句执行过程的信息</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">explain <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> student_info <span class="hljs-keyword">where</span> stu_name <span class="hljs-keyword">like</span> &quot;李%&quot; ;<br></code></pre></td></tr></table></figure>
+
+<p>上述explain语句的返回结果是:</p>
+<p><img src="/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/image-20220531094503351.png" srcset="/img/loading.gif" lazyload alt="image-20220531094503351"></p>
+<table>
+<thead>
+<tr>
+<th>重点字段</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>key</td>
+<td>用到的索引</td>
+</tr>
+<tr>
+<td>type</td>
+<td>查询类型</td>
+</tr>
+</tbody></table>
+<p>type的种类有: </p>
+<p>all	index	range	ref	eq_ref	const	system	NULL</p>
+<blockquote>
+<p>从左到右, 性能越来越好</p>
+</blockquote>
+<p>all: 全表索引, 性能最差, 需要查询索引表和数据表的全部数据</p>
+<p>index: 查询索引表的所有数据</p>
+<p>range: 范围查询, 查询特定范围的行</p>
+<p>ref: 查询索引表的特定字段</p>
+<p>eq_ref: 查询索引表上面的唯一字段</p>
+<p>const: 索引表只有一行数据</p>
+<p>system: 表只有零或一行记录 </p>
+<p>NULL: mysql可以直接返回结果</p>
+<h1 id="mysql配置"><a href="#mysql配置" class="headerlink" title="mysql配置"></a>mysql配置</h1><p>mysql配置文件的路径为&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d&#x2F;mysqld.cnf</p>
+<p>慢查询日志: 记录查询时间长的语句</p>
+<blockquote>
+<p>慢查询日志可以用于分析是否要添加索引来提高查询效率, 减少慢查询</p>
+</blockquote>
+<blockquote>
+<p>mysql默认配置</p>
+</blockquote>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs txt">#默认端口为3306<br>port=3306<br>#慢查询日志开启<br>slow_query_log=1<br>#慢查询日志路径<br>slow_query_log_file=/var/log/mysql/mysql-slow.log<br>#默认记录的慢查询是执行时间超过2s的查询语句<br>long_query_time=2<br>#慢查询不会记录任何使用了索引的记录<br>log_queries_not_using_indexes=1<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改mysql的配置文件后需要重启mysql服务使新配置生效</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>缓冲流</div>
+      <div>https://leeloveki.github.io/2022/11/03/缓冲流/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E7%BD%91%E5%85%B3/" title="网关">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网关</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/03/%E7%BA%BF%E4%B8%8ABug%E5%88%86%E6%9E%90/" title="线上Bug分析">
+                        <span class="hidden-mobile">线上Bug分析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
