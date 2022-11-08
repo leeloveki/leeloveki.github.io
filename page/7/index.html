@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4/" target="_self">
-          内存空间
+        <a href="/2022/11/03/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97/" target="_self">
+          初始化块
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97/" target="_self">
         <div>
-          内存空间 JVM的内存可以划分为: 线程栈stack, 堆heap, 程序计数器, 本地方法栈, 元空间 栈: 先进后出 LIFO(last in first out) 队列: 先进先出 FIFO(First in first out)  线性数据结构 高速访问 内存空间高效利用, 但是导致变量的大小固定不可变 低成本 栈内存里面的变量一般不需要GC进行内存回收, 因为它的内存空间会随着方法或代码
+          初始化块类的四种组成成员: 成员变量 方法 构造器 初始化块 (都可以有多个, 也可以没有) 一个类中的多个初始化块会按照先后顺序执行 初始化块里面可以包含任何执行语句 初始化块如果被static修饰, 则称为静态初始化块 初始化块不能有标识符来标记,因此初始化块无法被调用, 对于类外界来说是隐形的 初始化块在创建对象时会隐式执行, 并且在构造器之前执行 static初始化块在类第一次加载时运行
         </div>
       </a>
 
@@ -423,15 +423,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5(Myabtis-plus)/" target="_self">
-          如何实现分页(Myabtis-plus)
+        <a href="/2022/11/03/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" target="_self">
+          存储过程
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5(Myabtis-plus)/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" target="_self">
         <div>
-          如何实现分页(Myabtis-plus) 底层使用Sql语句的limit关键字  前端element分页 后端pageHelper插件 page方法 原理 拦截sql语句 用了limit 分页问题 最后一页 一条数据删除后无法回退 解决方案: 前端进行逻辑判断（获取全部的数据量）  element实现分页：  el-pagination标签，@size-change绑定页面刷新时执行的方法，:cu
+          存储过程存储过程是一组sql语句, 通常用于完成特定的功能 存储过程存储在数据库中, 一次编译可以多次使用 存储过程优点:  完成复杂的逻辑判断&#x2F;运算 灵活 相当于sql编程, 代码可重用 减少网络开销 执行速度快(编译后使用)   存储过程的创建和调用  12345678#创建存储过程create procedure test()begin	select * from user;	se
         </div>
       </a>
 
@@ -456,15 +456,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" target="_self">
-          存储过程
+        <a href="/2022/11/03/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5(Myabtis-plus)/" target="_self">
+          如何实现分页(Myabtis-plus)
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E9%A1%B5(Myabtis-plus)/" target="_self">
         <div>
-          存储过程存储过程是一组sql语句, 通常用于完成特定的功能 存储过程存储在数据库中, 一次编译可以多次使用 存储过程优点:  完成复杂的逻辑判断&#x2F;运算 灵活 相当于sql编程, 代码可重用 减少网络开销 执行速度快(编译后使用)   存储过程的创建和调用  12345678#创建存储过程create procedure test()begin	select * from user;	se
+          如何实现分页(Myabtis-plus) 底层使用Sql语句的limit关键字  前端element分页 后端pageHelper插件 page方法 原理 拦截sql语句 用了limit 分页问题 最后一页 一条数据删除后无法回退 解决方案: 前端进行逻辑判断（获取全部的数据量）  element实现分页：  el-pagination标签，@size-change绑定页面刷新时执行的方法，:cu
         </div>
       </a>
 
