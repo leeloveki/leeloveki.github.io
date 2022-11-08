@@ -1,0 +1,1421 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.jpg">
+  <link rel="icon" href="/img/fluid.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr Lee">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="面试周考试题-第一天考试题内容  线程有几种创建方式和区别？  你能说下synchronized和lock的区别吗？  set和list的区别？  哪些情况索引失效？  post请求和get请求的区别？  缓存穿透怎么解决？  redis持久化有几种方式区别？  sql执行计划怎么看？  MQ如何保证消息的可靠性？  gateway网关过滤器配置？  考试题解析一、Java中有哪些类加载器？说说什">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蜗牛面试题考试答案">
+<meta property="og:url" content="https://leeloveki.github.io/2022/11/08/wn%E9%9D%A2%E8%AF%95%E9%A2%98%E8%80%83%E8%AF%95%E7%AD%94%E6%A1%88/index.html">
+<meta property="og:site_name" content="Lee的学习笔记">
+<meta property="og:description" content="面试周考试题-第一天考试题内容  线程有几种创建方式和区别？  你能说下synchronized和lock的区别吗？  set和list的区别？  哪些情况索引失效？  post请求和get请求的区别？  缓存穿透怎么解决？  redis持久化有几种方式区别？  sql执行计划怎么看？  MQ如何保证消息的可靠性？  gateway网关过滤器配置？  考试题解析一、Java中有哪些类加载器？说说什">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025090521.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025101535.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025091234.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025090521.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025101535.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025091234.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025223241.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025225457.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025230124.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025233529.png">
+<meta property="og:image" content="c:\Users\35750\AppData\Roaming\Typora\typora-user-images\image-20221027133452328.png">
+<meta property="og:image" content="c:\Users\35750\AppData\Roaming\Typora\typora-user-images\image-20221027133501247.png">
+<meta property="og:image" content="c:\Users\35750\AppData\Roaming\Typora\typora-user-images\image-20221027133647788.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221031102346.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221031162947.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221031163030.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221031173912.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221101091010.png">
+<meta property="og:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221101091006.png">
+<meta property="article:published_time" content="2022-11-08T08:10:49.356Z">
+<meta property="article:modified_time" content="2022-11-03T11:59:44.473Z">
+<meta property="article:author" content="Mr Lee">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025090521.png">
+  
+  
+  
+  <title>蜗牛面试题考试答案 - Lee的学习笔记</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"leeloveki.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="蜗牛面试题考试答案"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-08 16:10" pubdate>
+          2022年11月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          26k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          217 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">蜗牛面试题考试答案</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="面试周考试题-第一天"><a href="#面试周考试题-第一天" class="headerlink" title="面试周考试题-第一天"></a>面试周考试题-第一天</h1><h2 id="考试题内容"><a href="#考试题内容" class="headerlink" title="考试题内容"></a>考试题内容</h2><ul>
+<li><input disabled="" type="checkbox"> 线程有几种创建方式和区别？</li>
+<li><input disabled="" type="checkbox"> 你能说下synchronized和lock的区别吗？</li>
+<li><input disabled="" type="checkbox"> set和list的区别？</li>
+<li><input disabled="" type="checkbox"> 哪些情况索引失效？</li>
+<li><input disabled="" type="checkbox"> post请求和get请求的区别？</li>
+<li><input disabled="" type="checkbox"> 缓存穿透怎么解决？</li>
+<li><input disabled="" type="checkbox"> redis持久化有几种方式区别？</li>
+<li><input disabled="" type="checkbox"> sql执行计划怎么看？</li>
+<li><input disabled="" type="checkbox"> MQ如何保证消息的可靠性？</li>
+<li><input disabled="" type="checkbox"> gateway网关过滤器配置？</li>
+</ul>
+<h2 id="考试题解析"><a href="#考试题解析" class="headerlink" title="考试题解析"></a>考试题解析</h2><h4 id="一、Java中有哪些类加载器？说说什么是双亲委派？哪些场景打破了双亲委派机制？"><a href="#一、Java中有哪些类加载器？说说什么是双亲委派？哪些场景打破了双亲委派机制？" class="headerlink" title="一、Java中有哪些类加载器？说说什么是双亲委派？哪些场景打破了双亲委派机制？"></a>一、Java中有哪些类加载器？说说什么是双亲委派？哪些场景打破了双亲委派机制？</h4><ul>
+<li><p>有哪些类加载器</p>
+<p>引导类加载器：负责加载存放在JDK\jre\lib目录中的类，用C++实现，在java中打印输出为：null</p>
+<p>扩展类加载器：负责加载JDK\̲j̲r̲e̲\lib\ext目录中的类，java实现，在java中打印输出为：ExtClassLoader</p>
+<p>应用类加载器：负责加载应用程序自己的代码，java实现，在java中打印输出为：AppClassLoader</p>
+</li>
+<li><p>什么是双亲委派</p>
+<p>双亲委派：当<strong>一个类加载器收到需要加载的请求时，它自己不会先去加载</strong>，而是将这个请求交给<strong>父类的加载器去加载</strong>，如果父类的加载器还有父类，那就一直向<strong>上请求直到请求到顶级</strong>的加载器</p>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025090521.png" srcset="/img/loading.gif" lazyload alt="image-20221025090514851"></p>
+<p>作用：避免类的重复加载，保证程序的安全</p>
+</li>
+<li><p>打破双亲委派机制</p>
+<p>tomcat容器，一个tomcat容器可以部署多个项目，可能很多类需要被重复加载</p>
+</li>
+</ul>
+<h4 id="二、GC是如何判断对象可以被回收的？"><a href="#二、GC是如何判断对象可以被回收的？" class="headerlink" title="二、GC是如何判断对象可以被回收的？"></a>二、GC是如何判断对象可以被回收的？</h4><ul>
+<li>引用计数法：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收</li>
+<li>可达性分析法：从GCRoots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GCRoots没有任何引用链相连时，则证明此对象是不可用的，那么虚拟机就判断是可回收对象</li>
+</ul>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025101535.png" srcset="/img/loading.gif" lazyload alt="image-20221025101535499"></p>
+<h4 id="三、线程的生命周期？阻塞情况有几种？"><a href="#三、线程的生命周期？阻塞情况有几种？" class="headerlink" title="三、线程的生命周期？阻塞情况有几种？"></a>三、线程的生命周期？阻塞情况有几种？</h4><ul>
+<li><p>线程的生命周期</p>
+<p>新建状态（New）：新创建了一个线程对象</p>
+<p>就绪状态（Runnable）：线程对象创建后，其他线程调用了该对象的start方法。该状态的线程位于可运行线程池中，变得可运行，等待获取CPU的使用权</p>
+<p>运行状态（Running）：就绪状态的线程获取了CPU，执行程序代码</p>
+<p>阻塞状态（Blocked）：阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行</p>
+<p>死亡状态（Dead）：线程执行完了或者因异常退出了run方法，该线程结束生命周期</p>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025091234.png" srcset="/img/loading.gif" lazyload alt="image-20221025091234546"></p>
+</li>
+<li><p>阻塞情况 </p>
+<p>等待阻塞：运行的线程执行wait方法，该线程会释放占用的所有资源，JVM会把该线程放入“等待池”中。进入这个状态后，是不能自动唤醒的，必须依靠其他线程调用notify或notifyAll方法才能被唤醒，wait是object类的方法</p>
+<p>同步阻塞：运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入“锁池”中</p>
+<p>其他阻塞：运行的线程执行sleep或join方法，或者发出了I&#x2F;O请求时，JVM会把该线程置为阻塞状态。当sleep状态超时、join等待线程终止或者超时、或者I&#x2F;O处理完毕时，线程重新转入就绪状态。sleep是Thread类的方法</p>
+</li>
+</ul>
+<h4 id="四、谈谈你对SpringIOC的理解？"><a href="#四、谈谈你对SpringIOC的理解？" class="headerlink" title="四、谈谈你对SpringIOC的理解？"></a>四、谈谈你对SpringIOC的理解？</h4><p>springIOC是spring框架十分重要的特性之一，一般我们称之为控制反转，要理解IOC，就需要理解什么是控制反转？控制了什么？什么发生了反转？</p>
+<ul>
+<li><p>控制：没有容器之前，创建对象是有程序员创建，通过new关键字或者反射技术。那么有了容器之后，我们如果要创建对象，只要配置好或者添加相关的注解，spring就会帮我们创建对象，并将创建好的对象放到spring容器中进行管理，所以，spring控制了对象的创建权</p>
+</li>
+<li><p>反转：在说反转的时候就需要提到一个很重要的特性，依赖注入。比如A类中依赖B类，那么在创建A类的时候，就会判断B类在不在容器中，如果不存在的话就会创建B类。</p>
+<p>例如，有一个名为 B 的 Java 类，它的代码如下</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> </span>&#123;<br>    <span class="hljs-keyword">String</span> bid;<br>    A a;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>从代码可以看出，B 中存在一个 A 类型的对象属性 a，此时我们就可以说 B 的对象依赖于对象 a。而依赖注入就是就是基于这种“依赖关系”而产生的</p>
+</li>
+</ul>
+<h4 id="五、在你的工作过程中，有哪些Sql优化的经历？"><a href="#五、在你的工作过程中，有哪些Sql优化的经历？" class="headerlink" title="五、在你的工作过程中，有哪些Sql优化的经历？"></a>五、在你的工作过程中，有哪些Sql优化的经历？</h4><p>SQL优化的经历需要问清楚，是SQL语句层面的优化，还是整个该SQL业务流的优化</p>
+<ul>
+<li><p>业务层面</p>
+<p>比如说查询一些日志，或者交易记录，只能一段时间内查询，查询三个月之间的数据</p>
+</li>
+<li><p>代码层面</p>
+<p>可以将复杂的多表关联查询，拆分为多个查询语句</p>
+</li>
+<li><p>SQL层面</p>
+<p>主要是索引相关的优化，比如创建联合索引，避免索引失效的查询语句，尽量以数据量小的表作为驱动表，模糊查询过程中尽量不在前面添加%</p>
+</li>
+</ul>
+<h4 id="六、Redis过期key的删除策略？"><a href="#六、Redis过期key的删除策略？" class="headerlink" title="六、Redis过期key的删除策略？"></a>六、Redis过期key的删除策略？</h4><ul>
+<li>惰性删除：只有当访问一个key时，才会判断该key是否已过期，过期则清除。该策略可以最大化地节省CPU资源，却对内存非常不友好。极端情况可能出现大量的过期key没有再次被访问，从而不会被清除，占用大量内存</li>
+<li>定期删除：每隔一定的时间，会扫描一定数量的数据库的expires字典中一定数量的key，并清除其中已过期的key。该策略是一个折中方案。通过调整定时扫描的时间间隔和每次扫描的限定耗时，可以在不同情况下使得CPU和内存资源达到最优的平衡效果</li>
+</ul>
+<h4 id="七、谈谈你对Redis事务的理解？"><a href="#七、谈谈你对Redis事务的理解？" class="headerlink" title="七、谈谈你对Redis事务的理解？"></a>七、谈谈你对Redis事务的理解？</h4><ul>
+<li>开始事务：multi</li>
+<li>命令入队：如果执行的不是（multi,exec,discard,watch）则会将命令添加到队列中 set name zhangsan</li>
+<li>事务执行：<ul>
+<li>exec：执行事务</li>
+<li>discard：清空事务队列，并放弃执行事务，客户端从事务状态中退出</li>
+</ul>
+</li>
+<li>特点：redis事务不支持回滚机制，但是它会检查每一个事务中的命令是否错误</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>multi</td>
+<td>开始事务  用于标记事务块的开始。Redis会将后续的命令逐个放入队列中，然后才能使用EXEC命令原子化地执行这个命令序列。</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>执行事务  在一个事务中执行所有先前放入队列的命令，然后恢复正常的连接状态。  当使用WATCH命令时，只有当受监控的键没有被修改时，EXEC命令才会执行事务中的命令，这种方式利用了检查再设置（CAS）的机制。  这个命令的返回值是一个数组，其中的每个元素分别是原子化事务中的每个命令的返回值。 当使用WATCH命令时，如果事务执行中止，那么EXEC命令就会返回一个Null值。</td>
+</tr>
+<tr>
+<td>discard</td>
+<td>回滚  清除所有先前在一个事务中放入队列的命令，然后恢复正常的连接状态。  如果使用了WATCH命令，那么DISCARD命令就会将当前连接监控的所有键取消监控。</td>
+</tr>
+<tr>
+<td>watch</td>
+<td>监控指定的key  当某个事务需要按条件执行时，就要使用这个命令将给定的键设置为受监控的。</td>
+</tr>
+<tr>
+<td>unwatch</td>
+<td>撤销监控</td>
+</tr>
+</tbody></table>
+<h4 id="八、Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？"><a href="#八、Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？" class="headerlink" title="八、Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？"></a>八、Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？</h4><ul>
+<li>作用：web服务器，反向代理，负载均衡，动静分离</li>
+<li>负载均衡：<ul>
+<li>轮询法:每个请求按时间顺序逐一分配到不同的后端服务，如果后端某台服务器死机，自动剔除故障系统，使用户访问不受影响</li>
+<li>加权轮询:weight的值越大分配到的访问概率越高，主要用于后端每台服务器性能不均衡的情况下</li>
+<li>ip_hash:每个请求按访问IP的哈希结果分配，使来自同一个IP的访客固定访问一台后端服务器，并且可以有效解决动态网页存在的session共享问题</li>
+<li>fair:fair算法可以根据页面大小和加载时间长短智能地进行负载均衡，也就是根据后端服务器的响应时间来分配请求，响应时间短的优先分配。Nginx本身不支持fair，如果需要这种调度算法，则必须安装upstream_fair模块</li>
+<li>url_hash:按访问的URL的哈希结果来分配请求，使每个URL定向到一台后端服务器，可以进一步提高后端缓存服务器的效率。Nginx本身不支持url_hash，如果需要这种调度算法，则必须安装Nginx的hash软件包</li>
+</ul>
+</li>
+</ul>
+<h4 id="九、你在工作中设计接口的如何保证幂等性？"><a href="#九、你在工作中设计接口的如何保证幂等性？" class="headerlink" title="九、你在工作中设计接口的如何保证幂等性？"></a>九、你在工作中设计接口的如何保证幂等性？</h4><ul>
+<li>唯一id。每次操作，都根据操作和内容生成唯一的id，在执行之前先判断id是否存在，如果不存在则执行后续操作，并且保存到数据库或者redis等</li>
+<li>服务端提供发送token的接口，业务调用接口前先获取token,然后调用业务接口请求时，把token携带过去,务器判断token是否存在redis中，存在表示第一次请求，可以继续执行业务，执行业务完成后，最后需要把redis中的token删除</li>
+<li>建去重表。将业务中有唯一标识的字段保存到去重表，如果表中存在，则表示已经处理过了</li>
+<li>版本控制。增加版本号，当版本号符合时，才能更新数据</li>
+<li>状态控制。例如订单有状态已支付 未支付 支付中 支付失败，当处于未支付的时候才允许修改为支付中等</li>
+</ul>
+<h4 id="十、什么是熔断？什么是服务降级？"><a href="#十、什么是熔断？什么是服务降级？" class="headerlink" title="十、什么是熔断？什么是服务降级？"></a>十、什么是熔断？什么是服务降级？</h4><ul>
+<li>服务熔断：服务熔断的作用类似于我们家用的保险丝，当某服务出现不可用或响应超时的情况时，为了防止整个系统出现雪崩，暂时停止对该服务的调用</li>
+<li>服务降级：是从整个系统的负荷情况出发和考虑的，对某些负荷会比较高的情况，为了预防某些功能（业务场景）出现负荷过载或者响应慢的情况，在其内部暂时舍弃对一些非核心的接口和数据的请求，而直接返回一个提前准备好的fallback（退路）错误处理息。这样，虽然提供的是一个有损的服务，但却保证了整个系统的稳定性和可用性</li>
+</ul>
+<h1 id="面试周考试题-第二天"><a href="#面试周考试题-第二天" class="headerlink" title="面试周考试题-第二天"></a>面试周考试题-第二天</h1><h2 id="考试题内容-1"><a href="#考试题内容-1" class="headerlink" title="考试题内容"></a>考试题内容</h2><ul>
+<li><input disabled="" type="checkbox"> Java中有哪些类加载器？说说什么是双亲委派？？哪些场景打破了双亲委派机制？</li>
+<li><input disabled="" type="checkbox"> GC是如何判断对象可以被回收的？</li>
+<li><input disabled="" type="checkbox"> 线程的生命周期？阻塞情况有几种？</li>
+<li><input disabled="" type="checkbox"> 谈谈你对SpringIOC的理解？</li>
+<li><input disabled="" type="checkbox"> 在你的工作过程中，有哪些Sql优化的经历？</li>
+<li><input disabled="" type="checkbox"> Redis过期key的删除策略？</li>
+<li><input disabled="" type="checkbox"> 谈谈你对Redis事务的理解？</li>
+<li><input disabled="" type="checkbox"> Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？</li>
+<li><input disabled="" type="checkbox"> 你在工作中设计接口的时候如何保证幂等性？</li>
+<li><input disabled="" type="checkbox"> 什么是熔断？什么是服务降级？</li>
+</ul>
+<h2 id="考试题解析-1"><a href="#考试题解析-1" class="headerlink" title="考试题解析"></a>考试题解析</h2><h4 id="一、Java中有哪些类加载器？说说什么是双亲委派？哪些场景打破了双亲委派机制？-1"><a href="#一、Java中有哪些类加载器？说说什么是双亲委派？哪些场景打破了双亲委派机制？-1" class="headerlink" title="一、Java中有哪些类加载器？说说什么是双亲委派？哪些场景打破了双亲委派机制？"></a>一、Java中有哪些类加载器？说说什么是双亲委派？哪些场景打破了双亲委派机制？</h4><ul>
+<li><p>有哪些类加载器</p>
+<p>引导类加载器：负责加载存放在JDK\jre\lib目录中的类，用C++实现，在java中打印输出为：null</p>
+<p>扩展类加载器：负责加载JDK\̲j̲r̲e̲\lib\ext目录中的类，java实现，在java中打印输出为：ExtClassLoader</p>
+<p>应用类加载器：负责加载应用程序自己的代码，java实现，在java中打印输出为：AppClassLoader</p>
+</li>
+<li><p>什么是双亲委派</p>
+<p>双亲委派：当<strong>一个类加载器收到需要加载的请求时，它自己不会先去加载</strong>，而是将这个请求交给<strong>父类的加载器去加载</strong>，如果父类的加载器还有父类，那就一直向<strong>上请求直到请求到顶级</strong>的加载器</p>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025090521.png" srcset="/img/loading.gif" lazyload alt="image-20221025090514851"></p>
+<p>作用：避免类的重复加载，保证程序的安全</p>
+</li>
+<li><p>打破双亲委派机制</p>
+<p>tomcat容器，一个tomcat容器可以部署多个项目，可能很多类需要被重复加载</p>
+</li>
+</ul>
+<h4 id="二、GC是如何判断对象可以被回收的？-1"><a href="#二、GC是如何判断对象可以被回收的？-1" class="headerlink" title="二、GC是如何判断对象可以被回收的？"></a>二、GC是如何判断对象可以被回收的？</h4><ul>
+<li>引用计数法：每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收</li>
+<li>可达性分析法：从GCRoots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GCRoots没有任何引用链相连时，则证明此对象是不可用的，那么虚拟机就判断是可回收对象</li>
+</ul>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025101535.png" srcset="/img/loading.gif" lazyload alt="image-20221025101535499"></p>
+<h4 id="三、线程的生命周期？阻塞情况有几种？-1"><a href="#三、线程的生命周期？阻塞情况有几种？-1" class="headerlink" title="三、线程的生命周期？阻塞情况有几种？"></a>三、线程的生命周期？阻塞情况有几种？</h4><ul>
+<li><p>线程的生命周期</p>
+<p>新建状态（New）：新创建了一个线程对象</p>
+<p>就绪状态（Runnable）：线程对象创建后，其他线程调用了该对象的start方法。该状态的线程位于可运行线程池中，变得可运行，等待获取CPU的使用权</p>
+<p>运行状态（Running）：就绪状态的线程获取了CPU，执行程序代码</p>
+<p>阻塞状态（Blocked）：阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行</p>
+<p>死亡状态（Dead）：线程执行完了或者因异常退出了run方法，该线程结束生命周期</p>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025091234.png" srcset="/img/loading.gif" lazyload alt="image-20221025091234546"></p>
+</li>
+<li><p>阻塞情况 </p>
+<p>等待阻塞：运行的线程执行wait方法，该线程会释放占用的所有资源，JVM会把该线程放入“等待池”中。进入这个状态后，是不能自动唤醒的，必须依靠其他线程调用notify或notifyAll方法才能被唤醒，wait是object类的方法</p>
+<p>同步阻塞：运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入“锁池”中</p>
+<p>其他阻塞：运行的线程执行sleep或join方法，或者发出了I&#x2F;O请求时，JVM会把该线程置为阻塞状态。当sleep状态超时、join等待线程终止或者超时、或者I&#x2F;O处理完毕时，线程重新转入就绪状态。sleep是Thread类的方法</p>
+</li>
+</ul>
+<h4 id="四、谈谈你对SpringIOC的理解？-1"><a href="#四、谈谈你对SpringIOC的理解？-1" class="headerlink" title="四、谈谈你对SpringIOC的理解？"></a>四、谈谈你对SpringIOC的理解？</h4><p>springIOC是spring框架十分重要的特性之一，一般我们称之为控制反转，要理解IOC，就需要理解什么是控制反转？控制了什么？什么发生了反转？</p>
+<ul>
+<li><p>控制：没有容器之前，创建对象是有程序员创建，通过new关键字或者反射技术。那么有了容器之后，我们如果要创建对象，只要配置好或者添加相关的注解，spring就会帮我们创建对象，并将创建好的对象放到spring容器中进行管理，所以，spring控制了对象的创建权</p>
+</li>
+<li><p>反转：在说反转的时候就需要提到一个很重要的特性，依赖注入。比如A类中依赖B类，那么在创建A类的时候，就会判断B类在不在容器中，如果不存在的话就会创建B类。</p>
+<p>例如，有一个名为 B 的 Java 类，它的代码如下</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> </span>&#123;<br>    <span class="hljs-keyword">String</span> bid;<br>    A a;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>从代码可以看出，B 中存在一个 A 类型的对象属性 a，此时我们就可以说 B 的对象依赖于对象 a。而依赖注入就是就是基于这种“依赖关系”而产生的</p>
+</li>
+</ul>
+<h4 id="五、在你的工作过程中，有哪些Sql优化的经历？-1"><a href="#五、在你的工作过程中，有哪些Sql优化的经历？-1" class="headerlink" title="五、在你的工作过程中，有哪些Sql优化的经历？"></a>五、在你的工作过程中，有哪些Sql优化的经历？</h4><p>SQL优化的经历需要问清楚，是SQL语句层面的优化，还是整个该SQL业务流的优化</p>
+<ul>
+<li><p>业务层面</p>
+<p>比如说查询一些日志，或者交易记录，只能一段时间内查询，查询三个月之间的数据</p>
+</li>
+<li><p>代码层面</p>
+<p>可以将复杂的多表关联查询，拆分为多个查询语句</p>
+</li>
+<li><p>SQL层面</p>
+<p>主要是索引相关的优化，比如创建联合索引，避免索引失效的查询语句，尽量以数据量小的表作为驱动表，模糊查询过程中尽量不在前面添加%</p>
+</li>
+</ul>
+<h4 id="六、Redis过期key的删除策略？-1"><a href="#六、Redis过期key的删除策略？-1" class="headerlink" title="六、Redis过期key的删除策略？"></a>六、Redis过期key的删除策略？</h4><ul>
+<li>惰性删除：只有当访问一个key时，才会判断该key是否已过期，过期则清除。该策略可以最大化地节省CPU资源，却对内存非常不友好。极端情况可能出现大量的过期key没有再次被访问，从而不会被清除，占用大量内存</li>
+<li>定期删除：每隔一定的时间，会扫描一定数量的数据库的expires字典中一定数量的key，并清除其中已过期的key。该策略是一个折中方案。通过调整定时扫描的时间间隔和每次扫描的限定耗时，可以在不同情况下使得CPU和内存资源达到最优的平衡效果</li>
+</ul>
+<h4 id="七、谈谈你对Redis事务的理解？-1"><a href="#七、谈谈你对Redis事务的理解？-1" class="headerlink" title="七、谈谈你对Redis事务的理解？"></a>七、谈谈你对Redis事务的理解？</h4><ul>
+<li>开始事务：multi</li>
+<li>命令入队：如果执行的不是（multi,exec,discard,watch）则会将命令添加到队列中 set name zhangsan</li>
+<li>事务执行：<ul>
+<li>exec：执行事务</li>
+<li>discard：清空事务队列，并放弃执行事务，客户端从事务状态中退出</li>
+</ul>
+</li>
+<li>特点：redis事务不支持回滚机制，但是它会检查每一个事务中的命令是否错误</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>multi</td>
+<td>开始事务  用于标记事务块的开始。Redis会将后续的命令逐个放入队列中，然后才能使用EXEC命令原子化地执行这个命令序列。</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>执行事务  在一个事务中执行所有先前放入队列的命令，然后恢复正常的连接状态。  当使用WATCH命令时，只有当受监控的键没有被修改时，EXEC命令才会执行事务中的命令，这种方式利用了检查再设置（CAS）的机制。  这个命令的返回值是一个数组，其中的每个元素分别是原子化事务中的每个命令的返回值。 当使用WATCH命令时，如果事务执行中止，那么EXEC命令就会返回一个Null值。</td>
+</tr>
+<tr>
+<td>discard</td>
+<td>回滚  清除所有先前在一个事务中放入队列的命令，然后恢复正常的连接状态。  如果使用了WATCH命令，那么DISCARD命令就会将当前连接监控的所有键取消监控。</td>
+</tr>
+<tr>
+<td>watch</td>
+<td>监控指定的key  当某个事务需要按条件执行时，就要使用这个命令将给定的键设置为受监控的。</td>
+</tr>
+<tr>
+<td>unwatch</td>
+<td>撤销监控</td>
+</tr>
+</tbody></table>
+<h4 id="八、Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？-1"><a href="#八、Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？-1" class="headerlink" title="八、Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？"></a>八、Nginx有哪些作用？负载均衡有哪些算法？描述一下每个算法的优劣势？</h4><ul>
+<li>作用：web服务器，反向代理，负载均衡，动静分离</li>
+<li>负载均衡：<ul>
+<li>轮询法:每个请求按时间顺序逐一分配到不同的后端服务，如果后端某台服务器死机，自动剔除故障系统，使用户访问不受影响</li>
+<li>加权轮询:weight的值越大分配到的访问概率越高，主要用于后端每台服务器性能不均衡的情况下</li>
+<li>ip_hash:每个请求按访问IP的哈希结果分配，使来自同一个IP的访客固定访问一台后端服务器，并且可以有效解决动态网页存在的session共享问题</li>
+<li>fair:fair算法可以根据页面大小和加载时间长短智能地进行负载均衡，也就是根据后端服务器的响应时间来分配请求，响应时间短的优先分配。Nginx本身不支持fair，如果需要这种调度算法，则必须安装upstream_fair模块</li>
+<li>url_hash:按访问的URL的哈希结果来分配请求，使每个URL定向到一台后端服务器，可以进一步提高后端缓存服务器的效率。Nginx本身不支持url_hash，如果需要这种调度算法，则必须安装Nginx的hash软件包</li>
+</ul>
+</li>
+</ul>
+<h4 id="九、你在工作中设计接口的如何保证幂等性？-1"><a href="#九、你在工作中设计接口的如何保证幂等性？-1" class="headerlink" title="九、你在工作中设计接口的如何保证幂等性？"></a>九、你在工作中设计接口的如何保证幂等性？</h4><ul>
+<li>唯一id。每次操作，都根据操作和内容生成唯一的id，在执行之前先判断id是否存在，如果不存在则执行后续操作，并且保存到数据库或者redis等</li>
+<li>服务端提供发送token的接口，业务调用接口前先获取token,然后调用业务接口请求时，把token携带过去,务器判断token是否存在redis中，存在表示第一次请求，可以继续执行业务，执行业务完成后，最后需要把redis中的token删除</li>
+<li>建去重表。将业务中有唯一标识的字段保存到去重表，如果表中存在，则表示已经处理过了</li>
+<li>版本控制。增加版本号，当版本号符合时，才能更新数据</li>
+<li>状态控制。例如订单有状态已支付 未支付 支付中 支付失败，当处于未支付的时候才允许修改为支付中等</li>
+</ul>
+<h4 id="十、什么是熔断？什么是服务降级？-1"><a href="#十、什么是熔断？什么是服务降级？-1" class="headerlink" title="十、什么是熔断？什么是服务降级？"></a>十、什么是熔断？什么是服务降级？</h4><ul>
+<li>服务熔断：服务熔断的作用类似于我们家用的保险丝，当某服务出现不可用或响应超时的情况时，为了防止整个系统出现雪崩，暂时停止对该服务的调用</li>
+<li>服务降级：是从整个系统的负荷情况出发和考虑的，对某些负荷会比较高的情况，为了预防某些功能（业务场景）出现负荷过载或者响应慢的情况，在其内部暂时舍弃对一些非核心的接口和数据的请求，而直接返回一个提前准备好的fallback（退路）错误处理息。这样，虽然提供的是一个有损的服务，但却保证了整个系统的稳定性和可用性</li>
+</ul>
+<h1 id="面试周考试题-第三天"><a href="#面试周考试题-第三天" class="headerlink" title="面试周考试题-第三天"></a>面试周考试题-第三天</h1><h2 id="考试题内容-2"><a href="#考试题内容-2" class="headerlink" title="考试题内容"></a>考试题内容</h2><ul>
+<li><input disabled="" type="checkbox"> HashMap是否线程安全？请描述一下ConcurrentHashMap在JDK1.7与1.8的区别？</li>
+<li><input disabled="" type="checkbox"> 说说你对volatile的理解？volatile能否保证线程安全？</li>
+<li><input disabled="" type="checkbox"> Redis是否是单线程？这样设计的好处是什么？Redis为什么这么快？</li>
+<li><input disabled="" type="checkbox"> 如何保证Redis缓存中与数据库中的数据一致性？</li>
+<li><input disabled="" type="checkbox"> 常见的限流算法有哪些？gateway采用什么？sentinel采用什么？</li>
+<li><input disabled="" type="checkbox"> @Autowired注解与@Resource注解的区别？</li>
+<li><input disabled="" type="checkbox"> 权限设计模型RBAC与RBAC的理解与它们的优缺点？</li>
+<li><input disabled="" type="checkbox"> 说一说B树与B+树的区别？聚簇索引与非聚簇索引的区别？</li>
+<li><input disabled="" type="checkbox"> 请问使用二分法查找数组中14，需要查询几次，数组为：[1,2,5,7,8,12,13,14,17]？</li>
+<li><input disabled="" type="checkbox"> 请描述一下SpringMVC处理请求的流程？</li>
+</ul>
+<h2 id="考试题解析-2"><a href="#考试题解析-2" class="headerlink" title="考试题解析"></a>考试题解析</h2><h4 id="一、HashMap是否线程安全？请描述一下ConcurrentHashMap在JDK1-7与1-8的区别？"><a href="#一、HashMap是否线程安全？请描述一下ConcurrentHashMap在JDK1-7与1-8的区别？" class="headerlink" title="一、HashMap是否线程安全？请描述一下ConcurrentHashMap在JDK1.7与1.8的区别？"></a>一、HashMap是否线程安全？请描述一下ConcurrentHashMap在JDK1.7与1.8的区别？</h4><ul>
+<li><p>HashMap不是线程安全，JDK1.8中存在数据覆盖的问题</p>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025223241.png" srcset="/img/loading.gif" lazyload alt="image-20221025223241186"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">final</span> V <span class="hljs-title function_">putVal</span><span class="hljs-params">(<span class="hljs-type">int</span> hash, K key, V value, <span class="hljs-type">boolean</span> onlyIfAbsent, <span class="hljs-type">boolean</span> evict)</span> &#123;<br>    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; <span class="hljs-type">int</span> n, i;<br>    <span class="hljs-keyword">if</span> ((tab = table) == <span class="hljs-literal">null</span> || (n = tab.length) == <span class="hljs-number">0</span>)<br>        n = (tab = resize()).length;<br>    <span class="hljs-keyword">if</span> ((p = tab[i = (n - <span class="hljs-number">1</span>) &amp; hash]) == <span class="hljs-literal">null</span>)<span class="hljs-comment">// 判断该位置是否有元素，进行hash碰撞比较</span><br>        tab[i] = newNode(hash, key, value, <span class="hljs-literal">null</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>比如两个线程A、B都在进行put操作，并且hash函数计算出的插入下标是相同的，当线程A执行完添加注释的代码行后由于时间片耗尽导致被挂起，而线程B得到时间片后在该下标处插入了元素，完成了正常的插入，然后线程A获得时间片，由于之前已经进行了hash碰撞的判断，所有此时不会再进行判断，而是直接进行插入，这就导致了线程B插入的数据被线程A覆盖了，从而线程不安全</p>
+</li>
+<li><p>JDK1.7</p>
+<blockquote>
+<ul>
+<li>数据结构: ReentrantLock+Segment+HashEntry，一个Segment中包含一个类似于HashMap的结构，数组+链表</li>
+<li>1.7 分段加锁 只锁住一个segment segment有多少个就允许多少个segment并发操作</li>
+</ul>
+</blockquote>
+<p>JDK1.8</p>
+<blockquote>
+<ul>
+<li><p>数据结构: synchronized+CAS+Node+红黑树</p>
+</li>
+<li><p>锁:锁链表的head节点，不影响其他元素的读写，锁粒度更细，效率更高，扩容时，阻塞所有的读写操作、并发扩容</p>
+</li>
+<li><p>读操作无锁</p>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h4 id="二、说说你对volatile的理解？volatile能否保证线程安全？"><a href="#二、说说你对volatile的理解？volatile能否保证线程安全？" class="headerlink" title="二、说说你对volatile的理解？volatile能否保证线程安全？"></a>二、说说你对volatile的理解？volatile能否保证线程安全？</h4><ul>
+<li><p>volatile理解：Java语言提供了一种稍弱的同步机制，即volatile变量，用来确保将变量的更新操作通知到其他线程</p>
+<ul>
+<li>volatile能够保证字段的可见性：volatile变量，用来确保将变量的更新操作通知到其他线程</li>
+</ul>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025225457.png" srcset="/img/loading.gif" lazyload alt="image-20221025225456905"></p>
+</li>
+<li><p>volatile能否保证线程安全：不能保证线程安全，不能保证操作的原子性</p>
+</li>
+</ul>
+<h4 id="三、Redis是否是单线程？这样设计的好处是什么？Redis为什么这么快？"><a href="#三、Redis是否是单线程？这样设计的好处是什么？Redis为什么这么快？" class="headerlink" title="三、Redis是否是单线程？这样设计的好处是什么？Redis为什么这么快？"></a>三、Redis是否是单线程？这样设计的好处是什么？Redis为什么这么快？</h4><ul>
+<li><p>Redis是否单线程：Redis本身不是单线程，比如进行RDB持久化是就是多线程，但是Redis执行客户端的命令是单线程</p>
+</li>
+<li><p>好处：</p>
+<ul>
+<li><p>代码更清晰，处理逻辑更简单</p>
+</li>
+<li><p>不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为锁而导致的性能消耗</p>
+</li>
+<li><p>不存在多进程或者多线程导致的CPU切换，充分利用CPU资源</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown">出现线程安全问题。有几个必要条件：<br><span class="hljs-bullet">1.</span> 多线程<br><span class="hljs-bullet">2.</span> 存在共享数据<br><span class="hljs-bullet">3.</span> 在同一时间段内有多个操作共享数据的线程<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>为什么快 </p>
+<ul>
+<li>完全基于内存操作，没有IO操作</li>
+<li>数据结构简单，对数据操作也简单</li>
+<li>使用多路 I&#x2F;O 复用模型，充分利用CPU资源</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025230124.png" srcset="/img/loading.gif" lazyload alt="image-20221025230123949"></p>
+<h4 id="四、如何保证Redis缓存中与数据库中的数据一致性？"><a href="#四、如何保证Redis缓存中与数据库中的数据一致性？" class="headerlink" title="四、如何保证Redis缓存中与数据库中的数据一致性？"></a>四、如何保证Redis缓存中与数据库中的数据一致性？</h4><h5 id="1）先删除缓存，在写数据库"><a href="#1）先删除缓存，在写数据库" class="headerlink" title="1）先删除缓存，在写数据库"></a>1）先删除缓存，在写数据库</h5><p>存在的问题：</p>
+<p>在高并发场景下，当第一个线程删除了缓存，还没有来得及写数据库，第二个线程来读取数据，发现缓存中没有数据，则会去数据库中读取数据（此时读到的数据是旧的数据，也就是脏数据）。第二个线程将读到的数据写入到缓存中（如果此时第一个线程已经将修改后的数据写到缓存中了），那么缓存中保存的还是旧的数据，也就是脏数据。存在数据不一致问题</p>
+<p>解决方案：</p>
+<pre><code class="hljs">1. 对数据进行修改后，不删除缓存，而是将缓存中的数据设置为一个默认值（如：-9999），当线程来读取数据时，发现返回值为默认值，则对该线程进行休眠一会儿（等待第一个线程将修改数据库之后的值，设置到缓存中），然后再重新查询缓存。对业务会有一定的入侵。
+2. 延时双删。先删除缓存，在修改数据库。该线程休眠一会儿，在重新删除缓存（保存数据的一致性，存在一定时间的脏数据）
+</code></pre>
+<h5 id="2）先写数据库，在删缓存"><a href="#2）先写数据库，在删缓存" class="headerlink" title="2）先写数据库，在删缓存"></a>2）先写数据库，在删缓存</h5><p>存在的问题：</p>
+<p>当删除缓存失败时，会存在数据不一致问题。</p>
+<p>解决方案：</p>
+<pre><code class="hljs"> 1. 给缓存设置一个有效期
+ 2. 引入MQ，添加事务，保证写数据库与删除缓存的原子操作（对于这种情况，一种常见的解决方案就是使用消息中间件来实现删除的重试。MQ一般都自带消费失败重试的机制，当要删除缓存的时候，就往 MQ中扔一条消息，缓存服务读取该消息并尝试删除缓存，删除失败了就会自动重试）。
+</code></pre>
+<p>总结：不管哪种方式，最终目的是要保证数据的最终一致性，就是缓存中的数据与数据库中的数据一致。但是不可避免存在一定时间内的脏数据问题。</p>
+<p>所以，引用缓存的数据，修改不能太频繁。</p>
+<h4 id="五、常见的限流算法有哪些？gateway采用什么？sentinel采用什么？"><a href="#五、常见的限流算法有哪些？gateway采用什么？sentinel采用什么？" class="headerlink" title="五、常见的限流算法有哪些？gateway采用什么？sentinel采用什么？"></a>五、常见的限流算法有哪些？gateway采用什么？sentinel采用什么？</h4><ul>
+<li>限流算法常见的有三种实现：滑动时间窗口、令牌桶算法、漏桶算法</li>
+<li>Gateway则采用了基于Redis实现的令牌桶算法</li>
+<li>Sentinel<ul>
+<li>默认限流模式是基于滑动时间窗口算法</li>
+<li>排队等待的限流模式则基于漏桶算法</li>
+<li>热点参数限流则是基于令牌桶算法</li>
+</ul>
+</li>
+</ul>
+<h4 id="六、-Autowired注解与-Resource注解的区别？"><a href="#六、-Autowired注解与-Resource注解的区别？" class="headerlink" title="六、@Autowired注解与@Resource注解的区别？"></a>六、@Autowired注解与@Resource注解的区别？</h4><ul>
+<li>@Autowired<ul>
+<li>spring框架提供的注解，需要在spring体系中使用</li>
+<li>@Autowired默认按照类型注入，如果有该类型在容器中有多个，则按照名称注入（按照属性的名称来注入），如果没有找到该属性的名称对应的bean实例，则报错</li>
+<li>默认按照类型进行装配，默认情况下要求依赖的对象必须存在，如果需要允许null值，则需要设置required属性</li>
+</ul>
+</li>
+<li>@Resource<ul>
+<li>JDK提供的注解，不依赖于spring体系，允许注入null</li>
+<li>同时没有指定name和type：自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配</li>
+<li>指定name：从Spring上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常</li>
+<li>指定type：从Spring上下文中找到类似匹配的唯一bean进行装配，找不到或是找到多个，都会抛出异常</li>
+<li>同时指定name和type：从Spring上下文中找到唯一匹配的bean进行装配（与指定name一样），找不到则抛出异常</li>
+</ul>
+</li>
+</ul>
+<h4 id="七、权限设计模型RBAC与ACL的理解与它们的优缺点？"><a href="#七、权限设计模型RBAC与ACL的理解与它们的优缺点？" class="headerlink" title="七、权限设计模型RBAC与ACL的理解与它们的优缺点？"></a>七、权限设计模型RBAC与ACL的理解与它们的优缺点？</h4><ul>
+<li>ACL: Access Control List 用户表 权限表 用户权限关联表<ul>
+<li>访问控制列表 ，以前盛行的一种权限设计，它的核心在于用户直接和权限挂钩</li>
+<li>优点：简单易用，开发便捷</li>
+<li>缺点：用户和权限直接挂钩，导致在授予时的复杂性，比较分散，不便于管理</li>
+</ul>
+</li>
+<li>RBAC: Role Based Access Control<ul>
+<li>基于角色的访问控制系统。权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限</li>
+<li>优点：简化了用户与权限的管理，通过对用户进行分类，使得角色与权限关联起来</li>
+<li>缺点：开发对比ACL相对复杂</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221025233529.png" srcset="/img/loading.gif" lazyload alt="image-20221025233529711"></p>
+<h4 id="八、说一说B树与B-树的区别？聚簇索引与非聚簇索引的区别？"><a href="#八、说一说B树与B-树的区别？聚簇索引与非聚簇索引的区别？" class="headerlink" title="八、说一说B树与B+树的区别？聚簇索引与非聚簇索引的区别？"></a>八、说一说B树与B+树的区别？聚簇索引与非聚簇索引的区别？</h4><ul>
+<li><p>B树：</p>
+</li>
+<li><p>B+树</p>
+</li>
+<li><p>区别：B数非叶子节点会存储数据，B+树非叶子节点只存储索引，不存储数据。另外B+树的叶子节点是单向链表结构，MySQL对B+树做了优化，非叶子节点使用双向链表结果，所以，同样高度的数据，B+数存储的数据量大于B树，减少了查找IO的次数</p>
+</li>
+<li><p>聚簇索引：叶子节点包含了该条记录的所有字段数据，比如innodb引擎中的主键索引就是聚簇索引，一张表里面只有一个聚簇索引</p>
+</li>
+<li><p>非聚簇索引：叶子节点只包含了主键跟索引的字段，如果需要查询其它字段，那么需要通过主键在进行一次查找，称之为回表查询</p>
+</li>
+</ul>
+<h4 id="九、请问使用二分法查找数组中14，需要查询几次，数组为：-1-2-5-7-8-12-13-14-17-？"><a href="#九、请问使用二分法查找数组中14，需要查询几次，数组为：-1-2-5-7-8-12-13-14-17-？" class="headerlink" title="九、请问使用二分法查找数组中14，需要查询几次，数组为：[1,2,5,7,8,12,13,14,17]？"></a>九、请问使用二分法查找数组中14，需要查询几次，数组为：[1,2,5,7,8,12,13,14,17]？</h4><ul>
+<li><p>需要查询3次</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BinerySearch</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">int</span>[] nums = &#123;<span class="hljs-number">1</span> ,<span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">12</span>, <span class="hljs-number">13</span>, <span class="hljs-number">14</span>, <span class="hljs-number">17</span>&#125;;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">target</span> <span class="hljs-operator">=</span> <span class="hljs-number">19</span>;<br><br>        <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> getNumIndex(nums, target);<br>        System.out.println(<span class="hljs-string">&quot;index = &quot;</span> + index);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getNumIndex</span><span class="hljs-params">(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target)</span>&#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">index</span> <span class="hljs-operator">=</span> -<span class="hljs-number">1</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> nums.length - <span class="hljs-number">1</span>;<br><br>        <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br><br>            <span class="hljs-comment">// 退出循环的条件</span><br>            <span class="hljs-keyword">if</span>(start &gt; end)&#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br><br>            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> (start + end) / <span class="hljs-number">2</span>;<br><br>            <span class="hljs-keyword">if</span>(nums[mid] == target)&#123;<br>                index = mid;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[mid] &gt; target)&#123;<br>                end = mid - <span class="hljs-number">1</span>;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                start = mid + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> index;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="十、请描述一下SpringMVC处理请求的流程？"><a href="#十、请描述一下SpringMVC处理请求的流程？" class="headerlink" title="十、请描述一下SpringMVC处理请求的流程？"></a>十、请描述一下SpringMVC处理请求的流程？</h4><ol>
+<li>浏览器发送请求至应用程序，被前端控制器（DispatcherServlet）接收；</li>
+<li>前端控制器调用处理器映射器（HandlerMapping）查找处理器（Handler）；</li>
+<li>处理器映射器根据请求映射从Spring容器中获取得到处理器（Handler，也是自定义的Controller）；</li>
+<li>处理器映射器组装处理器执行链（HandlerExecutionChain），返回给前端控制器；</li>
+<li>前端控制器找到合适的处理器适配器（HandlerAdapter）；</li>
+<li>处理器适配器执行处理器，处理器（Controller）执行完成后返回模型和视图（ModelAndView）；</li>
+<li>处理器适配器把模型和试图返回给前端控制器；</li>
+<li>前端控制器调用视图解析器（ViewReslover）解析模型和视图（ModelAndView）；</li>
+<li>视图解析器解析完成后，返回具体的视图（View）；</li>
+<li>前端控制器进行视图渲染（即把模型数据填充到视图中），最终响应浏览器的请求；</li>
+</ol>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">1</span>. HashMap是否线程安全？请描述一下ConcurrentHashMap在JDK1.<span class="hljs-number">7</span>与<span class="hljs-number">1</span>.<span class="hljs-number">8</span>的区别？<br><span class="hljs-attribute">2</span>. 说说你对volatile的理解？volatile能否保证线程安全？<br><span class="hljs-attribute">3</span>. Redis是否是单线程？这样设计的好处是什么？Redis为什么这么快？<br><span class="hljs-attribute">4</span>. 如何保证Redis缓存中与数据库中的数据一致性？<br><span class="hljs-attribute">5</span>. 常见的限流算法有哪些？gateway采用什么？sentinel采用什么？<br><span class="hljs-attribute">6</span>. @Autowired注解与@Resource注解的区别？<br><span class="hljs-attribute">7</span>. 权限设计模型RBAC与RBAC的理解与它们的优缺点？<br><span class="hljs-attribute">8</span>. 说一说B树与B+树的区别？聚簇索引与非聚簇索引的区别？<br><span class="hljs-attribute">9</span>. 请问使用二分法查找数组中<span class="hljs-number">14</span>，需要查询几次，数组为：[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">12</span>,<span class="hljs-number">13</span>,<span class="hljs-number">14</span>,<span class="hljs-number">17</span>]？<br><span class="hljs-attribute">10</span>. 请描述一下SpringMVC处理请求的流程？<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="面试周考试题-第四天"><a href="#面试周考试题-第四天" class="headerlink" title="面试周考试题-第四天"></a>面试周考试题-第四天</h1><h2 id="考试题内容-3"><a href="#考试题内容-3" class="headerlink" title="考试题内容"></a>考试题内容</h2><ul>
+<li><input disabled="" type="checkbox"> spring单例bean是否线程安全？如果不安全那你项目中是如何处理的？</li>
+<li><input disabled="" type="checkbox"> spring中的申明式事务用什么注解？spring中事务失效的场景有哪些？</li>
+<li><input disabled="" type="checkbox"> spring中bean实例的生命周期？</li>
+<li><input disabled="" type="checkbox"> spring中如何解决循环依赖问题？</li>
+<li><input disabled="" type="checkbox"> springboot的启动流程？</li>
+<li><input disabled="" type="checkbox"> springboot的自动装配原理是什么？</li>
+<li><input disabled="" type="checkbox"> spring容器中能够出现两个ID一样的bean对象？如果ID一样，会出现什么情况？</li>
+<li><input disabled="" type="checkbox"> 请描述一下spring容器与SpringMVC容器的关系？有什么特点？</li>
+<li><input disabled="" type="checkbox"> AOP的底层实现是什么？有几种方式？这几种方式有什么区别？</li>
+<li><input disabled="" type="checkbox"> beanfactory和factorybean的区别？</li>
+</ul>
+<h2 id="考试题解析-3"><a href="#考试题解析-3" class="headerlink" title="考试题解析"></a>考试题解析</h2><h4 id="一、spring单例bean是否线程安全？如果不安全那你项目中是如何处理的？"><a href="#一、spring单例bean是否线程安全？如果不安全那你项目中是如何处理的？" class="headerlink" title="一、spring单例bean是否线程安全？如果不安全那你项目中是如何处理的？"></a>一、spring单例bean是否线程安全？如果不安全那你项目中是如何处理的？</h4><p>Spring中的Bean默认是单例模式的，框架并没有对bean进行多线程的封装处理。如果Bean是有状态的 那就需要开发人员自己来进行线程安全的保证，最简单的办法就是改变bean的作用域 把 “singleton”改为’‘protopyte’ 这样每次请求Bean就相当于是 new Bean() 这样就可以保证线程的安全了。</p>
+<ul>
+<li><p>有状态就是有数据存储功能</p>
+</li>
+<li><p>无状态就是不会保存数据 controller、service和dao层本身并不是线程安全的，只是如果只是调用里面的方法，而且多线程调用一个实例的方法，会在内存中复制变量，这是自己的线程的工作内存，是安全的。</p>
+</li>
+</ul>
+<p>Dao会操作数据库Connection，Connection是带有状态的，比如说数据库事务，Spring的事务管理器使用Threadlocal为不同线程维护了一套独立的connection副本，保证线程之间不会互相影响（Spring是如何保证事务获取同一个Connection的）</p>
+<p>不要在bean中声明任何有状态的实例变量或类变量，如果必须如此，那么就使用ThreadLocal把变量变为线程私有的，如果bean的实例变量或类变量需要在多个线程之间共享，那么就只能使用synchronized、lock、CAS等这些实现线程同步的方法了。</p>
+<h4 id="二、spring中的申明式事务用什么注解？spring中事务失效的场景有哪些？"><a href="#二、spring中的申明式事务用什么注解？spring中事务失效的场景有哪些？" class="headerlink" title="二、spring中的申明式事务用什么注解？spring中事务失效的场景有哪些？"></a>二、spring中的申明式事务用什么注解？spring中事务失效的场景有哪些？</h4><ul>
+<li>Transactional</li>
+<li>事务失效的场景<ul>
+<li>方法不是被public修饰</li>
+<li>异常被吃掉，事务不会回滚(或者抛出的异常没有被定义，默认为RuntimeException)</li>
+<li>没有被spring管理</li>
+<li>数据库不支持事务</li>
+<li>发生自调用，类里面使用this调用本类的方法（this通常省略），此时这个this对象不是代理类，而是UserService对象本身！</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> interview <span class="hljs-keyword">default</span> <span class="hljs-type">character</span> <span class="hljs-keyword">set</span> utf8;<br><br>use interview;<br><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> t_account (<br>    id <span class="hljs-type">int</span> <span class="hljs-keyword">primary key</span> auto_increment,<br>	<span class="hljs-type">name</span> <span class="hljs-type">varchar</span>(<span class="hljs-number">40</span>),<br>    <span class="hljs-type">money</span> <span class="hljs-type">int</span><br>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t_account (<span class="hljs-type">name</span>, <span class="hljs-type">money</span>) <span class="hljs-keyword">values</span> (<span class="hljs-string">&#x27;zhangsan&#x27;</span>,<span class="hljs-number">1000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t_account (<span class="hljs-type">name</span>, <span class="hljs-type">money</span>) <span class="hljs-keyword">values</span> (<span class="hljs-string">&#x27;lisi&#x27;</span>, <span class="hljs-number">1000</span>);<br><span class="hljs-keyword">commit</span>;<br></code></pre></td></tr></table></figure>
+
+<h4 id="三、spring中bean实例的生命周期？"><a href="#三、spring中bean实例的生命周期？" class="headerlink" title="三、spring中bean实例的生命周期？"></a>三、spring中bean实例的生命周期？</h4><ul>
+<li>实例化 Instantiation</li>
+<li>初始化–属性赋值 Populate</li>
+<li>初始化–增强实现 PostProcessor</li>
+<li>使用和销毁 Destruction</li>
+</ul>
+<p>1、解析类得到BeanDefinition</p>
+<p>2、如果有多个构造方法，则要推断构造方法</p>
+<p>3、确定好构造方法后，进行实例化得到一个对象</p>
+<p>4、对对象中的加了@Autowired注解的属性进行属性填充</p>
+<p>5、回调Aware方法，比如BeanNameAware，BeanFactoryAware</p>
+<p>6、调用BeanPostProcessor的初始化前的方法</p>
+<p>7、调用初始化方法</p>
+<p>8、调用BeanPostProcessor的初始化后的方法，在这里会进行AOP</p>
+<p>9、如果当前创建的bean是单例的则会把bean放入单例池</p>
+<p>10、使用bean</p>
+<p>11、Spring容器关闭时调用DisposableBean中destory()方法</p>
+<h4 id="四、spring中如何解决循环依赖问题？"><a href="#四、spring中如何解决循环依赖问题？" class="headerlink" title="四、spring中如何解决循环依赖问题？"></a>四、spring中如何解决循环依赖问题？</h4><ol>
+<li><p>singletonObjects：缓存某个beanName对应的经过了完整⽣命周期的bean </p>
+</li>
+<li><p>earlySingletonObjects：缓存提前拿原始对象进⾏了AOP之后得到的代理对象，原始对象还没有进⾏属性注⼊和后续的BeanPostProcessor等⽣命周期</p>
+</li>
+<li><p>singletonFactories：缓存的是⼀个ObjectFactory，主要⽤来去⽣成原始对象进⾏了AOP之后得到的代理对象，在每个Bean的⽣成过程中，都会提前暴露⼀个⼯⼚，这个⼯⼚可能⽤到，也可能⽤不到，如果没有出现循环依赖依赖本bean，那么这个⼯⼚⽆⽤，本bean按照⾃⼰的⽣命周期执⾏，执⾏完后直接把本bean放⼊singletonObjects中即可，如果出现了循环依赖依赖了本bean，则另外那个bean执⾏ObjectFactory提交得到⼀个AOP之后的代理对象(如果有AOP的话，如果⽆需AOP，则直接得到⼀个原始对象)。</p>
+</li>
+</ol>
+<h4 id="五、springboot的启动流程？"><a href="#五、springboot的启动流程？" class="headerlink" title="五、springboot的启动流程？"></a>五、springboot的启动流程？</h4><ol>
+<li><p>首先从main找到run()方法，在执行run()方法之前new一个SpringApplication对象</p>
+</li>
+<li><p>进入run()方法，创建应用监听器SpringApplicationRunListeners开始监听</p>
+</li>
+<li><p>然后加载SpringBoot配置环境(ConfigurableEnvironment)，然后把配置环境(Environment)加入监听对象中</p>
+</li>
+<li><p>然后加载应用上下文(ConfigurableApplicationContext)，当做run方法的返回对象</p>
+</li>
+<li><p>最后创建Spring容器，refreshContext(context)，实现starter自动化配置和bean的实例化等工作。</p>
+</li>
+</ol>
+<p>Springboot的启动，主要创建了配置环境(environment)、事件监听(listeners)、应用上下文(applicationContext)，并基于以上条件，在容器中开始实例化我们需要的Bean，至此，通过SpringBoot启动的程序已经构造完成</p>
+<h4 id="六、springboot的自动装配原理是什么？"><a href="#六、springboot的自动装配原理是什么？" class="headerlink" title="六、springboot的自动装配原理是什么？"></a>六、springboot的自动装配原理是什么？</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs less">启动类的<span class="hljs-variable">@SpringBootApplication</span>注解由<span class="hljs-variable">@SpringBootConfiguration</span>，<span class="hljs-variable">@EnableAutoConfiguration</span>，<span class="hljs-variable">@ComponentScan</span>三个注解组成，三个注解共同完成自动装配；<br>    <span class="hljs-variable">@SpringBootConfiguration</span> 注解标记启动类为配置类<br>    <span class="hljs-variable">@ComponentScan</span> 注解实现启动时扫描启动类所在的包以及子包下所有标记为bean的类由IOC容器注册为bean<br>    <span class="hljs-variable">@EnableAutoConfiguration</span>通过 <span class="hljs-variable">@Import</span> 注解导入 AutoConfigurationImportSelector类，然后通过AutoConfigurationImportSelector 类的 selectImports 方法去读取需要被自动装配的组件依赖下的spring.factories文件配置的组件的类全名，并按照一定的规则过滤掉不符合要求的组件的类全名，将剩余读取到的各个组件的类全名集合返回给IOC容器并将这些组件注册为bean<br></code></pre></td></tr></table></figure>
+
+<h4 id="七、spring容器中能够出现两个ID一样的bean对象？如果ID一样，会出现什么情况？"><a href="#七、spring容器中能够出现两个ID一样的bean对象？如果ID一样，会出现什么情况？" class="headerlink" title="七、spring容器中能够出现两个ID一样的bean对象？如果ID一样，会出现什么情况？"></a>七、spring容器中能够出现两个ID一样的bean对象？如果ID一样，会出现什么情况？</h4><ul>
+<li>不能</li>
+<li>如果是基于xml配置的话，那么在编译的时候就会报错</li>
+<li>如果是基于java方式注入的话，出现相同的ID，只会创建第一次出现的bean对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean(name = &quot;userService01&quot;)</span><br><span class="hljs-keyword">public</span> AccountService <span class="hljs-title function_">accountService1</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AccountServiceImpl</span>(<span class="hljs-number">1</span>);<br>&#125;<br><br><span class="hljs-meta">@Bean(name = &quot;userService01&quot;)</span><br><span class="hljs-keyword">public</span> AccountService <span class="hljs-title function_">accountService2</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AccountServiceImpl</span>(<span class="hljs-number">2</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="八、请描述一下spring容器与SpringMVC容器的关系？有什么特点？"><a href="#八、请描述一下spring容器与SpringMVC容器的关系？有什么特点？" class="headerlink" title="八、请描述一下spring容器与SpringMVC容器的关系？有什么特点？"></a>八、请描述一下spring容器与SpringMVC容器的关系？有什么特点？</h4><ul>
+<li>SpringMVC容器继承了spring容器</li>
+<li>SpringMVC容器能访问spring容器里面的bean对象，spring容器不能访问SpringMVC容器中的对象</li>
+</ul>
+<p><img src="C:\Users\35750\AppData\Roaming\Typora\typora-user-images\image-20221027133452328.png" srcset="/img/loading.gif" lazyload alt="image-20221027133452328"></p>
+<p><img src="C:\Users\35750\AppData\Roaming\Typora\typora-user-images\image-20221027133501247.png" srcset="/img/loading.gif" lazyload alt="image-20221027133501247"></p>
+<p>注意：在springBoot中，只有一个容器，springIOC容器（webapplicationContext）</p>
+<h4 id="九、AOP的底层实现是什么？有几种方式？这几种方式有什么区别？"><a href="#九、AOP的底层实现是什么？有几种方式？这几种方式有什么区别？" class="headerlink" title="九、AOP的底层实现是什么？有几种方式？这几种方式有什么区别？"></a>九、AOP的底层实现是什么？有几种方式？这几种方式有什么区别？</h4><ul>
+<li>AOP的底层实现是动态代理</li>
+<li>基于JDK的动态代理，基于CGLIB的动态代理</li>
+</ul>
+<ol>
+<li>原理区别<ul>
+<li>JDK动态代理是利用反射机制生成一个实现代理接口的匿名类，在调用具体的方法之前调用InvocationHandler</li>
+<li>CGLIB动态代理是利用ASM开源包，对被代理类的class文件进行字节码修改，生成被代理类的子类，覆盖目标方法。</li>
+</ul>
+</li>
+<li>依赖区别<ul>
+<li>JDK动态代理，不需要第三方的库，只要JDK环境就可以；</li>
+<li>CGLIB动态代理，需要加入cglib、asm的类库</li>
+</ul>
+</li>
+<li>要求区别<ul>
+<li>JDK动态代理，被代理的类必须有实现的接口</li>
+<li>CGLIB动态代理，针对具体的实现类进行代理，但是类不能用final修饰。</li>
+</ul>
+</li>
+<li>编程区别<ul>
+<li>JDK动态代理，需要实现InvocationHandler接口编写增强、使用Proxy.newInstance获取代理对象</li>
+<li>CGLIB动态代理，实现MethodInterceptor接口中的invoke方法实现增强，使用Enhancer根据被代理对象和增强修改字节码文件</li>
+</ul>
+</li>
+</ol>
+<p><img src="C:\Users\35750\AppData\Roaming\Typora\typora-user-images\image-20221027133647788.png" srcset="/img/loading.gif" lazyload alt="image-20221027133647788"></p>
+<h4 id="十、Beanfactory和Factorybean的区别？"><a href="#十、Beanfactory和Factorybean的区别？" class="headerlink" title="十、Beanfactory和Factorybean的区别？"></a>十、Beanfactory和Factorybean的区别？</h4><ul>
+<li>BeanFactory是ApplicationContext的父接口，可以理解为就是IOC容器，用来管理所有的bean对象的（我们一般都不会使用BeanFactory，而是使用子接口ApplicationContext）</li>
+<li>Factorybean是一个bean对象，该对象主要用于定制一些复杂bean对象的实例化，比如创建代理对象</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> spring单例bean是否线程安全？如果不安全那你项目中是如何处理的？<br><span class="hljs-bullet">2.</span> spring中的申明式事务用什么注解？spring中事务失效的场景有哪些？<br><span class="hljs-bullet">3.</span> spring中bean实例的生命周期？<br><span class="hljs-bullet">4.</span> spring中如何解决循环依赖问题？<br><span class="hljs-bullet">5.</span> springboot的启动流程？<br><span class="hljs-bullet">6.</span> springboot的自动装配原理是什么？<br><span class="hljs-bullet">7.</span> spring容器中能够出现两个ID一样的bean对象？如果ID一样，会出现什么情况？<br><span class="hljs-bullet">8.</span> 请描述一下spring容器与SpringMVC容器的关系？有什么特点？<br><span class="hljs-bullet">9.</span> AOP的底层实现是什么？有几种方式？这几种方式有什么区别？<br><span class="hljs-bullet">10.</span> beanfactory和factorybean的区别？<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="面试周考试题-第五天"><a href="#面试周考试题-第五天" class="headerlink" title="面试周考试题-第五天"></a>面试周考试题-第五天</h1><h2 id="考试题内容-4"><a href="#考试题内容-4" class="headerlink" title="考试题内容"></a>考试题内容</h2><ul>
+<li><input disabled="" type="checkbox"> 请描述一下接口和抽象类的区别？你是如何理解这两者的关系？项目中有用到抽象类吗？</li>
+<li><input disabled="" type="checkbox"> 请写出java中的基本数据类型及每种数据类型对应的字节数？</li>
+<li><input disabled="" type="checkbox"> 以下三段代码是否会编译异常？为什么？</li>
+<li><input disabled="" type="checkbox"> HashMap的key的扩容规则？</li>
+<li><input disabled="" type="checkbox"> 请描述一下java的异常体系？写出你常见的5种异常类型？</li>
+<li><input disabled="" type="checkbox"> 请描述一下cookie与session的区别？在你的项目中有用到cookie吗？</li>
+<li><input disabled="" type="checkbox"> 如果要统计当前系统在线的人数，请问你会怎么来实现？</li>
+<li><input disabled="" type="checkbox"> String、StringBuffer、StringBuilder的区别？</li>
+<li><input disabled="" type="checkbox"> 什么是悲观锁？什么是乐观锁？乐观锁的ABA问题是什么？</li>
+<li><input disabled="" type="checkbox"> 什么是时间复杂度？什么是空间复杂度？工作中我们主要关注哪一种？</li>
+</ul>
+<h2 id="考试题解析-4"><a href="#考试题解析-4" class="headerlink" title="考试题解析"></a>考试题解析</h2><h4 id="一、请描述一下接口和抽象类的区别？你是如何理解这两者的关系？项目中有用到抽象类吗？"><a href="#一、请描述一下接口和抽象类的区别？你是如何理解这两者的关系？项目中有用到抽象类吗？" class="headerlink" title="一、请描述一下接口和抽象类的区别？你是如何理解这两者的关系？项目中有用到抽象类吗？"></a>一、请描述一下接口和抽象类的区别？你是如何理解这两者的关系？项目中有用到抽象类吗？</h4><p>抽象类</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-comment">//抽象类的定义</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> 类名 </span>&#123;&#125;<br><br>特点：<br><span class="hljs-number">1</span>）抽象类中不一定有抽象方法，有抽象方法的类一定是抽象类<br><span class="hljs-number">2</span>）抽象类不能实例化(<span class="hljs-keyword">new</span> )<br><span class="hljs-number">3</span>）抽象类的子类要么重写抽象类中的所有抽象方法，要么是抽象类    <br><span class="hljs-number">4</span>）抽象类可以有构造方法，但是不能使用<br></code></pre></td></tr></table></figure>
+
+<p>接口</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> 接口名 </span>&#123;&#125; <br><br>特点：<br><span class="hljs-number">1</span>）接口不能实例化<br><span class="hljs-number">2</span>）接口的子类要么重写接口中的所有抽象方法，要么子类也是抽象类<br><span class="hljs-number">3</span>）接口没有构造方法，因为接口主要是扩展功能的，而没有具体存在<br><span class="hljs-number">4</span>）接口的成员变量是常量，默认的访问修饰符为：<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span><br><span class="hljs-number">5</span>）接口的成员方法是抽象方法，默认的访问修饰符：<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span><br><span class="hljs-number">6</span>）一个类可以实现多个接口<br><span class="hljs-number">7</span>）接口可以实现多继承<br></code></pre></td></tr></table></figure>
+
+<p>理解抽象类与接口的关系</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">抽象类：抽象类是将某一类的一些公共属性与方法抽取出来，定义的类，里面既可以有实现的方法也可以有抽象方法。如果某些属性与行为都是相同的，则可以在抽象里面实现，这样提高了代码的复用性。但是由于<span class="hljs-keyword">java的单继承特点，一个类只能继承一个父类，扩展性相对来说就差一些</span><br><span class="hljs-keyword"></span>接口：接口里面默认的都是抽象方法（<span class="hljs-keyword">JDK1.8之后有默认方法与静态方法），相当于一个标准，一个类实现某一个接口，那么就需要实现该接口中所有的抽象方法，所以说，接口可以理解为一种规范，而且java中支持多实现。</span><br></code></pre></td></tr></table></figure>
+
+<p>项目中的抽象类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">在我的项目中暂时没有自定义抽象类的使用，更多的是面向接口编程。但是在一些源码来里面很多地方都用到了抽象类，比如Servlet中的GenericServlet就是一个抽象类（空实现）   <br></code></pre></td></tr></table></figure>
+
+<h4 id="二、请写出java中的基本数据类型及每种数据类型对应的字节数？"><a href="#二、请写出java中的基本数据类型及每种数据类型对应的字节数？" class="headerlink" title="二、请写出java中的基本数据类型及每种数据类型对应的字节数？"></a>二、请写出java中的基本数据类型及每种数据类型对应的字节数？</h4><table>
+<thead>
+<tr>
+<th align="left">数据类型</th>
+<th>关键字</th>
+<th>内存占用 （字节）</th>
+<th align="left">取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">整数类型</td>
+<td>byte</td>
+<td>1</td>
+<td align="left">-128~127</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td>short</td>
+<td>2</td>
+<td align="left">-32768~32767</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td>int(默认)</td>
+<td>4</td>
+<td align="left">-2的31次方到2的31次方-1</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td>long</td>
+<td>8</td>
+<td align="left">-2的63次方到2的63次方-1</td>
+</tr>
+<tr>
+<td align="left">浮点类型</td>
+<td>float</td>
+<td>4</td>
+<td align="left">负数：-3.402823E+38到-1.401298E-45   正数：   1.401298E-45到3.402823E+38</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td>double(默认)</td>
+<td>8</td>
+<td align="left">负数：-1.797693E+308到-4.9000000E-324  正数：4.9000000E-324   到1.797693E+308</td>
+</tr>
+<tr>
+<td align="left">字符类型</td>
+<td>char</td>
+<td>2</td>
+<td align="left">0-65535</td>
+</tr>
+<tr>
+<td align="left">布尔类型</td>
+<td>boolean</td>
+<td>1（不确定，与JVM有关）</td>
+<td align="left">true，false</td>
+</tr>
+</tbody></table>
+<h4 id="三、以下三段代码是否会编译异常？为什么？"><a href="#三、以下三段代码是否会编译异常？为什么？" class="headerlink" title="三、以下三段代码是否会编译异常？为什么？"></a>三、以下三段代码是否会编译异常？为什么？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>	<span class="hljs-type">byte</span> <span class="hljs-variable">b1</span> <span class="hljs-operator">=</span> <span class="hljs-number">21</span>;<span class="hljs-comment">// 不会编译异常</span><br>	<span class="hljs-type">byte</span> <span class="hljs-variable">b2</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;<span class="hljs-comment">// 不会编译异常</span><br>	<span class="hljs-type">byte</span> <span class="hljs-variable">b3</span> <span class="hljs-operator">=</span> b1 + b2;<span class="hljs-comment">// 编译异常</span><br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">21</span>;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>        System.out.println(a);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;程序结束了&quot;</span>);<span class="hljs-comment">// 编译异常</span><br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">21</span>;<br>    <span class="hljs-keyword">while</span>(a &gt; <span class="hljs-number">0</span>)&#123;<br>        System.out.println(a);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;程序结束了&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>第一段代码：编译错误，b1+b2的数据类型为int类型，将int类型赋值给byte类型，编译异常</p>
+<p>第二段代码：编译错误，出现死循环</p>
+<p>第三段代码：编译正常，a是一个变量，运行时为死循环，但是编译的时候并不能确定a的值，所以编译可以通过</p>
+<h4 id="四、HashMap的key的扩容规则？"><a href="#四、HashMap的key的扩容规则？" class="headerlink" title="四、HashMap的key的扩容规则？"></a>四、HashMap的key的扩容规则？</h4><p>扩容规则</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade">hashMap的<span class="hljs-built_in">hash</span>表的默认长度为<span class="hljs-number">16</span>，扩容因子为<span class="hljs-number">0.75</span>，当达到指定的阈值后，就会进行扩容操作，其扩容的规则为：原来的长度*<span class="hljs-number">2</span><br>如果创建hashMap的时候指定了其长度<br><span class="hljs-built_in">Map</span> <span class="hljs-built_in">map</span> = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number">17</span>); <span class="hljs-comment">// 请问其初始化的长度为：9 离9最近的2的N次方的值</span><br></code></pre></td></tr></table></figure>
+
+<p>扩容之后数据如何迁移到新的数组（1.7 全部重新 1.8）</p>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221031102346.png" srcset="/img/loading.gif" lazyload alt="image-20221031102339239"></p>
+<h4 id="五、请描述一下java的异常体系？写出你常见的5种异常类型？"><a href="#五、请描述一下java的异常体系？写出你常见的5种异常类型？" class="headerlink" title="五、请描述一下java的异常体系？写出你常见的5种异常类型？"></a>五、请描述一下java的异常体系？写出你常见的5种异常类型？</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php">Java中的所有异常都来自顶级父类<span class="hljs-built_in">Throwable</span>。<br><span class="hljs-built_in">Throwable</span>下有两个子类<span class="hljs-built_in">Exception</span>和<span class="hljs-built_in">Error</span>。<br><span class="hljs-built_in">Error</span>是程序无法处理的错误，一旦出现这个错误，则程序将被迫停止运行。<br><span class="hljs-built_in">Exception</span>不会导致程序停止，又分为两个部分RunTimeException运行时异常和CheckedException检查异常。<br>RunTimeException常常发生在程序运行过程中，会导致程序当前线程执行失败。CheckedException常常发生在程序编译过程中，会导致程序编译不通过<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">NullPointerException:</span> 空指针异常<br><span class="hljs-symbol">ClassCastException:</span> 类型强制转换异常<br><span class="hljs-symbol">ArrayIndexOutOfBoundsException:</span> 数组下标越界异常<br><span class="hljs-symbol">ArithmeticException:</span>算术运算异常<br><span class="hljs-symbol">NumberFormatException:</span> 数字格式异常<br></code></pre></td></tr></table></figure>
+
+<h4 id="六、请描述一下cookie与session的区别？在你的项目中有用到cookie吗？"><a href="#六、请描述一下cookie与session的区别？在你的项目中有用到cookie吗？" class="headerlink" title="六、请描述一下cookie与session的区别？在你的项目中有用到cookie吗？"></a>六、请描述一下cookie与session的区别？在你的项目中有用到cookie吗？</h4><p>区别</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs markdown">共同点：会话技术，都解决了http协议无状态的问题<br>不同点：<br><span class="hljs-bullet">	1.</span> session存储数据在服务器端，Cookie在客户端<br><span class="hljs-bullet">	2.</span> session没有数据大小限制，Cookie有<br><span class="hljs-bullet">	3.</span> session数据安全，Cookie相对于不安全<br></code></pre></td></tr></table></figure>
+
+<p>项目中使用cookie的场景（JWT—token）</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gauss">在项目中的单点登录的场景中使用到了cookie，将<span class="hljs-built_in">token</span>保存到了cookie中<br></code></pre></td></tr></table></figure>
+
+<h4 id="七、如果要统计当前系统在线的人数，请问你会怎么来实现？"><a href="#七、如果要统计当前系统在线的人数，请问你会怎么来实现？" class="headerlink" title="七、如果要统计当前系统在线的人数，请问你会怎么来实现？"></a>七、如果要统计当前系统在线的人数，请问你会怎么来实现？</h4><p>基于监听器</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">使用<span class="hljs-keyword">session</span>的监听器，监听<span class="hljs-keyword">session</span>对象的创建，创建一个<span class="hljs-keyword">session</span>则表示有用户上线了，当<span class="hljs-keyword">session</span>销毁时，就表示用户下线了<br></code></pre></td></tr></table></figure>
+
+<p>基于Redis</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">当用户登录的时候，将用户的信息保存到redis中，其中添加一个最后活跃的字段（last_avtive）,比如每5分钟由服务器给客户端发送一个心跳，判断客户端是否在线，并且记录当前这个时间，这个这个时间可以查询5分钟的在线用户<br></code></pre></td></tr></table></figure>
+
+<h4 id="八、String、StringBuffer、StringBuilder的区别？"><a href="#八、String、StringBuffer、StringBuilder的区别？" class="headerlink" title="八、String、StringBuffer、StringBuilder的区别？"></a>八、String、StringBuffer、StringBuilder的区别？</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-built_in">String</span>是<span class="hljs-keyword">final</span>修饰的，不可变，每次操作都会产生新的<span class="hljs-built_in">String</span>对象<br><span class="hljs-built_in">StringBuffer</span>和StringBuilder都是在原对象上操作<br><span class="hljs-built_in">StringBuffer</span>是线程安全的，StringBuilder线程不安全的<br><span class="hljs-built_in">StringBuffer</span>方法都是synchronized修饰的<br>性能：StringBuilder &gt; <span class="hljs-built_in">StringBuffer</span> &gt; <span class="hljs-built_in">String</span><br>场景：经常需要改变字符串内容时使用后面两个<br>优先使用StringBuilder，多线程使用共享变量时使用<span class="hljs-built_in">StringBuffer</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="九、什么是悲观锁？什么是乐观锁？乐观锁的ABA问题是什么？"><a href="#九、什么是悲观锁？什么是乐观锁？乐观锁的ABA问题是什么？" class="headerlink" title="九、什么是悲观锁？什么是乐观锁？乐观锁的ABA问题是什么？"></a>九、什么是悲观锁？什么是乐观锁？乐观锁的ABA问题是什么？</h4><p>悲观锁：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">就是比较悲观的锁，总是假设最坏的情况，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁<br>行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java中<span class="hljs-keyword">synchronized</span>和ReentrantLock等独占锁就是悲观锁思想的实现<br></code></pre></td></tr></table></figure>
+
+<p>乐观锁（无锁）：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs objectivec">总是假设最好的情况，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号机制和<span class="hljs-built_in">CAS</span>算法实现<br>在Java中java.util.concurrent.atomic包下面的原子变量类就是使用了乐观锁的一种实现方式<span class="hljs-built_in">CAS</span>实现的<br><br>ABA问题：<br>如果一个变量V初次读取的时候是A值，并且在准备赋值的时候检查到它仍然是A值，那我们就能说明它的值没有被其他线程修改过了吗？很明显是不能的，因为在这段时间它的值可能被改为其他值，然后又改回A，那<span class="hljs-built_in">CAS</span>操作就会误认为它从来没有被修改过。这个问题被称为<span class="hljs-built_in">CAS</span>操作的 <span class="hljs-string">&quot;ABA&quot;</span>问题。可以通过版本控制来解决ABA问题<br></code></pre></td></tr></table></figure>
+
+<h4 id="十、什么是时间复杂度？什么是空间复杂度？工作中我们主要关注哪一种？"><a href="#十、什么是时间复杂度？什么是空间复杂度？工作中我们主要关注哪一种？" class="headerlink" title="十、什么是时间复杂度？什么是空间复杂度？工作中我们主要关注哪一种？"></a>十、什么是时间复杂度？什么是空间复杂度？工作中我们主要关注哪一种？</h4><p>时间复杂度</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">一个算法所花费的时间与其中语句的执行次数成正比例，算法中的基本操作的执行次数，为算法的时间复杂度<br>时间复杂通常使用大<span class="hljs-built_in">O</span>计数发来表示<br><span class="hljs-number">1</span>、用常数<span class="hljs-number">1</span>取代运行时间中的所有加法常数。<br><span class="hljs-number">2</span>、在修改后的运行次数函数中，只保留最高阶项。<br><span class="hljs-number">3</span>、如果最高阶项存在且不是<span class="hljs-number">1</span>，则去除与这个项目相乘的常数。得到的结果就是大<span class="hljs-built_in">O</span>阶。<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">void</span> <span class="hljs-title function_">Func1</span><span class="hljs-params">(<span class="hljs-type">int</span> N)</span> <br>&#123;<br>    <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; N; ++i) <br>    &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; j &lt; N; ++j)<br>        &#123;<br>            ++count;<br>        &#125;<br>    &#125;<span class="hljs-comment">// n * n = n的平方</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">2</span> * N; ++k) <br>    &#123;<br>        ++count;<br>    &#125;<span class="hljs-comment">// 2n</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">M</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>    <span class="hljs-keyword">while</span> (M--) <br>    &#123;<br>        ++count;<br>    &#125;<span class="hljs-comment">//</span><br>    printf(<span class="hljs-string">&quot;%d\n&quot;</span>, count);<br>&#125;<br><br>这个函数在调用的过程中使用了三个<span class="hljs-keyword">for</span>循环和一个<span class="hljs-keyword">while</span>循环，每循环一次我们说它进行了一次基本操作。那么这个函数执行基本操作的次数为F(N)=N²+<span class="hljs-number">2</span>*N+<span class="hljs-number">10</span>，按照上面的规则，那么上述代码的时间复杂度就为O(N²)<br></code></pre></td></tr></table></figure>
+
+<p>空间复杂度</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mathematica">空间复杂度是对一个算法在运行过程中临时占用存储空间大小的量度 。空间复杂度不是程序占用了多少<span class="hljs-variable">bytes</span>的空间，因为这个也没太大意义，所以空间复杂度算的是变量的个数。空间复杂度计算规则基本跟实践复杂度类似，也使用大<span class="hljs-built_in">O</span>渐进表示法<br><br>空间复杂度一般只有两种情况：<br>创建了常数个变量：<span class="hljs-built_in">O</span><span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-punctuation">)</span><br>创建了<span class="hljs-built_in">N</span>个变量：<span class="hljs-built_in">O</span><span class="hljs-punctuation">(</span><span class="hljs-built_in">N</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+
+<p>工作中我们主要关注时间复杂度</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-number">1.</span> 请描述一下接口和抽象类的区别？你是如何理解这两者的关系？项目中有用到抽象类吗？<br><span class="hljs-number">2.</span> 请写出java中的基本数据类型及每种数据类型对应的字节数？<br><span class="hljs-number">3.</span> 以下三段代码是否会编译异常？为什么？<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">String</span>[] args)</span> </span>&#123;<br>	<span class="hljs-type">byte</span> b1 = <span class="hljs-number">21</span>;<br>	<span class="hljs-type">byte</span> b2 = <span class="hljs-number">5</span>;<br>	<span class="hljs-type">byte</span> b3 = b1 + b2;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">String</span>[] args)</span> </span>&#123;<br>    <span class="hljs-type">int</span> a = <span class="hljs-number">21</span>;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>        System.out.<span class="hljs-built_in">println</span>(a);<br>    &#125;<br>    System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;程序结束了&quot;</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">String</span>[] args)</span> </span>&#123;<br>    <span class="hljs-type">int</span> a = <span class="hljs-number">21</span>;<br>    <span class="hljs-keyword">while</span>(a &gt; <span class="hljs-number">0</span>)&#123;<br>        System.out.<span class="hljs-built_in">println</span>(a);<br>    &#125;<br>    System.out.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;程序结束了&quot;</span>);<br>&#125;<br><span class="hljs-number">4.</span> HashMap的key的扩容规则？<br><span class="hljs-number">5.</span> 请描述一下java的异常体系？写出你常见的<span class="hljs-number">5</span>种异常类型？<br><span class="hljs-number">6.</span> 请描述一下cookie与session的区别？在你的项目中有用到cookie吗？<br><span class="hljs-number">7.</span> 如果要统计当前系统在线的人数，请问你会怎么来实现？<br><span class="hljs-number">8.</span> <span class="hljs-type">String</span>、StringBuffer、StringBuilder的区别？<br><span class="hljs-number">9.</span> 什么是悲观锁？什么是乐观锁？乐观锁的ABA问题是什么？<br><span class="hljs-number">10.</span> 什么是时间复杂度？什么是空间复杂度？工作中我们主要关注哪一种？<br></code></pre></td></tr></table></figure>
+
+<h1 id="面试周考试题-第六天"><a href="#面试周考试题-第六天" class="headerlink" title="面试周考试题-第六天"></a>面试周考试题-第六天</h1><h2 id="考试题内容-5"><a href="#考试题内容-5" class="headerlink" title="考试题内容"></a>考试题内容</h2><ul>
+<li><input disabled="" type="checkbox"> 请描述一下事务的基本特性和隔离级别？MySQL默认采用的是哪种隔离级别？</li>
+<li><input disabled="" type="checkbox"> 请描述一下spring中默认的事务传播行为？</li>
+<li><input disabled="" type="checkbox"> 请描述一下什么是正排索引？什么是倒排索引？</li>
+<li><input disabled="" type="checkbox"> 为什么说ElasticSearch是近实时查询？</li>
+<li><input disabled="" type="checkbox"> 请描述Redis主从复制中的全量复制与增量复制？</li>
+<li><input disabled="" type="checkbox"> 请描述一下Redis主从复制中什么时候执行全量复制？什么时候执行增量复制？</li>
+<li><input disabled="" type="checkbox"> Redis哨兵机制中故障恢复的原理（指哨兵选举主机的依据是什么）？</li>
+<li><input disabled="" type="checkbox"> MQ中如何实现延迟队列？哪些消息会被添加到死信队列里面？在你的项目中有没有使用过延迟队列？</li>
+<li><input disabled="" type="checkbox"> mybatis中#{}与${}的区别？项目中用哪一个？</li>
+<li><input disabled="" type="checkbox"> 请描述一下mybatis的缓存机制？不同的缓存有什么特点？</li>
+</ul>
+<h2 id="考试题解析-5"><a href="#考试题解析-5" class="headerlink" title="考试题解析"></a>考试题解析</h2><h4 id="一、请描述一下事务的基本特性和隔离级别？MySQL默认采用的是哪种隔离级别？"><a href="#一、请描述一下事务的基本特性和隔离级别？MySQL默认采用的是哪种隔离级别？" class="headerlink" title="一、请描述一下事务的基本特性和隔离级别？MySQL默认采用的是哪种隔离级别？"></a>一、请描述一下事务的基本特性和隔离级别？MySQL默认采用的是哪种隔离级别？</h4><p> 事务的基本特征（ACID）</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 原子性：是不可分割的最小操作单位，要么同时成功，要么同时失败<br><span class="hljs-bullet">2.</span> 持久性：当事务提交或回滚后，数据库会持久化的保存数据<br><span class="hljs-bullet">3.</span> 隔离性：多个事务之间，相互独立<br><span class="hljs-bullet">4.</span> 一致性：事务操作前后，数据总量不变<br></code></pre></td></tr></table></figure>
+
+<p>事务的隔离级别</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> read uncommitted：读未提交<br>   产生的问题：脏读、不可重复读、幻读<br><span class="hljs-bullet">2.</span> read committed：读已提交 （Oracle）<br>   产生的问题：不可重复读、幻读<br><span class="hljs-bullet">3.</span> repeatable read：可重复读 （MySQL默认）<br>   产生的问题：幻读<br><span class="hljs-bullet">4.</span> serializable：串行化<br>   可以解决所有的问题<br>   <br><span class="hljs-bullet">1.</span> 脏读：一个事务，读取到另一个事务中没有提交的数据<br><span class="hljs-bullet">2.</span> 不可重复读(虚读)：在同一个事务中，两次读取到的数据不一样<br><span class="hljs-bullet">3.</span> 幻读：一个事务操作(DML)数据表中所有记录，另一个事务添加了一条数据，则第一个事务查询不到自己的修改   <br></code></pre></td></tr></table></figure>
+
+<p>MySQL采用的隔离级别</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">repeatable</span> <span class="hljs-keyword">read</span>：可重复读<br></code></pre></td></tr></table></figure>
+
+<h4 id="二、请描述一下spring中默认的事务传播行为？"><a href="#二、请描述一下spring中默认的事务传播行为？" class="headerlink" title="二、请描述一下spring中默认的事务传播行为？"></a>二、请描述一下spring中默认的事务传播行为？</h4><table>
+<thead>
+<tr>
+<th>传播行为</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PROPAGATION_REQUIRED</code></td>
+<td>如果当前存在事务，则加入该事务；<br />如果当前没有事务，则创建一个新的事务。<strong>【默认】</strong></td>
+</tr>
+<tr>
+<td><code>PROPAGATION_SUPPORTS</code></td>
+<td>如果当前存在事务，则加入该事务；<br />如果当前没有事务，则以非事务的方式继续运行。</td>
+</tr>
+<tr>
+<td><code>PROPAGATION_MANDATORY</code></td>
+<td>如果当前存在事务，则加入该事务；<br />如果当前没有事务，则抛出异常。</td>
+</tr>
+<tr>
+<td><code>PROPAGATION_REQUIRES_NEW</code></td>
+<td>创建一个新的事务，如果当前存在事务，则把当前事务挂起。</td>
+</tr>
+<tr>
+<td><code>PROPAGATION_NOT_SUPPORTED</code></td>
+<td>以非事务方式运行，如果当前存在事务，则把当前事务挂起。</td>
+</tr>
+<tr>
+<td><code>PROPAGATION_NEVER</code></td>
+<td>以非事务方式运行，如果当前存在事务，则抛出异常。</td>
+</tr>
+<tr>
+<td><code>PROPAGATION_NESTED</code></td>
+<td>如果当前存在事务，则在嵌套事务内执行。<br />如果当前没有事务，则执行 REQUIRED 类似的操作</td>
+</tr>
+</tbody></table>
+<h4 id="三、请描述一下什么是正排索引？什么是倒排索引？"><a href="#三、请描述一下什么是正排索引？什么是倒排索引？" class="headerlink" title="三、请描述一下什么是正排索引？什么是倒排索引？"></a>三、请描述一下什么是正排索引？什么是倒排索引？</h4><p>正排索引</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">正排索引（正向索引）：正排表是以文档的ID为关键字，表中记录文档中每个字的位置信息，查找时扫描表中每个文档中字的信息直到找出所有包含查询关键字的文档<br></code></pre></td></tr></table></figure>
+
+<p>倒排索引</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">倒排索引（反向索引）：倒排表以字或词为关键字进行索引，表中关键字所对应的记录表项记录了出现这个字或词的所有文档，一个表项就是一个字表段，它记录该文档的ID和字符在该文档中出现的位置情况<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221031162947.png" srcset="/img/loading.gif" lazyload alt="image-20221031162947788"></p>
+<h4 id="四、为什么说ElasticSearch是近实时查询？"><a href="#四、为什么说ElasticSearch是近实时查询？" class="headerlink" title="四、为什么说ElasticSearch是近实时查询？"></a>四、为什么说ElasticSearch是近实时查询？</h4><p>Elasticsearch是一个接近实时的搜索平台。这意味着，从索引一个文档直到这个文档能够被搜索到有一个轻微的延迟（通常是1秒以内）</p>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221031163030.png" srcset="/img/loading.gif" lazyload alt="image-20221031163030595"></p>
+<h4 id="五、请描述Redis主从复制中的全量复制与增量复制？"><a href="#五、请描述Redis主从复制中的全量复制与增量复制？" class="headerlink" title="五、请描述Redis主从复制中的全量复制与增量复制？"></a>五、请描述Redis主从复制中的全量复制与增量复制？</h4><p>全量复制</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-literal">slave</span>节点请求增量同步<br><span class="hljs-literal">master</span>节点判断replid，发现不一致，拒绝增量同步<br><span class="hljs-literal">master</span>将完整内存数据生成RDB，发送RDB到<span class="hljs-literal">slave</span><br><span class="hljs-literal">slave</span>清空本地数据，加载<span class="hljs-literal">master</span>的RDB<br><span class="hljs-literal">master</span>将RDB期间的命令记录在repl_baklog，并持续将log中的命令发送给<span class="hljs-literal">slave</span><br><span class="hljs-literal">slave</span>执行接收到的命令，保持与<span class="hljs-literal">master</span>之间的同步<br></code></pre></td></tr></table></figure>
+
+<p>增量复制</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">更新<span class="hljs-literal">slave</span>与<span class="hljs-literal">master</span>存在差异的部分数据<br>通过repl_baklog文件。这个文件是一个固定大小的数组，只不过数组是环形，也就是说角标到达数组末尾后，会再次从<span class="hljs-number">0</span>开始读写，这样数组头部的数据就会被覆盖。repl_baklog中会记录Redis处理过的命令日志及offset，包括<span class="hljs-literal">master</span>当前的offset，和<span class="hljs-literal">slave</span>已经拷贝到的offset<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221031173912.png" srcset="/img/loading.gif" lazyload alt="image-20221031173912487"></p>
+<h4 id="六、请描述一下Redis主从复制中什么时候执行全量复制？什么时候执行增量复制？"><a href="#六、请描述一下Redis主从复制中什么时候执行全量复制？什么时候执行增量复制？" class="headerlink" title="六、请描述一下Redis主从复制中什么时候执行全量复制？什么时候执行增量复制？"></a>六、请描述一下Redis主从复制中什么时候执行全量复制？什么时候执行增量复制？</h4><p>全量复制与增量复制的区别</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">- 全量同步：<span class="hljs-literal">master</span>将完整内存数据生成RDB，发送RDB到<span class="hljs-literal">slave</span>。后续命令则记录在repl_baklog，逐个发送给<span class="hljs-literal">slave</span>。<br>- 增量同步：<span class="hljs-literal">slave</span>提交自己的offset到<span class="hljs-literal">master</span>，<span class="hljs-literal">master</span>获取repl_baklog中从offset之后的命令给<span class="hljs-literal">slave</span><br></code></pre></td></tr></table></figure>
+
+<p>什么时候执行全量复制</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">- <span class="hljs-literal">slave</span>节点第一次连接<span class="hljs-literal">master</span>节点时<br>- <span class="hljs-literal">slave</span>节点断开时间太久，repl_baklog中的offset已经被覆盖时<br></code></pre></td></tr></table></figure>
+
+<p>什么时候执行增量复制</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">slave节点断开又恢复，并且在repl_baklog中能找到<span class="hljs-built_in">offset</span>时<br></code></pre></td></tr></table></figure>
+
+<h4 id="七、Redis哨兵机制中故障恢复的原理（指哨兵选举主机的依据是什么）？"><a href="#七、Redis哨兵机制中故障恢复的原理（指哨兵选举主机的依据是什么）？" class="headerlink" title="七、Redis哨兵机制中故障恢复的原理（指哨兵选举主机的依据是什么）？"></a>七、Redis哨兵机制中故障恢复的原理（指哨兵选举主机的依据是什么）？</h4><p>一旦发现master故障，sentinel需要在salve中选择一个作为新的master，选择依据是这样的：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">- 首先会判断<span class="hljs-literal">slave</span>节点与<span class="hljs-literal">master</span>节点断开时间长短，如果超过指定值（down-after-milliseconds * <span class="hljs-number">10</span>）则会排除该<span class="hljs-literal">slave</span>节点<br>- 然后判断<span class="hljs-literal">slave</span>节点的<span class="hljs-literal">slave</span>-priority值，越小优先级越高，如果是<span class="hljs-number">0</span>则永不参与选举<br>- 如果<span class="hljs-literal">slave</span>-prority一样，则判断<span class="hljs-literal">slave</span>节点的offset值，越大说明数据越新，优先级越高<br>- 最后是判断<span class="hljs-literal">slave</span>节点的运行id大小，越小优先级越高<br></code></pre></td></tr></table></figure>
+
+<h4 id="八、MQ中如何实现延迟队列？哪些消息会被添加到死信队列里面？在你的项目中有没有使用过延迟队列？"><a href="#八、MQ中如何实现延迟队列？哪些消息会被添加到死信队列里面？在你的项目中有没有使用过延迟队列？" class="headerlink" title="八、MQ中如何实现延迟队列？哪些消息会被添加到死信队列里面？在你的项目中有没有使用过延迟队列？"></a>八、MQ中如何实现延迟队列？哪些消息会被添加到死信队列里面？在你的项目中有没有使用过延迟队列？</h4><p>MQ原本没有提供延迟队列的功能，不过可以通过死信队列来完成延迟消费的效果</p>
+<p>以下情况会添加到死信队列（前提是需要配置好死信队列）：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 消息被消费方否定确认，使用 channel.basicNack 或 channel.basicReject ，并且此时requeue 属性被设置为 false  <br><span class="hljs-bullet">2.</span> 消息在队列的存活时间超过设置的TTL时间<br><span class="hljs-bullet">3.</span> 消息队列的消息数量已经超过最大队列长度<br></code></pre></td></tr></table></figure>
+
+<p>项目中运用死信队列的</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">比如订单的支付，每个订单的支付时间为15分钟，那么将订单的信息保存到Redis中，并设置过期时间为15分钟，如果15时间到了还没有支付，则进入到死信队列，消费死信队列里面的失效的订单数据，更改数据库中订单的状态<br></code></pre></td></tr></table></figure>
+
+<h4 id="九、mybatis中-与-的区别？项目中用哪一个？"><a href="#九、mybatis中-与-的区别？项目中用哪一个？" class="headerlink" title="九、mybatis中#{}与${}的区别？项目中用哪一个？"></a>九、mybatis中#{}与${}的区别？项目中用哪一个？</h4><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">#</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml">是预编译处理、是占位符， $</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml">是字符串替换、是拼接符。</span><br><span class="language-xml">Mybatis 在处理#</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml">时，会将 sql 中的#</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml">替换为?号，调用 PreparedStatement 来赋值；</span><br><span class="language-xml">Mybatis 在处理$</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml">时， 就是把$</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml">替换成变量的值，调用 Statement 来赋值；</span><br><span class="language-xml">#</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml"> 的变量替换是在DBMS（数据库管理系统） 中、变量替换后，#</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml"> 对应的变量自动加上单引号</span><br><span class="language-xml">$</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml"> 的变量替换是在 DBMS 外、变量替换后，$</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml"> 对应的变量不会加上单引号</span><br><span class="language-xml">使用#</span><span class="hljs-template-variable">&#123;&#125;</span><span class="language-xml">可以有效的防止 SQL 注入， 提高系统安全性。</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="十、请描述一下mybatis的缓存机制？不同的缓存有什么特点？"><a href="#十、请描述一下mybatis的缓存机制？不同的缓存有什么特点？" class="headerlink" title="十、请描述一下mybatis的缓存机制？不同的缓存有什么特点？"></a>十、请描述一下mybatis的缓存机制？不同的缓存有什么特点？</h4><p>Mybatis中的缓存是为了减少对数据库的访问，提交资源的利用率和响应效率。Mybatis支持的缓存有两个级别，SqlSession内级别（一级缓存）和SqlSession间（Mapper）级别（二级缓存）</p>
+<table>
+<thead>
+<tr>
+<th>缓存级别</th>
+<th>是否默认开启</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>一级缓存</td>
+<td>默认开启</td>
+<td>在同一个SqlSession中进行多次同样的查询操作，只有第一次从数据库中查询数据，而后的其他几次会直接从一级缓存中读取数据</td>
+</tr>
+<tr>
+<td>二级缓存</td>
+<td>需手动开启</td>
+<td>在不同的SqlSession中进行同样的查询操作，只有最先执行的一次查询操作会从数据库中查询，其他几次会直接从二级缓存中读取数据</td>
+</tr>
+</tbody></table>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221101091010.png" srcset="/img/loading.gif" lazyload alt="image-20221101090930130"></p>
+<p><img src="https://woniumd.oss-cn-hangzhou.aliyuncs.com/java/tanghaifeng/20221101091006.png" srcset="/img/loading.gif" lazyload alt="image-20221101090937245"></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">1.</span> 请描述一下事务的基本特性和隔离级别？MySQL默认采用的是哪种隔离级别？<br><span class="hljs-bullet">2.</span> 请描述一下spring中默认的事务传播行为？<br><span class="hljs-bullet">3.</span> 请描述一下什么是正排索引？什么是倒排索引？<br><span class="hljs-bullet">4.</span> 为什么说ElasticSearch是近实时查询？<br><span class="hljs-bullet">5.</span> 请描述Redis主从复制中的全量复制与增量复制？<br><span class="hljs-bullet">6.</span> 请描述一下Redis主从复制中什么时候执行全量复制？什么时候执行增量复制？<br><span class="hljs-bullet">7.</span> Redis哨兵机制中故障恢复的原理（指哨兵选举主机的依据是什么）？<br><span class="hljs-bullet">8.</span> MQ中如何实现延迟队列？哪些消息会被添加到死信队列里面？在你的项目中有没有使用过延迟队列？<br><span class="hljs-bullet">9.</span> mybatis中#&#123;&#125;与$&#123;&#125;的区别？项目中用哪一个？<br><span class="hljs-bullet">10.</span> 请描述一下mybatis的缓存机制？不同的缓存有什么特点？<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>蜗牛面试题考试答案</div>
+      <div>https://leeloveki.github.io/2022/11/08/wn面试题考试答案/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr Lee</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/08/Java%E8%B7%A8%E5%B9%B3%E5%8F%B0/" title="Java跨平台">
+                        <span class="hidden-mobile">Java跨平台</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
