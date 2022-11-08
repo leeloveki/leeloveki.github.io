@@ -225,15 +225,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/" target="_self">
-          方法重载
+        <a href="/2022/11/03/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/" target="_self">
+          隐式转换
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%96%B9%E6%B3%95%E9%87%8D%E8%BD%BD/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/" target="_self">
         <div>
-          方法重载Java允许同一个类里有多个重名的方法, 但是要求重名的方法对应的形参列表不能相同 如果一个类中包含多个方法名相同, 但是形参列表不同的方法, 就称为方法重载 (返回值不同不能作为方法重载的条件) 在Java中确定一个方法需要三要素  调用者 方法的所属者, 可以是类或对象 方法名 方法对应标识符 形参列表 调用方法时候, 实参的值将被赋值给形参  形参个数可变的方法也可以被重载 123p
+          4.26笔记 隐式转换Java中的类型转换包括自动类型转换(隐式类型转换), 强制类型转换 自动类型转换:将小范围的类型向大范围类型转换, 转换中不会发生数据丢失 byte -&gt; short -&gt;int-&gt; long -&gt; float -&gt; double char -&gt; int  boolean类型不能参与到表达式的运算中  字符集 char类型的本质是整数数值
         </div>
       </a>
 
@@ -258,15 +258,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E6%B3%9B%E5%9E%8B/" target="_self">
-          泛型
+        <a href="/2022/11/03/%E9%9B%86%E5%90%88Stream%E6%B5%81/" target="_self">
+          集合Stream流
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%B3%9B%E5%9E%8B/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E9%9B%86%E5%90%88Stream%E6%B5%81/" target="_self">
         <div>
-          泛型java5中引入参数化类型(parameterized type)的概念,也就是泛型(Generic) 泛型允许在创建集合时指定元素的类型 12345//声明了一个String泛型的集合alArrayList&lt;String&gt; al = new ArrayList&lt;String&gt;();//java7后可以省略菱形语法ArrayList&lt;String&gt; al2
+          集合Stream流Stream API是java8添加的新特性, 通过lambda表达式实现了对集合对象的聚合或批量操作 通过Stream可以实现对集合的筛选 排序 聚合等操作 优点:  性能高 代码简洁 并行  创建Stream操作的三步骤:  创建: 通过集合&#x2F;数组创建Stream 中间操作: 通过中间操作链处理数据 结束操作: 执行中间操作链产生结果  中间操作有:    方法名
         </div>
       </a>
 
@@ -291,15 +291,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" target="_self">
-          注册中心
+        <a href="/2022/11/03/%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7/" target="_self">
+          异常捕获
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7/" target="_self">
         <div>
-          注册中心Spring Cloud Config是
+          异常捕获异常捕获是编译时异常的解决方案之一 关键字 try catch finally 12345678910111213141516171819public static void main(String[] args) &#123;    SimpleDateFormat sdf=new SimpleDateFormat(&quot;yyy-MM-dd&quot;);    if(true)&
         </div>
       </a>
 
@@ -324,15 +324,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%20MQ/" target="_self">
-          消息队列 MQ
+        <a href="/2022/11/03/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" target="_self">
+          微服务
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%20MQ/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" target="_self">
         <div>
-          消息队列 MQ(Message Queue)消息队列中间件也被称为MQ(Message Queue)是分布式系统的关键组件 用于解决项目解耦, 异步信息, 流量消峰等问题, 使用中间件可以实现高性能 高可用 可伸缩 最终一致性  常用的消息队列中间件有: ActiveMQ RabbitMQ ZeroMQ Kafka RocketMQ  消息队列使用场景  异步处理任务 系统解耦 流量削峰(流量消费
+          微服务微服务: 一种系统设计架构, 用于将单体系统拆分为多个模块, 每个模块都是可以独立开发的微服务, 模块间通过网络通信, 实现了分布式架构 微服务优点:   可维护性高, 更新迭代快, 每个模块都可以独立进行开发和部署, 对其他模块的影响较低 容错性高,  每个模块都是独立的进程, 隔离性高 扩展性高, 模块间耦合性低, 分布式系统的扩容能力强 模块间使用HTTP通信, 通用性高 可监控, 通
         </div>
       </a>
 
@@ -357,15 +357,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E7%AE%97%E6%B3%95/" target="_self">
-          算法
+        <a href="/2022/11/03/%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95/" target="_self">
+          技术面试
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E7%AE%97%E6%B3%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95/" target="_self">
         <div>
-          算法复杂度复杂度分为时间复杂度和空间复杂度, 两者被用来衡量(描述)一个程序或者算法的效率 时间复杂度时间复杂度用于衡量算法的快慢 时间复杂度需要考虑到算法所处理的数据的规模大小, 算法的执行时间一般与数据规模呈正相关关系 为什么时间复杂度需要考虑数据规模: 不同的算法在不同数据规模下的运行时间不同  如果算法a和b的时间复杂度为100n和n^2, 在100n
+          技术面试问题项目问题 你是怎么实现某个业务的 业务的具体代码实现 如何部署项目(测试环境, 公有云上线)  Java基础 单例模式的八种实现方式  Spring问题 自动装配流程 定时任务实现 Spring Cloud用过哪些组件, 说下他们的作用&#x2F;角色  谈谈对某种技术的理解:  概念 实现 优缺点 (项目中的用途)  NO.1:项目是怎么实现维修业务的 后端传设备参数到前端，前端处理
         </div>
       </a>
 
@@ -390,15 +390,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" target="_self">
-          算法入门
+        <a href="/2022/11/03/%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%AD%94%E6%A1%88/" target="_self">
+          技术面试答案
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%8A%80%E6%9C%AF%E9%9D%A2%E8%AF%95%E7%AD%94%E6%A1%88/" target="_self">
         <div>
-          算法入门算法是指程序解决计算问题需要遵循的一组规则&#x2F;有限的步骤  算法与具体的语言无关, 但是解决问题时我们需要使用特定的语言编写程序去实现算法  算法必须具备的特性:  清晰明确, 不可以有模糊描述 必须在有限时间内结束 明确的输入: 算法接收的输入应该是预先定义好范围和类型的 输出的明确性: 算法应该明确定义好将要产生的输出 输出的确定性: 相同的输入必须产生相同的输出 与特定语言无
+          技术面试答案谈谈对单例模式的理解: 概念: 单例模式就是保证一个类只能存在一个实例, 并且只有一个方法来获取该类实例(该类的静态方法) 单例模式实现的类也被称为单例类 单例类的三个必要条件:  私有构造函数, 防止new, 保证只能在类内部创建对象 私有静态变量用于存放唯一的实例 提供静态方法用于创建唯一的实例   私有构造函数会导致类无法被继承  单例模式的五种实现方式:  懒汉 饿汉 静态内部
         </div>
       </a>
 
@@ -423,15 +423,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%8F%8D%E5%B0%84/" target="_self">
-          类加载和反射
+        <a href="/2022/11/03/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" target="_self">
+          排序算法
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%8F%8D%E5%B0%84/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" target="_self">
         <div>
-          类加载和反射当一个类被首次使用时, 会经历 加载 连接 初始化 三个步骤 这三个步骤被称为类的初始化或类加载 类加载由jvm提供的系统类加载器完成, 通过类加载可以将二进制的class文件读取到jvm内存中, 在内存中创建一个java.lang.Class类型的对象  在java中类是对象的抽象, 对象是类的实现 但是在底层实现中, 每个类在使m用时都是有对应的java.lang.Class对象来
+          排序算法常见的排序算法有: 选择排序 冒泡排序 快速排序 选择排序
         </div>
       </a>
 
@@ -456,15 +456,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_self">
-          类加载器
+        <a href="/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_self">
+          数据库
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%95%B0%E6%8D%AE%E5%BA%93/" target="_self">
         <div>
-          类加载器类加载器分为四种: 启动类加载器 扩展类加载器 应用程序加载器 自定义类加载器 项目出问题排除方向前端: 后端: Mysql排除:  索引 慢sql日志
+          [toc] 数据库数据库基本概念数据库类型数据库按照历史发展顺序有如下4种  网状型数据库 层次型数据库 关系数据库 (SQL数据库) 非关系型数据库 (NO-SQL)  SQL和NO-SQL的区别关系型数据库和非关系型数据库也被称为SQL数据库和NO-SQL数据库 两者的区别在于关系型数据库存储数据以及数据间的关系,而非关系型数据库只存储数据  sql数据库代表: mysql sqlserver
         </div>
       </a>
 
@@ -489,15 +489,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/" target="_self">
-          线程安全
+        <a href="/2022/11/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8/" target="_self">
+          数据结构入门
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8/" target="_self">
         <div>
-          线程安全线程安全的本质是对资源访问是否具有独占性问题 多个线程同时对资源进行写入和读取操作时会发生线程不安全 如何保证线程安全: 确保资源的独占性: 同一时刻只能有一个线程在访问临界资源  也被称为序列化访问临界资源方案或者称为同步互斥访问  java中有两种线程锁机制来实现同步互斥访问的方法: synchronized	Lock Synchronized(互斥锁)synchronized被称为互
+          数据结构入门数据结构是计算机中数据存储的一种特殊结构, 良好的数据结构可以减少占用的空间和缩短数据操作时间 数据结构分为线性数据结构和非线性数据结构  在java中每种集合都有对应的数据结构  线性数据结构: list queue stack array  线性结构中的元素都是在同一个维度上, 只有一对一的关系, 不存在同等的元素  非线性数据结构: tree graph table  非线性结构
         </div>
       </a>
 
@@ -522,15 +522,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/" target="_self">
-          缓冲流
+        <a href="/2022/11/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A802/" target="_self">
+          数据结构入门02
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E7%BC%93%E5%86%B2%E6%B5%81/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A802/" target="_self">
         <div>
-          缓冲流java中的大部分IO流都提供了缓冲功能, 不需要特别记忆 12345678//缓冲流的默认缓冲区大小为8192byte, 可以通过size参数指定缓冲区大小BufferedInputStream bis=new BufferedInputStream(file,int size);BufferedOutputStream bos=new BufferedOutputStream(file,
+          线性数据结构常见的线性数据结构有: 数组(array) 链表(linked list) 栈(stack) 队列(queue) 数组: 连续存储结构, 存储的元素都是相同类型(相同空间大小) 数组一旦创建, 其空间大小固定, 不可改变(连续存储位置的特性导致的限制) 链表: 每个元素都是对象, 可以动态增加和删除元素, 其线性顺序由指针维护 链表的类型一般有四种,   单链表: 一个节点只存储下一个
         </div>
       </a>
 
